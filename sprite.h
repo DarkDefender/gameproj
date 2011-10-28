@@ -24,7 +24,7 @@ class Sprite
         GLuint texture[1];
         GLfloat xrot; /* X Rotation ( NEW ) */
         GLfloat yrot; /* Y Rotation ( NEW ) */
-        GLfloat zrot; /* Z Rotation ( NEW ) */ 
+        GLfloat zrot; /* Z Rotation ( NEW ) */
 	public:
 		Sprite(string image_path);
 		bool create_texture();

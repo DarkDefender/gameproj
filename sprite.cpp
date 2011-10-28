@@ -34,6 +34,22 @@ void Sprite::render()
     /* Select Our Texture */
     glBindTexture( GL_TEXTURE_2D, texture[0] );
 
+    // Enable transparency (blending textures/colors)
+    glEnable (GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+    glBegin(GL_QUADS);
+      glColor4f( 1, 1, 1, 0.5 );
+      /* Front Face */
+      /* Bottom Left Of The Texture and Quad */
+      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, -1.0f, -2.0f );
+      /* Bottom Right Of The Texture and Quad */
+      glTexCoord2f( 1.0f, 1.0f ); glVertex3f(  1.0f, -1.0f, -2.0f );
+      /* Top Right Of The Texture and Quad */
+      glTexCoord2f( 1.0f, 0.0f ); glVertex3f(  1.0f,  1.0f, -2.0f );
+      /* Top Left Of The Texture and Quad */
+      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f,  1.0f, -2.0f );
+    glEnd();
     /* NOTE:
      *   The x coordinates of the glTexCoord2f function need to inverted
      * for SDL because of the way SDL_LoadBmp loads the data. So where
@@ -41,6 +57,7 @@ void Sprite::render()
      * now read glTexCoord2f( 0.0f, 0.0f );
      */
     glBegin(GL_QUADS);
+      glColor4f( 1, 1, 1, 0.5f );
       /* Front Face */
       /* Bottom Left Of The Texture and Quad */
       glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, -1.0f, 1.0f );
@@ -102,9 +119,9 @@ void Sprite::render()
       glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f,  1.0f, -1.0f );
     glEnd( );
     
-    xrot += 0.003f; /* X Axis Rotation */
-    yrot += 0.002f; /* Y Axis Rotation */
-    zrot += 0.004f; /* Z Axis Rotation */
+    xrot += 0.3f; /* X Axis Rotation */
+    yrot += 0.2f; /* Y Axis Rotation */
+    zrot += 0.4f; /* Z Axis Rotation */
 	
 }
 

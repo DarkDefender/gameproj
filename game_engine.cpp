@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include "game_exception.h"
+#include "timer.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ Game_engine::Game_engine()
 void Game_engine::run()
 {
     SDL_Surface *surface;
+    Timer fps;
     // Load textures
     init_sdl(surface);
     menu->init();
@@ -48,7 +50,14 @@ void Game_engine::run()
 
         //Render
         if (isActive)
+        {
             menu->render();
+            //Cap the frame rate
+            if( fps.get_ticks() < 1000 / 60 )
+            { 
+                SDL_Delay( ( 1000 / 60 ) - fps.get_ticks() ); 
+            }
+        }
 
     }
 
@@ -165,6 +174,11 @@ bool Game_engine::resizeWindow( int width, int height )
         /* Set our perspective */
         gluPerspective( 45.0f, ratio, 0.1f, 100.0f );
 
+       // if (width <= height) {
+       //     glOrtho(-1.0, 1.0, -1.0 / ratio, 1.0 / ratio, 0.1, 100);  // aspect <= 1
+       // } else {
+       //     glOrtho(-1.0 * ratio, 1.0 * ratio, -1.0, 1.0, 0.1, 100);  // aspect > 1
+       // }
         /* Make sure we're chaning the model view and not the projection */
         glMatrixMode( GL_MODELVIEW );
 
