@@ -61,17 +61,17 @@ void Game_engine::handle_events()
     {
         switch( event.type )
         {
-            case SDL_VIDEORESIZE:
+            //case SDL_VIDEORESIZE:
                 /* handle resize event */
-                surface = SDL_SetVideoMode( event.resize.w, event.resize.h, SCREEN_BPP, surface->flags );
-                if ( !surface )
-                {
-                    fprintf( stderr, "Could not get a surface after resize: %s\n", SDL_GetError( ) );
+                //surface = SDL_SetVideoMode( event.resize.w, event.resize.h, SCREEN_BPP, surface->flags );
+                //if ( !surface )
+                //{
+                    //fprintf( stderr, "Could not get a surface after resize: %s\n", SDL_GetError( ) );
                     // TODO: Fix a cleanup function if all goes to hell
                     //Quit( 1 );
-                }
-                resizeWindow( event.resize.w, event.resize.h );
-                break;
+                //}
+                //resizeWindow( event.resize.w, event.resize.h );
+                //break;
 
                 //Handle user quit
             case SDL_QUIT:
