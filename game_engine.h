@@ -15,15 +15,16 @@ class Game_engine
 private:
 
     void clean();
-    void handle_events();
+    void handle_events(SDL_Surface*&);
     bool resizeWindow(int, int);
-	bool init_sdl();
+	bool init_sdl(SDL_Surface*&);
 	bool init_gl();	
 	bool running;
+    bool isActive;
 	int SCREEN_HEIGHT;
 	int SCREEN_WIDTH;
 	int SCREEN_BPP;
-	State* menu;
+    State* menu;
 	State* game;
 	State* current_state;
 	

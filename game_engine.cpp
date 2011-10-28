@@ -20,6 +20,7 @@ using namespace std;
 Game_engine::Game_engine()
 {
 	running = true;
+    isActive = true;
 	menu = new Menu_state(this);
 	SCREEN_HEIGHT = 600;
 	SCREEN_WIDTH = 800;
@@ -29,14 +30,15 @@ Game_engine::Game_engine()
 //Keeps the game running
 void Game_engine::run()
 {
+    SDL_Surface *surface;
     // Load textures
-    init_sdl();
+    init_sdl(surface);
     menu->init();
 
     while(running)
     {
         //Handle key and/or other events. Pass them on if needed
-        handle_events();
+        handle_events(surface);
 
         //Update
         menu->update();
@@ -45,14 +47,15 @@ void Game_engine::run()
         menu->remove_objects();
 
         //Render
-        menu->render();
+        if (isActive)
+            menu->render();
 
     }
 
     clean();
 }
 
-void Game_engine::handle_events()
+void Game_engine::handle_events(SDL_Surface*& surface)
 {
     SDL_Event event;
 
@@ -61,17 +64,28 @@ void Game_engine::handle_events()
     {
         switch( event.type )
         {
-            //case SDL_VIDEORESIZE:
+            case SDL_ACTIVEEVENT:
+                /* Something's happend with our focus
+                 * If we lost focus or we are iconified, we
+                 * shouldn't draw the screen
+                 */
+                if ( event.active.gain == 0 )
+                    isActive = false;
+                else
+                    isActive = true;
+                break; 
+            case SDL_VIDEORESIZE:
                 /* handle resize event */
-                //surface = SDL_SetVideoMode( event.resize.w, event.resize.h, SCREEN_BPP, surface->flags );
-                //if ( !surface )
-                //{
-                    //fprintf( stderr, "Could not get a surface after resize: %s\n", SDL_GetError( ) );
+
+                surface = SDL_SetVideoMode( event.resize.w, event.resize.h, 0, surface->flags );
+                if ( !surface )
+                {
+                    fprintf( stderr, "Could not get a surface after resize: %s\n", SDL_GetError( ) );
                     // TODO: Fix a cleanup function if all goes to hell
                     //Quit( 1 );
-                //}
-                //resizeWindow( event.resize.w, event.resize.h );
-                //break;
+                }
+                resizeWindow( event.resize.w, event.resize.h );
+                break;
 
                 //Handle user quit
             case SDL_QUIT:
@@ -161,10 +175,8 @@ bool Game_engine::resizeWindow( int width, int height )
     }
 
 //Init SDL
-bool Game_engine::init_sdl()
+bool Game_engine::init_sdl(SDL_Surface*& surface)
 {
-    /* This is our SDL surface */
-    SDL_Surface *surface;
     /* Flags to pass to SDL_SetVideoMode */
     int videoFlags;
     /* this holds some info about our display */
