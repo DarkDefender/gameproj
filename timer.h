@@ -1,3 +1,6 @@
+#ifndef TIMER
+#define TIMER
+
 #include <SDL.h>
 
 class Timer
@@ -30,3 +33,5 @@ class Timer
     bool is_started();
     bool is_paused();
 };
+
+#endif

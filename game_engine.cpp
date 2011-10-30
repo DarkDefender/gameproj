@@ -15,6 +15,8 @@
 #include "game_exception.h"
 #include "timer.h"
 
+#include "intro_state.h"
+
 using namespace std;
 
 //Default constructor
@@ -22,7 +24,8 @@ Game_engine::Game_engine()
 {
 	running = true;
     isActive = true;
-	menu = new Menu_state(this);
+	//menu = new Menu_state(this);
+    menu = new Intro_state();
 	SCREEN_HEIGHT = 600;
 	SCREEN_WIDTH = 800;
 	SCREEN_BPP = 32;
@@ -78,10 +81,10 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                  * If we lost focus or we are iconified, we
                  * shouldn't draw the screen
                  */
-                if ( event.active.gain == 0 )
-                    isActive = false;
-                else
-                    isActive = true;
+                //if ( event.active.gain == 0 )
+                //    isActive = false;
+                //else
+                //    isActive = true;
                 break; 
             case SDL_VIDEORESIZE:
                 /* handle resize event */
@@ -172,13 +175,13 @@ bool Game_engine::resizeWindow( int width, int height )
         glLoadIdentity( );
 
         /* Set our perspective */
-        gluPerspective( 45.0f, ratio, 0.1f, 100.0f );
+        //gluPerspective( 45.0f, ratio, 0.1f, 100.0f );
 
-       // if (width <= height) {
-       //     glOrtho(-1.0, 1.0, -1.0 / ratio, 1.0 / ratio, 0.1, 100);  // aspect <= 1
-       // } else {
-       //     glOrtho(-1.0 * ratio, 1.0 * ratio, -1.0, 1.0, 0.1, 100);  // aspect > 1
-       // }
+        if (width <= height) {
+            glOrtho(-1.0, 1.0, -1.0 / ratio, 1.0 / ratio, 0.1, 100);  // aspect <= 1
+        } else {
+            glOrtho(-1.0 * ratio, 1.0 * ratio, -1.0, 1.0, 0.1, 100);  // aspect > 1
+        }
         /* Make sure we're chaning the model view and not the projection */
         glMatrixMode( GL_MODELVIEW );
 
