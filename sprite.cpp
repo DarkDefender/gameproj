@@ -66,7 +66,7 @@ bool Sprite::create_texture()
     SDL_Surface *TextureImage[1]; 
 
     /* Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit */
-    if ( ( TextureImage[0] = SDL_LoadBMP( img_path ) ) )
+    if ( ( TextureImage[0] = SDL_LoadBMP( img_path.c_str() ) ) )
     {
 
         /* Create The Texture */

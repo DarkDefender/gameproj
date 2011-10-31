@@ -28,7 +28,7 @@ class Sprite
 		Sprite(string image_path, GLfloat, GLfloat);
 		bool create_texture();
 		void render(GLfloat, GLfloat, GLfloat);
-		void change_img(string image_path);
+		void change_img(string image_path, GLfloat, GLfloat);
         GLuint* get_texture();
 	};
 
