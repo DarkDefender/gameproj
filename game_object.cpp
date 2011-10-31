@@ -10,6 +10,7 @@
 #include "game_object.h"
 #include "sprite.h"
 #include <string>
+#include <SDL_opengl.h>
 #include <iostream>
 
 using namespace std;
@@ -37,12 +38,12 @@ void Game_object::handle_key_events(SDL_Event keyevent)
 	
 }
 
-Game_object::Game_object(int x_pos, int y_pos, string obj_type, string img_path)
+Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path)
 {
 	x = x_pos;
 	y = y_pos;
-	height = 1;
-	width = 1;
+	height = 0.1;
+	width = 0.1;
 	dead = false;
 	type = obj_type;
 	img = new Sprite(img_path, height, width);
@@ -61,12 +62,12 @@ int Game_object::get_y()
 
 void Game_object::set_x(int new_x)
 {
-	x = new_x;	
+	x = new_x;
 }
 
 void Game_object::set_y(int new_y)
 {
-	y= new_y;	
+	y= new_y;
 }
 
 Game_object::Game_object()

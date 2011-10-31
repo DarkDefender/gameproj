@@ -31,6 +31,7 @@ Game_engine::Game_engine()
 	SCREEN_BPP = 32;
 	// Load textures
     init_sdl(surface);
+	
 	menu = new Menu_state(this);
     //menu = new Intro_state();
 }
@@ -39,7 +40,6 @@ Game_engine::Game_engine()
 void Game_engine::run()
 {
     Timer fps;
-    menu->init();
 
     while(running)
     {

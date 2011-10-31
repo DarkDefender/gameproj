@@ -14,6 +14,7 @@
 
 #include "sprite.h"
 #include <SDL.h>
+#include <SDL_opengl.h>
 #include <string>
 
 using namespace std;
@@ -21,10 +22,10 @@ using namespace std;
 class Game_object
 	{
 	private:
-		int x;
-		int y;
-		int height;
-		int width;
+		GLfloat x;
+		GLfloat y;
+		GLfloat height;
+		GLfloat width;
 		string type;
 		bool dead;
 		int speed;
@@ -40,7 +41,7 @@ class Game_object
 		virtual void render();
 		virtual void remove_objects();
 		virtual void handle_key_events(SDL_Event keyevent);
-		Game_object(int x_pos, int y_pos, string obj_type, string img_path);
+		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
 		Game_object();
 		
 	};
