@@ -16,20 +16,18 @@
 
 using namespace std;
 
-Sprite::Sprite(string image_path)
+Sprite::Sprite(string image_path, GLfloat height, GLfloat width)
 {
 	img_path = image_path;
+    h = height;
+    w = width;
 }	
 
-void Sprite::render()
+void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
 {
     /* Move Into The Screen 5 Units */
     glLoadIdentity( );
-    glTranslatef( 0.0f, 0.0f, -5.0f );
-
-    glRotatef( xrot, 1.0f, 0.0f, 0.0f); /* Rotate On The X Axis */
-    glRotatef( yrot, 0.0f, 1.0f, 0.0f); /* Rotate On The Y Axis */
-    glRotatef( zrot, 0.0f, 0.0f, 1.0f); /* Rotate On The Z Axis */
+    glTranslatef( x, y, z );
 
     /* Select Our Texture */
     glBindTexture( GL_TEXTURE_2D, texture[0] );
@@ -39,90 +37,17 @@ void Sprite::render()
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
     glBegin(GL_QUADS);
-      glColor4f( 1, 1, 1, 0.5 );
+      glColor4f( 1, 1, 1, 1 );
       /* Front Face */
       /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, -1.0f, -2.0f );
+      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -0.5f * w, -0.5f * h, 0 );
       /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f(  1.0f, -1.0f, -2.0f );
+      glTexCoord2f( 1.0f, 1.0f ); glVertex3f(  0.5f * w, -0.5f * h, 0 );
       /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f(  1.0f,  1.0f, -2.0f );
+      glTexCoord2f( 1.0f, 0.0f ); glVertex3f(  0.5f * w,  0.5f * h, 0 );
       /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f,  1.0f, -2.0f );
+      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -0.5f * w,  0.5f * h, 0 );
     glEnd();
-    /* NOTE:
-     *   The x coordinates of the glTexCoord2f function need to inverted
-     * for SDL because of the way SDL_LoadBmp loads the data. So where
-     * in the tutorial it has glTexCoord2f( 1.0f, 0.0f ); it should
-     * now read glTexCoord2f( 0.0f, 0.0f );
-     */
-    glBegin(GL_QUADS);
-      glColor4f( 1, 1, 1, 0.5f );
-      /* Front Face */
-      /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, -1.0f, 1.0f );
-      /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f(  1.0f, -1.0f, 1.0f );
-      /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f(  1.0f,  1.0f, 1.0f );
-      /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f,  1.0f, 1.0f );
-
-      /* Back Face */
-      /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, -1.0f );
-      /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f,  1.0f, -1.0f );
-      /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f(  1.0f,  1.0f, -1.0f );
-      /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f(  1.0f, -1.0f, -1.0f );
-
-      /* Top Face */
-      /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f,  1.0f, -1.0f );
-      /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f( -1.0f,  1.0f,  1.0f );
-      /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f(  1.0f,  1.0f,  1.0f );
-      /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f(  1.0f,  1.0f, -1.0f );
-
-      /* Bottom Face */
-      /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f, -1.0f, -1.0f );
-      /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f(  1.0f, -1.0f, -1.0f );
-      /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f(  1.0f, -1.0f,  1.0f );
-      /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f, -1.0f,  1.0f );
-
-      /* Right face */
-      /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( 1.0f, -1.0f, -1.0f );
-      /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( 1.0f,  1.0f, -1.0f );
-      /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f( 1.0f,  1.0f,  1.0f );
-      /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f( 1.0f, -1.0f,  1.0f );
-
-      /* Left Face */
-      /* Bottom Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 0.0f ); glVertex3f( -1.0f, -1.0f, -1.0f );
-      /* Bottom Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 0.0f ); glVertex3f( -1.0f, -1.0f,  1.0f );
-      /* Top Right Of The Texture and Quad */
-      glTexCoord2f( 0.0f, 1.0f ); glVertex3f( -1.0f,  1.0f,  1.0f );
-      /* Top Left Of The Texture and Quad */
-      glTexCoord2f( 1.0f, 1.0f ); glVertex3f( -1.0f,  1.0f, -1.0f );
-    glEnd( );
-    
-    xrot += 0.3f; /* X Axis Rotation */
-    yrot += 0.2f; /* Y Axis Rotation */
-    zrot += 0.4f; /* Z Axis Rotation */
-	
 }
 
 void Sprite::change_img(string image_path)

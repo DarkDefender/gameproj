@@ -21,7 +21,7 @@ Menu_state::Menu_state(Game_engine* game) : State(game)
 	cursor = 1;
 	x = 0;
 	y = 0;
-	cursor_img = new Sprite("hello.bmp");
+	cursor_img = new Sprite("hello.bmp", 1, 1);
 }
 
 //Only for testing purposes
@@ -54,7 +54,7 @@ void Menu_state::render()
     /* Clear The Screen And The Depth Buffer */
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-    cursor_img->render();
+    cursor_img->render(0,0,-5);
 
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );

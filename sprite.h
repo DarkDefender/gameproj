@@ -22,13 +22,12 @@ class Sprite
 		
 		string img_path;
         GLuint texture[1];
-        GLfloat xrot; /* X Rotation ( NEW ) */
-        GLfloat yrot; /* Y Rotation ( NEW ) */
-        GLfloat zrot; /* Z Rotation ( NEW ) */
+        GLfloat h,w;
+
 	public:
-		Sprite(string image_path);
+		Sprite(string image_path, GLfloat, GLfloat);
 		bool create_texture();
-		void render();
+		void render(GLfloat, GLfloat, GLfloat);
 		void change_img(string image_path);
         GLuint* get_texture();
 	};
