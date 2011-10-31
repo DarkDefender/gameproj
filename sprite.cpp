@@ -50,9 +50,11 @@ void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
     glEnd();
 }
 
-void Sprite::change_img(string image_path)
+void Sprite::change_img(string image_path, GLfloat height, GLfloat width)
 {
 	img_path = image_path;
+    h = height;
+    w = width;
 	create_texture();
 }
 
@@ -64,7 +66,7 @@ bool Sprite::create_texture()
     SDL_Surface *TextureImage[1]; 
 
     /* Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit */
-    if ( ( TextureImage[0] = SDL_LoadBMP( "hello.bmp" ) ) )
+    if ( ( TextureImage[0] = SDL_LoadBMP( img_path ) ) )
     {
 
         /* Create The Texture */
