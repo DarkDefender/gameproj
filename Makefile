@@ -1,4 +1,4 @@
-CC = g++ -Wall -Wextra 
+CC = g++ -Wall -Wextra -pedantic
 
 OS = $(shell uname -s)
 
@@ -20,7 +20,7 @@ endif
 
 
 all:
-	$(CC) $(LIBS) -o space-invaders `sdl-config --cflags --libs` main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp sprite.cpp timer.cpp
+	$(CC) $(LIBS) -o space-invaders `sdl-config --cflags --libs` main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_object.cpp sprite.cpp timer.cpp
 
 clean:
 	@echo Cleaning up...

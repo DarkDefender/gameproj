@@ -12,6 +12,7 @@
 
 #include "state.h"
 #include "sprite.h"
+#include "game_object.h"
 #include <SDL.h>
 
 class Game_engine;
@@ -22,7 +23,10 @@ class Menu_state : public State
 		int cursor;
 		int x;
 		int y;
-		Sprite* cursor_img;
+		Game_object* new_game_obj;
+		Sprite* help_img;
+		Sprite* quit_img;
+		Game_object* cursor_obj;
 		void move_cursor(int move); //Only test
 		Menu_state(); //Private default constructor
 		

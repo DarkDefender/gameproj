@@ -84,6 +84,8 @@ bool Sprite::create_texture()
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
     }
+	
+	
 
     /* Free up any memory we may have used */
     if ( TextureImage[0] )

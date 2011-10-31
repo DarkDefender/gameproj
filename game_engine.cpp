@@ -17,6 +17,8 @@
 
 #include "intro_state.h"
 
+#include <iostream>
+
 using namespace std;
 
 //Default constructor
@@ -24,20 +26,19 @@ Game_engine::Game_engine()
 {
 	running = true;
     isActive = true;
-	//menu = new Menu_state(this);
-    menu = new Intro_state();
 	SCREEN_HEIGHT = 600;
 	SCREEN_WIDTH = 800;
 	SCREEN_BPP = 32;
+	// Load textures
+    init_sdl(surface);
+	menu = new Menu_state(this);
+    //menu = new Intro_state();
 }
 
 //Keeps the game running
 void Game_engine::run()
 {
-    SDL_Surface *surface;
     Timer fps;
-    // Load textures
-    init_sdl(surface);
     menu->init();
 
     while(running)
