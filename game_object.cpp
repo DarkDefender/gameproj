@@ -15,25 +15,22 @@
 
 using namespace std;
 
-void Game_object::init()
-{
-	
-}
 void Game_object::update()
 {
 	
 }
+
+void Game_object::handle_key_events(SDL_Event keyevent)
+{
+	
+}
+
 void Game_object::render()
 {
 	img->render(x,y,-5);
 }
 
 void Game_object::remove_objects()
-{
-	
-}
-
-void Game_object::handle_key_events(SDL_Event keyevent)
 {
 	
 }
@@ -47,25 +44,30 @@ Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string i
 	dead = false;
 	type = obj_type;
 	img = new Sprite(img_path, height, width);
-	img->create_texture();
+	img->create_texture();	
 }
 
-int Game_object::get_x()
+void Game_object::init()
+{
+
+}
+
+GLfloat Game_object::get_x()
 {
 	return x;
 }
 
-int Game_object::get_y()
+GLfloat Game_object::get_y()
 {
 	return y;
 }
 
-void Game_object::set_x(int new_x)
+void Game_object::set_x(GLfloat new_x)
 {
 	x = new_x;
 }
 
-void Game_object::set_y(int new_y)
+void Game_object::set_y(GLfloat new_y)
 {
 	y= new_y;
 }

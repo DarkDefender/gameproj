@@ -50,7 +50,7 @@ class Star
         }
 };
 
-Intro_state::Intro_state()
+Intro_state::Intro_state(bool run) : State(run)
 {
     for(int i = 0; i <= 50; i++)
     {

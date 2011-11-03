@@ -10,31 +10,33 @@
 #include "menu_state.h"
 #include "game_engine.h"
 #include "game_object.h"
+#include "cursor.h"
 #include <string>
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-Menu_state::Menu_state(Game_engine* game) : State(game)
-{
-	cursor = 1;
+Menu_state::Menu_state(bool run) : State(run)
+{	
+	cursor_obj = new Cursor(-1.2, 0.8, "cursor", "test_img.bmp");
+	//new_game_obj = new Game_object(-1,0.8,"new game","test_img.bmp");
+	//help_obj = new Game_object(-1,0.6,"help","test_img.bmp");
+	//quit_obj = new Game_object(-1,0.4,"quit","test_img.bmp");
 	
-	cursor_obj = new Game_object(-1, 1, "cursor", "test_img.bmp");
-	new_game_obj = new Game_object(1,1,"new game","test_img.bmp");
-}
-
-//Only for testing purposes
-void Menu_state::move_cursor(int move)
-{
-
+	//New game image
+	images.push_back(new Game_object(-1,0.8,"new game","test_img.bmp"));
+	//Help image
+	images.push_back(new Game_object(-1,0.6,"help","test_img.bmp"));
+	//Quit image
+	images.push_back(new Game_object(-1,0.4,"quit","test_img.bmp"));
 }
 
 void Menu_state::init()
 {
-    // You have to init textures AFTER you have started the GL context
-
+	
 }
 
 void Menu_state::update()
@@ -49,7 +51,14 @@ void Menu_state::render()
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     cursor_obj->render();
-	new_game_obj->render();
+	
+	
+	// Render all Game_objects
+	for (int it = 0;
+		 it < images.size(); it++ )
+	{
+		images[it]->render();
+	}
 
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
@@ -68,20 +77,17 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 		case SDL_KEYDOWN:
 			switch(keyevent.key.keysym.sym)
 			{
-				case SDLK_LEFT:
-					//charxvel = -1;
-					break;
-				case SDLK_RIGHT:
-					//charxvel = 1;
-					break;
 				case SDLK_UP:
-					cursor_obj->set_y(cursor_obj->get_y() + 1);
+					cursor_obj->handle_key_events(keyevent);
 					break;
 				case SDLK_DOWN:
-					cursor_obj->set_y(cursor_obj->get_y() - 1);
+					cursor_obj->handle_key_events(keyevent);
+					break;
+				case SDLK_RETURN:
+					cout << "Return" << endl;
 					break;
 				case SDLK_ESCAPE:
-					//ge->set_running(false);
+					set_running(false);
 					break;
 				default:
 					break;
@@ -90,12 +96,6 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 		case SDL_KEYUP:
 			switch(keyevent.key.keysym.sym)
 			{
-				case SDLK_LEFT:
-					//charxvel = 0;
-					break;
-				case SDLK_RIGHT:
-					//charxvel = 0;
-					break;
 				case SDLK_UP:
 					//charyvel = 0;
 					break;

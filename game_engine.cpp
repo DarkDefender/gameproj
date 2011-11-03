@@ -10,14 +10,12 @@
 #include "game_engine.h"
 #include "state.h"
 #include "menu_state.h"
-#include <SDL.h>
-#include <SDL_opengl.h>
 #include "game_exception.h"
 #include "timer.h"
-
 #include "intro_state.h"
-
 #include <iostream>
+#include <SDL.h>
+#include <SDL_opengl.h>
 
 using namespace std;
 
@@ -32,7 +30,7 @@ Game_engine::Game_engine()
 	// Load textures
     init_sdl(surface);
 	
-	menu = new Menu_state(this);
+	menu = new Menu_state(true);
     //menu = new Intro_state();
 }
 
@@ -41,7 +39,7 @@ void Game_engine::run()
 {
     Timer fps;
 
-    while(running)
+    while(menu->get_running())
     {
         //Handle key and/or other events. Pass them on if needed
         handle_events(surface);
@@ -103,7 +101,7 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                 //Handle user quit
             case SDL_QUIT:
                 //Stop program
-                running = false;
+                menu->set_running(false);
                 break;
             case SDL_KEYDOWN:
                 menu->handle_key_events(event);
@@ -112,12 +110,6 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                 break;
         }
     }
-}
-
-//Testing purposes only
-void Game_engine::show(int x, int y)
-{
-
 }
 
 //Init opengl
@@ -260,7 +252,7 @@ bool Game_engine::init_sdl(SDL_Surface*& surface)
     resizeWindow( SCREEN_WIDTH, SCREEN_HEIGHT );
 
     //Set caption
-    SDL_WM_SetCaption( "Most awesome game ever", NULL );
+    SDL_WM_SetCaption( "Space Invaders", NULL );
 
     return true;
 }

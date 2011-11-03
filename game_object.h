@@ -30,13 +30,13 @@ class Game_object
 		bool dead;
 		int speed;
 		Sprite* img;
+		void init();
 		
 	public:
-		int get_x();
-		int get_y();
-		void set_x(int new_x);
-		void set_y(int new_y);
-        void init();
+		GLfloat get_x();
+		GLfloat get_y();
+		void set_x(GLfloat new_x);
+		void set_y(GLfloat new_y);
 		virtual void update();
 		virtual void render();
 		virtual void remove_objects();

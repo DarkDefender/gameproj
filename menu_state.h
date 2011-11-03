@@ -14,21 +14,17 @@
 #include "sprite.h"
 #include "game_object.h"
 #include <SDL.h>
+#include <vector>
 
 class Game_engine;
 
 class Menu_state : public State
 {
 	private:
-		int cursor;
 		int x;
 		int y;
-		Game_object* new_game_obj;
-		Sprite* help_img;
-		Sprite* quit_img;
+		vector<Game_object*> images;
 		Game_object* cursor_obj;
-		void move_cursor(int move); //Only test
-		Menu_state(); //Private default constructor
 		
 	public:
         void init();
@@ -36,7 +32,7 @@ class Menu_state : public State
 		void render();
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
-		Menu_state(Game_engine* game);
+		Menu_state(bool run);
 		
 		
 };

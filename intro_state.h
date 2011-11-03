@@ -31,7 +31,7 @@ class Intro_state : public State
 		void render();
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
-		Intro_state();
+		Intro_state(bool run);
 		
 };
 

@@ -21,7 +21,7 @@ class State
 		Game_engine* ge;
 		int screen_height;
 		int screen_width;
-		
+		bool running;
 		
 		
 	public:
@@ -30,8 +30,9 @@ class State
 		virtual void render() = 0;
 		virtual void remove_objects() = 0;
 		virtual void handle_key_events(SDL_Event keyevent) = 0;
-		State(Game_engine* game);
-		State();
+		void set_running(bool run);
+		bool get_running();
+		State(bool run);
 		~State();
 		
 		

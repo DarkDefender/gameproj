@@ -10,15 +10,19 @@
 #include "state.h"
 #include "game_engine.h"
 
-
-State::State(Game_engine* game)
+void State::set_running(bool run)
 {
-	ge = game;
+	running = run;
+}
+bool State::get_running()
+{
+	return running;
 }
 
-State::State()
-{
 
+State::State(bool run)
+{
+	running = run;
 }
 
 State::~State()
