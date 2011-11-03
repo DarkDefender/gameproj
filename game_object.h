@@ -24,8 +24,8 @@ class Game_object
 	private:
 		GLfloat x;
 		GLfloat y;
-		GLfloat height;
-		GLfloat width;
+		GLfloat h;
+		GLfloat w;
 		string type;
 		bool dead;
 		int speed;
@@ -42,6 +42,7 @@ class Game_object
 		virtual void remove_objects();
 		virtual void handle_key_events(SDL_Event keyevent);
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
+		Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path);
 		Game_object();
 		
 	};

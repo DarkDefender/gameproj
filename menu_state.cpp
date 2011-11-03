@@ -21,17 +21,24 @@ using namespace std;
 
 Menu_state::Menu_state(bool run) : State(run)
 {	
-	cursor_obj = new Cursor(-1.2, 0.8, "cursor", "test_img.bmp");
-	//new_game_obj = new Game_object(-1,0.8,"new game","test_img.bmp");
-	//help_obj = new Game_object(-1,0.6,"help","test_img.bmp");
-	//quit_obj = new Game_object(-1,0.4,"quit","test_img.bmp");
+	menu_item = 0;
+	
+	//Cursor
+	cursor_obj = new Game_object(-1.2, 0.8, "cursor", "test_img.bmp");
 	
 	//New game image
 	images.push_back(new Game_object(-1,0.8,"new game","test_img.bmp"));
+	// Player 1 image
+	images.push_back(new Game_object(-1,0.6,"player 1","test_img.bmp"));
+	// Player 2 image
+	images.push_back(new Game_object(-1,0.4,"player 2","test_img.bmp"));
 	//Help image
-	images.push_back(new Game_object(-1,0.6,"help","test_img.bmp"));
+	images.push_back(new Game_object(-1,0.2,"help","test_img.bmp"));
 	//Quit image
-	images.push_back(new Game_object(-1,0.4,"quit","test_img.bmp"));
+	images.push_back(new Game_object(-1,0,"quit","test_img.bmp"));
+	//Highscore image
+	highscore.push_back(new Game_object(0.4,0.8,"highscore","test_img.bmp"));
+	
 }
 
 void Menu_state::init()
@@ -53,16 +60,47 @@ void Menu_state::render()
     cursor_obj->render();
 	
 	
-	// Render all Game_objects
-	for (int it = 0;
+	// Render all menu items
+	for (unsigned int it = 0;
 		 it < images.size(); it++ )
 	{
 		images[it]->render();
+	}
+	
+	// Render all highscore items
+	for (unsigned int it = 0;
+		 it < highscore.size(); it++ )
+	{
+		highscore[it]->render();
 	}
 
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
 
+}
+
+void Menu_state::move_cursor_up()
+{	
+	menu_item = menu_item - 1;
+	
+	if(menu_item < 0)
+	{
+		menu_item = images.size() - 1;
+	}
+	
+	cursor_obj->set_y(images[menu_item]->get_y());
+}
+
+void Menu_state::move_cursor_down()
+{	
+	menu_item = menu_item + 1;
+	
+	if(menu_item > images.size() - 1)
+	{
+		menu_item = 0;
+	}
+	
+	cursor_obj->set_y(images[menu_item]->get_y());
 }
 
 void Menu_state::remove_objects()
@@ -78,10 +116,14 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 			switch(keyevent.key.keysym.sym)
 			{
 				case SDLK_UP:
-					cursor_obj->handle_key_events(keyevent);
+					move_cursor_up();
 					break;
 				case SDLK_DOWN:
-					cursor_obj->handle_key_events(keyevent);
+					move_cursor_down();
+					break;
+				case SDLK_LEFT:
+					break;
+				case SDLK_RIGHT:
 					break;
 				case SDLK_RETURN:
 					cout << "Return" << endl;

@@ -39,11 +39,23 @@ Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string i
 {
 	x = x_pos;
 	y = y_pos;
-	height = 0.1;
-	width = 0.1;
+	h = 0.1;
+	w = 0.1;
 	dead = false;
 	type = obj_type;
-	img = new Sprite(img_path, height, width);
+	img = new Sprite(img_path, h, w);
+	img->create_texture();	
+}
+
+Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path)
+{
+	x = x_pos;
+	y = y_pos;
+	h = height;
+	w = width;
+	dead = false;
+	type = obj_type;
+	img = new Sprite(img_path, h, w);
 	img->create_texture();	
 }
 

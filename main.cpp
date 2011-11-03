@@ -17,9 +17,11 @@ int main( int argc, char* args[] )
 	catch (Game_exception &e)
 	{
 		cerr << e.what();
+		delete ge;
 		return 1;
 	}
 	
+	delete ge;
     return 0;
 }
 

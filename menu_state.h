@@ -21,10 +21,12 @@ class Game_engine;
 class Menu_state : public State
 {
 	private:
-		int x;
-		int y;
+		int menu_item;
+		vector<Game_object*> highscore;
 		vector<Game_object*> images;
 		Game_object* cursor_obj;
+		void move_cursor_up();
+		void move_cursor_down();
 		
 	public:
         void init();
