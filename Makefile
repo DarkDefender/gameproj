@@ -11,8 +11,8 @@ LIBS = -framework OpenGL -framework GLUT -lstdc++
 endif
 
 # Windows
-ifeq ($(OS),Windows)
-LIBS = -lGL - lGLU
+ifeq ($(OS),MINGW32_NT-6.0)
+LIBS = -lopengl32 -lglu32
 endif
 
 
@@ -20,7 +20,7 @@ endif
 
 
 all:
-	$(CC) $(LIBS) -o space-invaders `sdl-config --cflags --libs` main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_object.cpp sprite.cpp timer.cpp
+	$(CC) -o space-invaders main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_object.cpp sprite.cpp timer.cpp `sdl-config --cflags --libs` $(LIBS)
 
 clean:
 	@echo Cleaning up...
