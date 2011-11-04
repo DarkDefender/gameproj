@@ -3,7 +3,7 @@
  *  
  *
  *  Created by Jacob Sundqvist on 10/31/11.
- *  Copyright 2011 __MyCompanyName__. All rights reserved.
+ *  Copyright 2011 . All rights reserved.
  *
  */
 
