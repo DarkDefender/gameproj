@@ -28,7 +28,7 @@ class Game_object
 		GLfloat w;
 		string type;
 		bool dead;
-		int spd;
+		GLfloat spd;
         int angle;
         GLfloat goalx, goaly;
 		Sprite* img;

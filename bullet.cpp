@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, int speed, int start_angle)
+Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, int start_angle)
 {
     x = x_pos;
     y = y_pos;

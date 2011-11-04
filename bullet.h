@@ -17,7 +17,7 @@ class Bullet : public Game_object
    //   void remove_objects();   Skall troligtvis bort!
    //   void handle_key_events(SDL_Event keyevent);
         int get_dmg();
-        Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, int speed, int start_angle);
+        Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, int start_angle);
    //   TODO
    //   Eventuellt lägga till destruktor
    //   Hoppa
