@@ -88,3 +88,5 @@ Game_object::Game_object()
 {
 
 }
+
+bool Game_object::get_dead() { return dead; }

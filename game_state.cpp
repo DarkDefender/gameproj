@@ -62,5 +62,12 @@ void Game_state::handle_key_events(SDL_Event keyevent)
 
 void Game_state::remove_objects()
 {
-
+    for(int i = 0; i < (int)bullet_vec.size(); i++)
+    {
+        if( bullet_vec[i].get_dead() )
+        {
+            bullet_vec.erase (bullet_vec.begin()+i);
+            --i;
+        }
+    }
 }
