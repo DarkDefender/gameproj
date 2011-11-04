@@ -11,8 +11,8 @@
 #define SPRITE_H
 
 #include <string>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
 
 using namespace std;
 

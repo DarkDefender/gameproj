@@ -13,7 +13,7 @@
 #include "state.h"
 #include "sprite.h"
 #include "game_object.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 
 class Game_engine;

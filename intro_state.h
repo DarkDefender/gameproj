@@ -13,7 +13,7 @@
 #include "state.h"
 #include "sprite.h"
 #include "timer.h"
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <vector>
 using namespace std;
 

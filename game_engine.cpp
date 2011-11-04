@@ -14,8 +14,8 @@
 #include "timer.h"
 #include "intro_state.h"
 #include <iostream>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
 
 using namespace std;
 

@@ -9,7 +9,7 @@
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
 #include "state.h"
-#include <sdl.h>
+#include <SDL/SDL.h>
 
 class Game_engine
 {

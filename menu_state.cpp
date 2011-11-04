@@ -10,10 +10,9 @@
 #include "menu_state.h"
 #include "game_engine.h"
 #include "game_object.h"
-#include "cursor.h"
 #include <string>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
 #include <iostream>
 #include <vector>
 

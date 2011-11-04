@@ -2,8 +2,8 @@
 #include "sprite.h"
 #include "intro_state.h"
 #include "timer.h"
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
 #include <time.h>
 #include <vector>
 #include <ostream>
