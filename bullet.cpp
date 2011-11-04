@@ -16,6 +16,7 @@ Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloa
     dmg = damage;
     spd = speed;
     angle = start_angle;
+    dead = false;
 }
 
 void Bullet::update()
