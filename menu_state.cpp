@@ -27,7 +27,7 @@ Menu_state::Menu_state(bool run) : State(run)
 	cursor_obj = new Game_object(-1.2, 0.8, "cursor", "test_img.bmp");
 	
 	//New game image
-	images.push_back(new Game_object(-1,0.8,"new game","test_img.bmp"));
+	images.push_back(new Game_object(-1,0.8,"new game","quit.bmp"));
 	// Player 1 image
 	images.push_back(new Game_object(-1,0.6,"player 1","test_img.bmp"));
 	// Player 2 image
