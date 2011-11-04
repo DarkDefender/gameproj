@@ -9,7 +9,7 @@
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
 #include "state.h"
-#include <sdl.h>
+#include <SDL/SDL.h>
 
 class Game_engine
 {
@@ -17,7 +17,7 @@ private:
 
     void clean();
     void handle_events(SDL_Surface*&);
-    bool resizeWindow(int, int);
+    bool resize_window(int, int);
 	bool init_sdl(SDL_Surface*&);
 	bool init_gl();	
 	bool running;

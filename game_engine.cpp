@@ -14,8 +14,8 @@
 #include "timer.h"
 #include "intro_state.h"
 #include <iostream>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
 
 using namespace std;
 
@@ -95,7 +95,7 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                     // TODO: Fix a cleanup function if all goes to hell
                     //Quit( 1 );
                 }
-                resizeWindow( event.resize.w, event.resize.h );
+                resize_window( event.resize.w, event.resize.h );
                 break;
 
                 //Handle user quit
@@ -146,7 +146,7 @@ bool Game_engine::init_gl()
     return true;
 }
 
-bool Game_engine::resizeWindow( int width, int height )
+bool Game_engine::resize_window( int width, int height )
     {
         /* Height / width ration */
         GLfloat ratio;
@@ -249,7 +249,7 @@ bool Game_engine::init_sdl(SDL_Surface*& surface)
     }
 
      /* resize the initial window */
-    resizeWindow( SCREEN_WIDTH, SCREEN_HEIGHT );
+    resize_window( SCREEN_WIDTH, SCREEN_HEIGHT );
 
     //Set caption
     SDL_WM_SetCaption( "Space Invaders", NULL );

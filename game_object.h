@@ -13,8 +13,8 @@
 #define GAME_OBJECT_H
 
 #include "sprite.h"
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
 #include <string>
 
 using namespace std;
