@@ -10,7 +10,7 @@
 #include "game_object.h"
 #include "sprite.h"
 #include <string>
-#include <SDL_opengl.h>
+#include <SDL/SDL_opengl.h>
 #include <iostream>
 
 using namespace std;
