@@ -13,6 +13,7 @@
 #include "game_exception.h"
 #include "timer.h"
 #include "intro_state.h"
+#include "game_state.h"
 #include <iostream>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
@@ -30,8 +31,9 @@ Game_engine::Game_engine()
 	// Load textures
     init_sdl(surface);
 	
-	menu = new Menu_state(true);
-    //menu = new Intro_state();
+	//menu = new Menu_state(true);
+    //menu = new Intro_state(true);
+    menu = new Game_state(true);
 }
 
 //Keeps the game running

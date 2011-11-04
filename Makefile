@@ -20,7 +20,7 @@ endif
 
 
 all:
-	$(CC) -o space-invaders main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_object.cpp sprite.cpp timer.cpp `sdl-config --cflags --libs` $(LIBS)
+	$(CC) -o space-invaders main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_state.cpp bullet.cpp game_object.cpp sprite.cpp timer.cpp `sdl-config --cflags --libs` $(LIBS)
 
 clean:
 	@echo Cleaning up...

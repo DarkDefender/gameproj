@@ -21,7 +21,7 @@ using namespace std;
 
 class Game_object
 	{
-	private:
+	protected:
 		GLfloat x;
 		GLfloat y;
 		GLfloat h;

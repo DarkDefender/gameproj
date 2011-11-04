@@ -1,3 +1,4 @@
+#include "bullet.h"
 #include "game_object.h"
 #include "sprite.h"
 #include <SDL/SDL.h>

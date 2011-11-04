@@ -1,8 +1,10 @@
+#ifndef BULLET_H
+#define BULLET_H
+
 #include "game_object.h"
 #include "sprite.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
-#include <string>
 
 using namespace std;
 
@@ -21,5 +23,6 @@ class Bullet : public Game_object
    //   TODO
    //   Eventuellt lägga till destruktor
    //   Hoppa
-}
+};
 
+#endif
