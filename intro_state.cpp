@@ -67,11 +67,11 @@ Intro_state::Intro_state(bool run) : State(run)
 
         stars.push_back(Star(x,y,z));
     }
+    timer.start();
 }
 
 void Intro_state::init()
 {
-    timer.start();
 }
 
 void Intro_state::update()

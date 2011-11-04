@@ -12,7 +12,7 @@ using namespace std;
 
 Game_state::Game_state(bool run) : State(run)
 {
-    for(int i = 0; i <= 10000; i++)
+    for(int i = 0; i <= 1000; i++)
     {
         GLfloat speed;
         int angle, dmg;

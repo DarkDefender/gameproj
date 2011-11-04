@@ -40,9 +40,15 @@ Game_engine::Game_engine()
 void Game_engine::run()
 {
     Timer fps;
+    int frame = 0;
+
+    Timer time;
+    time.start();
 
     while(menu->get_running())
     {
+        //Reset/Start the timer
+        fps.start();
         //Handle key and/or other events. Pass them on if needed
         handle_events(surface);
 
@@ -62,7 +68,14 @@ void Game_engine::run()
                 SDL_Delay( ( 1000 / 60 ) - fps.get_ticks() ); 
             }
         }
+        if ( time.get_ticks() > 1000 )
+        {
+            //cout << frame << endl;
+            frame = 0;
+            time.start();
+        }
 
+        frame++;
     }
 
     clean();
