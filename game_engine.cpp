@@ -23,7 +23,7 @@ using namespace std;
 //Default constructor
 Game_engine::Game_engine()
 {
-    isActive = true;
+    is_active = true;
 	SCREEN_HEIGHT = 600;
 	SCREEN_WIDTH = 800;
 	SCREEN_BPP = 32;
@@ -58,7 +58,7 @@ void Game_engine::run()
         menu->remove_objects();
 
         //Render
-        if (isActive)
+        if (is_active)
         {
             menu->render();
             //Cap the frame rate
@@ -95,9 +95,9 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                  * shouldn't draw the screen
                  */
                 //if ( event.active.gain == 0 )
-                //    isActive = false;
+                //    is_active = false;
                 //else
-                //    isActive = true;
+                //    is_active = true;
                 break; 
             case SDL_VIDEORESIZE:
                 /* handle resize event */
@@ -117,10 +117,8 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                 //Stop program
                 menu->set_running(false);
                 break;
-            case SDL_KEYDOWN:
-                menu->handle_key_events(event);
-                break;
             default:
+				menu->handle_key_events(event);
                 break;
         }
     }

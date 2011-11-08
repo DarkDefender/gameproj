@@ -138,10 +138,9 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 			switch(keyevent.key.keysym.sym)
 			{
 				case SDLK_UP:
-					//charyvel = 0;
+					cout << "Key up" << endl;
 					break;
 				case SDLK_DOWN:
-					//charyvel = 0;
 					break;
 				default:
 					break;

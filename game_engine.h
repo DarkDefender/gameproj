@@ -21,7 +21,7 @@ private:
 	bool init_sdl(SDL_Surface*&);
 	bool init_gl();	
 	bool running;
-    bool isActive;
+    bool is_active;
 	int SCREEN_HEIGHT;
 	int SCREEN_WIDTH;
 	int SCREEN_BPP;
