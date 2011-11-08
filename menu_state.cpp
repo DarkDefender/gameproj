@@ -23,18 +23,18 @@ Menu_state::Menu_state(bool run) : State(run)
 	menu_item = 0;
 	
 	//Cursor
-	cursor_obj = new Game_object(-1.2, 0.8, "cursor", "test_img.bmp");
+	cursor_obj = new Game_object(-1.2, 0.8, "cursor", "test_img.png");
 	
 	//New game image
-	images.push_back(new Game_object(-1,0.8,"new game","quit.bmp"));
+	images.push_back(new Game_object(-1,0.8,"new game","new_game.bmp"));
 	// Player 1 image
-	images.push_back(new Game_object(-1,0.6,"player 1","test_img.bmp"));
+	images.push_back(new Game_object(-1,0.6,"player 1","player1.bmp"));
 	// Player 2 image
-	images.push_back(new Game_object(-1,0.4,"player 2","test_img.bmp"));
+	images.push_back(new Game_object(-1,0.4,"player 2","player2.bmp"));
 	//Help image
-	images.push_back(new Game_object(-1,0.2,"help","test_img.bmp"));
+	images.push_back(new Game_object(-1,0.2,"help","help.bmp"));
 	//Quit image
-	images.push_back(new Game_object(-1,0,"quit","test_img.bmp"));
+	images.push_back(new Game_object(-1,0,"quit","quit.png"));
 	//Highscore image
 	highscore.push_back(new Game_object(0.4,0.8,"highscore","test_img.bmp"));
 	
@@ -138,7 +138,6 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 			switch(keyevent.key.keysym.sym)
 			{
 				case SDLK_UP:
-					cout << "Key up" << endl;
 					break;
 				case SDLK_DOWN:
 					break;

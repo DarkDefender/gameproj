@@ -7,7 +7,7 @@ LIBS = -lGL -lGLU
 
 # MAC OS X
 ifeq ($(OS),Darwin)
-LIBS = -framework OpenGL -framework GLUT -lstdc++
+LIBS = -framework OpenGL -framework GLUT -framework SDL_Image -lstdc++
 endif
 
 # Windows
