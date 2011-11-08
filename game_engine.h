@@ -32,9 +32,6 @@ private:
 	
 public:
 	void run();
-	bool get_running();
-	void set_running(bool run);
-	void show(int x, int y);
 	Game_engine();
 
 

@@ -23,7 +23,7 @@ void Bullet::update()
 {
     x = x + cos(angle) * spd;
     y = y + sin(angle) * spd;
-    if (abs(x) >= 1 or abs(y) >= 1)
+    if (fabs(x) >= 1 or fabs(y) >= 1)
         dead = true;
 }
 

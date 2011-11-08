@@ -23,7 +23,6 @@ using namespace std;
 //Default constructor
 Game_engine::Game_engine()
 {
-	running = true;
     isActive = true;
 	SCREEN_HEIGHT = 600;
 	SCREEN_WIDTH = 800;
@@ -31,9 +30,9 @@ Game_engine::Game_engine()
 	// Load textures
     init_sdl(surface);
 	
-	//menu = new Menu_state(true);
+	menu = new Menu_state(true);
     //menu = new Intro_state(true);
-    menu = new Game_state(true);
+    //menu = new Game_state(true);
 }
 
 //Keeps the game running
@@ -278,16 +277,4 @@ bool Game_engine::init_sdl(SDL_Surface*& surface)
 void Game_engine::clean()
 {
 
-}
-
-//Stop/run game
-void Game_engine::set_running(bool run)
-{
-    running = run;
-}
-
-//get running status
-bool Game_engine::get_running()
-{
-    return running;
 }
