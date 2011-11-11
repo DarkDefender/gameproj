@@ -95,7 +95,7 @@ void Game_engine::run()
         }
         if ( time.get_ticks() > 1000 )
         {
-            //cout << frame << endl;
+            cout << frame << endl;
             frame = 0;
             time.start();
         }
