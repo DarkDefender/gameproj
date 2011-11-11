@@ -35,6 +35,16 @@ void Game_object::remove_objects()
 	
 }
 
+Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type)
+{
+	x = x_pos;
+	y = y_pos;
+	h = 0.1;
+	w = 0.1;
+	dead = false;
+	type = obj_type;
+}
+
 Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path)
 {
 	x = x_pos;

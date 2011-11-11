@@ -22,6 +22,7 @@ class State
 		int screen_height;
 		int screen_width;
 		bool running;
+		bool change_state;
 		
 		
 	public:
@@ -32,6 +33,7 @@ class State
 		virtual void handle_key_events(SDL_Event keyevent) = 0;
 		void set_running(bool run);
 		bool get_running();
+		bool swap_state();
 		State(bool run);
 		~State();
 		

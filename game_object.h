@@ -43,6 +43,7 @@ class Game_object
 		virtual void render();
 		virtual void remove_objects();
 		virtual void handle_key_events(SDL_Event keyevent);
+		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type);
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
 		Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path);
 		Game_object();

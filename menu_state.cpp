@@ -10,6 +10,7 @@
 #include "menu_state.h"
 #include "game_engine.h"
 #include "game_object.h"
+#include "name.h"
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
@@ -20,23 +21,59 @@ using namespace std;
 
 Menu_state::Menu_state(bool run) : State(run)
 {	
+	
+	show_help = false;
+	player1_name = false;
+	player2_name = false;
 	menu_item = 0;
+	letter_item = 0;
 	
 	//Cursor
-	cursor_obj = new Game_object(-1.2, 0.8, "cursor", "test_img.png");
+	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "test_img.png");
 	
 	//New game image
-	images.push_back(new Game_object(-1,0.8,"new game","new_game.bmp"));
+	images.push_back(new Game_object(-0.5,0.8,0.2,0.5,"new game","new_game.png"));
 	// Player 1 image
-	images.push_back(new Game_object(-1,0.6,"player 1","player1.bmp"));
+	images.push_back(new Game_object(-0.5,0.4,0.2,0.5,"player 1","player1.png"));
 	// Player 2 image
-	images.push_back(new Game_object(-1,0.4,"player 2","player2.bmp"));
+	images.push_back(new Game_object(-0.5,0,0.2,0.5,"player 2","player2.png"));
 	//Help image
-	images.push_back(new Game_object(-1,0.2,"help","help.bmp"));
+	images.push_back(new Game_object(-0.5,-0.4,0.2,0.5,"help","help.png"));
 	//Quit image
-	images.push_back(new Game_object(-1,0,"quit","quit.png"));
+	images.push_back(new Game_object(-0.5,-0.8,0.2,0.5,"quit","quit.png"));
+	
+	
+	//Letters
+	//Player1
+	letters1.push_back(new Name(0,0.4,"1"));
+	letters1.push_back(new Name(0.5,0.4,"2"));
+	letters1.push_back(new Name(1,0.4,"3"));
+	//Player2
+	letters2.push_back(new Name(0,0,"1"));
+	letters2.push_back(new Name(0.5,0,"2"));
+	letters2.push_back(new Name(1,0,"3"));
+	
 	//Highscore image
 	highscore.push_back(new Game_object(0.4,0.8,"highscore","test_img.bmp"));
+	
+	//Help
+	//Player 1
+	help.push_back(new Game_object(-0.5,0.8,0.2,0.5,"player 1","player1.png"));
+	help.push_back(new Game_object(-0.5,0.6,0.2,0.2,"up","up-arrow.png"));
+	help.push_back(new Game_object(-0.5,0.4,0.2,0.2,"down","down-arrow.png"));
+	help.push_back(new Game_object(-0.5,0.2,0.2,0.2,"shift","shift.png"));
+	//Player 2
+	help.push_back(new Game_object(0.5,0.8,0.2,0.5,"player 2","player2.png"));
+	help.push_back(new Game_object(0.5,0.6,0.2,0.2,"w","alphabet-w.png"));
+	help.push_back(new Game_object(0.5,0.4,0.2,0.2,"s","alphabet-s.png"));
+	help.push_back(new Game_object(0.5,0.2,0.2,0.2,"1","number-1.png"));
+	//Menu buttons
+	help.push_back(new Game_object(0,0,0.2,0.5,"Menu","new_game.png"));
+	help.push_back(new Game_object(-0.1,-0.2,0.2,0.2,"left","left-arrow.png"));
+	help.push_back(new Game_object(0.1,-0.2,0.2,0.2,"right","right-arrow.png"));
+	help.push_back(new Game_object(0,-0.4,0.2,0.2,"enter","enter.png"));
+	help.push_back(new Game_object(0,-0.6,0.2,0.2,"esc","esc.png"));
+	
 	
 }
 
@@ -56,23 +93,51 @@ void Menu_state::render()
     /* Clear The Screen And The Depth Buffer */
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-    cursor_obj->render();
 	
 	
-	// Render all menu items
-	for (unsigned int it = 0;
-		 it < images.size(); it++ )
+	if(show_help)
 	{
-		images[it]->render();
+		// Render all help items
+		for (unsigned int it = 0;
+			 it < help.size(); it++ )
+		{
+			help[it]->render();
+		}
+	}
+	else
+	{
+	
+		cursor_obj->render();
+	
+	
+		// Render all menu items
+		for (unsigned int it = 0;
+			it < images.size(); it++ )
+		{
+			images[it]->render();
+		}
+	
+		// Render all highscore items
+		for (unsigned int it = 0;
+			 it < highscore.size(); it++ )
+		{
+			highscore[it]->render();
+		}
+		//Render all letters for player1			  
+		for (unsigned int it = 0;
+			it < letters1.size(); it++ )
+		{
+			letters1[it]->render();
+		}
+		//Render all letters for player2
+		for (unsigned int it = 0;
+			 it < letters2.size(); it++ )
+		{
+			letters2[it]->render();
+		}
 	}
 	
-	// Render all highscore items
-	for (unsigned int it = 0;
-		 it < highscore.size(); it++ )
-	{
-		highscore[it]->render();
-	}
-
+	
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
 
@@ -107,6 +172,39 @@ void Menu_state::remove_objects()
 	
 }
 
+
+
+void Menu_state::menu_select()
+{
+	
+	switch(menu_item)
+	{
+		case 0:
+			//New game
+			change_state = true;
+			break;
+		case 1:
+			//player 1
+			player1_name = true;
+			break;
+		case 2:
+			//player 2
+			player2_name = true;
+			break;
+		case 3:
+			//help
+			show_help = true;
+			break;
+		case 4:
+			//Quit
+			running = false;
+			break;
+						
+	}
+	
+	
+}
+
 //Handles keyboard input
 void Menu_state::handle_key_events(SDL_Event keyevent)
 {
@@ -115,17 +213,71 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 			switch(keyevent.key.keysym.sym)
 			{
 				case SDLK_UP:
-					move_cursor_up();
+					if(player1_name)
+					{
+						letters1[letter_item]->change_letter_up();
+					}
+					else if(player2_name)
+					{
+						letters2[letter_item]->change_letter_up();
+					}
+					else if(!show_help)
+					{
+						move_cursor_up();
+					}
 					break;
 				case SDLK_DOWN:
-					move_cursor_down();
+					if(player1_name)
+					{
+						letters1[letter_item]->change_letter_down();
+					}
+					else if(player2_name)
+					{
+						letters2[letter_item]->change_letter_down();
+					}
+					else if(!show_help)
+					{
+						move_cursor_down();
+					}
 					break;
 				case SDLK_LEFT:
+					//Move to previous letter object
+					if(player1_name || player2_name)
+					{
+						letter_item--;
+						if(letter_item < 0)
+						{
+							letter_item = letters1.size() - 1;
+						}
+						
+					}
 					break;
 				case SDLK_RIGHT:
+					//Move to next letter object
+					if(player1_name || player2_name)
+					{
+						letter_item++;
+						if(letter_item > letters1.size() - 1)
+						{
+							letter_item = 0;
+						}	
+					}
 					break;
 				case SDLK_RETURN:
-					cout << "Return" << endl;
+					if(show_help)
+					{
+						show_help = false;
+					}
+					else if(player1_name || player2_name)
+					{
+						player1_name = false;
+						player2_name = false;
+						letter_item = 0;
+					}
+					else
+					{
+						menu_select();
+					}
 					break;
 				case SDLK_ESCAPE:
 					set_running(false);

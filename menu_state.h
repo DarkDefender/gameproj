@@ -12,6 +12,7 @@
 
 #include "state.h"
 #include "sprite.h"
+#include "name.h"
 #include "game_object.h"
 #include <SDL/SDL.h>
 #include <vector>
@@ -22,9 +23,17 @@ class Menu_state : public State
 {
 	private:
 		int menu_item;
+		int letter_item;
+		bool show_help;
+		bool player1_name;
+		bool player2_name;
 		vector<Game_object*> highscore;
 		vector<Game_object*> images;
+		vector<Name*> letters1;
+		vector<Name*> letters2;
+		vector<Game_object*> help;
 		Game_object* cursor_obj;
+		void menu_select();
 		void move_cursor_up();
 		void move_cursor_down();
 		
