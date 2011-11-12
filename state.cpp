@@ -13,10 +13,16 @@
 void State::set_running(bool run)
 {
 	running = run;
+	change_state = false;
 }
 bool State::get_running()
 {
 	return running;
+}
+
+bool State::swap_state()
+{
+	return change_state;
 }
 
 

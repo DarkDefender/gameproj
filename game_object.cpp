@@ -35,6 +35,16 @@ void Game_object::remove_objects()
 	
 }
 
+Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type)
+{
+	x = x_pos;
+	y = y_pos;
+	h = 0.1;
+	w = 0.1;
+	dead = false;
+	type = obj_type;
+}
+
 Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path)
 {
 	x = x_pos;
@@ -64,25 +74,17 @@ void Game_object::init()
 
 }
 
-GLfloat Game_object::get_x()
-{
-	return x;
-}
+GLfloat Game_object::get_x() { return x; }
 
-GLfloat Game_object::get_y()
-{
-	return y;
-}
+GLfloat Game_object::get_y() { return y; }
 
-void Game_object::set_x(GLfloat new_x)
-{
-	x = new_x;
-}
+GLfloat Game_object::get_h() { return h; }
 
-void Game_object::set_y(GLfloat new_y)
-{
-	y= new_y;
-}
+GLfloat Game_object::get_w() { return w; } 
+
+void Game_object::set_x(GLfloat new_x) { x = new_x; }
+
+void Game_object::set_y(GLfloat new_y) { y= new_y; }
 
 Game_object::Game_object()
 {
@@ -90,3 +92,7 @@ Game_object::Game_object()
 }
 
 bool Game_object::get_dead() { return dead; }
+void Game_object::set_dead() { dead = true; }
+
+int Game_object::get_hp() { return hp; }
+void Game_object::set_hp(int health) { hp = health; }

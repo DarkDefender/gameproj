@@ -1,10 +1,12 @@
 #include "bullet.h"
+#include "obstacle.h"
 #include "game_object.h"
 #include "sprite.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
 #include <math.h>
+#include <iostream>
 
 using namespace std;
 
@@ -13,7 +15,7 @@ Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloa
     x = x_pos;
     y = y_pos;
     type = obj_type;
-    dmg = damage;
+    hp = damage;
     spd = speed;
     angle = start_angle;
     dead = false;
@@ -27,6 +29,26 @@ void Bullet::update()
         dead = true;
 }
 
+void Bullet::collision(Game_object& obj)
+{
+    if ( fabs(obj.get_x() - x) < obj.get_w() && fabs(obj.get_y() -y) < obj.get_h() )
+    {
+        int cur_hp = obj.get_hp() - hp;
+        if (cur_hp <= 0)
+        {
+            obj.set_dead();
+            hp = abs(cur_hp);
+            if (hp == 0)
+                dead = true;
+        }
+        else
+        {
+            obj.set_hp(cur_hp);
+            dead = true;
+        }
+    }
+}           
+
 void Bullet::render()
 {
     glLoadIdentity( );
@@ -39,7 +61,5 @@ void Bullet::render()
     glVertex3f(-0.005, 0, 0);
     glEnd();
 }
-
-int Bullet::get_dmg() { return dmg; }
 
 
