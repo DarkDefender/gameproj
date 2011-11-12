@@ -142,41 +142,4 @@ void Game_state::handle_key_events(SDL_Event keyevent)
 		images[it]->handle_key_events(keyevent);
 	}
 
-  /*switch(keyevent.type){
-		case SDL_KEYDOWN:
-			switch(keyevent.key.keysym.sym)
-			{
-				case SDLK_UP:
-					move_cursor_up();
-					break;
-				case SDLK_DOWN:
-					move_cursor_down();
-					break;
-				case SDLK_LEFT:
-					break;
-				case SDLK_RIGHT:
-					break;
-				case SDLK_RETURN:
-					cout << "Return" << endl;
-					break;
-				case SDLK_ESCAPE:
-					set_running(false);
-					break;
-				default:
-					break;
-			}
-			break;
-		case SDL_KEYUP:
-			switch(keyevent.key.keysym.sym)
-			{
-				case SDLK_UP:
-					//charyvel = 0;
-					break;
-				case SDLK_DOWN:
-					//charyvel = 0;
-					break;
-				default:
-					break;
-			}
-			}*/
 }
