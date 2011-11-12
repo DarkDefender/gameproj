@@ -21,18 +21,23 @@ class Star;
 
 class Intro_state : public State
 {
-	private:
-        vector<Star> stars;
-        Timer timer;
-		
-	public:
-        void init();
-		void update();
-		void render();
-		void remove_objects();
-		void handle_key_events(SDL_Event keyevent);
-		Intro_state(bool run);
-		
+    private:
+    GLfloat planet_off;
+    GLfloat alien_width;
+
+    vector<Star> stars;
+    Sprite* alien;
+    Sprite* planet;
+    Timer timer;
+
+    public:
+    void init();
+    void update();
+    void render();
+    void remove_objects();
+    void handle_key_events(SDL_Event keyevent);
+    Intro_state(bool run);
+
 };
 
 #endif

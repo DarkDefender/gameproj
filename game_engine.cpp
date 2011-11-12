@@ -30,8 +30,8 @@ Game_engine::Game_engine()
 	// Load textures
     init_sdl(surface);
 	
-	menu = new Menu_state(true);
-    //menu = new Intro_state(true);
+	//menu = new Menu_state(true);
+    menu = new Intro_state(true);
     //menu = new Game_state(true);
 }
 
@@ -127,9 +127,6 @@ void Game_engine::handle_events(SDL_Surface*& surface)
 //Init opengl
 bool Game_engine::init_gl()
 {
-    /* Enable Texture Mapping ( NEW ) */
-    glEnable( GL_TEXTURE_2D );
-
     /* Enable smooth shading */
     glShadeModel( GL_SMOOTH );
 
