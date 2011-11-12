@@ -50,7 +50,7 @@ class Score : public Game_object
   w = 0.1;
   h = 0.1;
   dead = false;
-  speed = 0;
+  spd = 0;
 
   img = new Sprite("number1.bmp", h, w);
 

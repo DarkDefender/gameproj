@@ -21,7 +21,7 @@ class Aliens : public Game_object
   w = 0.1;
   h = 0.1;
   dead = false;
-  speed = 0.005;
+  spd = 0.005;
 
   if(typein == "player1")
     {

@@ -18,7 +18,7 @@ class Player : public Game_object
   y = 0;
   h = 0.1;
   w = 0.1;
-  speed = 0.01;
+  spd = 0.01;
   dead = false;
   img = new Sprite(im, h, w);
   img->create_texture();

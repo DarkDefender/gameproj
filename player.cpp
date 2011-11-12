@@ -10,9 +10,9 @@ using namespace std;
 
 void Player :: move_up()
 {
-  if (y + speed<1)
+  if (y + spd<1)
     {
-      y=y+speed;
+      y=y+spd;
     }
   else
     {
@@ -24,9 +24,9 @@ void Player :: move_up()
 
 void Player :: move_down()
 {
-  if (y - speed>-1)
+  if (y - spd>-1)
     {
-      y=y-speed;
+      y=y-spd;
     }
   
 }

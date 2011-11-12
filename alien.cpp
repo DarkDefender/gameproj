@@ -8,34 +8,34 @@ using namespace std;
 
 void Aliens :: move_up()
 {
-  if (y + speed + h/2<1 && moved_x_dir == 0)
+  if (y + spd + h/2<1 && moved_x_dir == 0)
     {
-      y=y+speed;
+      y=y+spd;
     }
   else
     {
       if( type == "player1")
 	{
-	  x=x-speed;
-	  moved_x_dir = moved_x_dir - speed;
+	  x=x-spd;
+	  moved_x_dir = moved_x_dir - spd;
 	  
 	  if (moved_x_dir<=-w)
 	    {
 	      moved_x_dir = 0;
-	      speed=speed+0.001;
+	      spd=spd+0.001;
 	      up=false;
 	      down=true;
 	    }
 	} 
       else //player 2
 	{
-	  x=x+speed;
-	  moved_x_dir = moved_x_dir + speed;
+	  x=x+spd;
+	  moved_x_dir = moved_x_dir + spd;
 	  
 	  if (moved_x_dir>=w)
 	    {
 	      moved_x_dir = 0;
-	      speed=speed+0.001;
+	      spd=spd+0.001;
 	      up=false;
 	      down=true;
 	    }
@@ -47,34 +47,34 @@ void Aliens :: move_up()
 
 void Aliens :: move_down()
 {
-  if (y - speed- h/2>-1)
+  if (y - spd- h/2>-1)
     {
-      y=y-speed;
+      y=y-spd;
     }
   else
     {
       if( type == "player1")
 	{
-	  x=x-speed;
-	  moved_x_dir = moved_x_dir - speed;
+	  x=x-spd;
+	  moved_x_dir = moved_x_dir - spd;
 	  
 	  if (moved_x_dir<=-w)
 	    {
 	      moved_x_dir = 0;
-	      speed=speed+0.001;
+	      spd=spd+0.001;
 	      up=true;
 	      down=false;
 	    }
 	} 
       else //player 2
 	{
-	  x=x+speed;
-	  moved_x_dir = moved_x_dir + speed;
+	  x=x+spd;
+	  moved_x_dir = moved_x_dir + spd;
 	  
 	  if (moved_x_dir>=w)
 	    {
 	      moved_x_dir = 0;
-	      speed=speed+0.001;
+	      spd=spd+0.001;
 	      up=true;
 	      down=false;
 	    }
