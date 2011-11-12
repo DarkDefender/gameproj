@@ -1,94 +1,182 @@
-#include "bullet.h"
-#include "obstacle.h"
+/*
+ *  Menu_state.cpp
+ *  space-invaders
+ *
+ *  Created by Jacob Sundqvist on 10/24/11.
+ *  Copyright 2011 __MyCompanyName__. All rights reserved.
+ *
+ */
 
-#include "state.h"
 #include "game_state.h"
+#include "game_engine.h"
+#include "game_object.h"
+#include "player.h"
+#include "alien.h"
+#include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
-#include <time.h>
-#include <vector>
-#include <ostream>
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 Game_state::Game_state(bool run) : State(run)
-{
-    for(int i = 0; i <= 1000; i++)
+{	
+
+	
+  images.push_back(new Player("player1", "player1.bmp"));
+  images.push_back(new Player("player2", "player2.bmp"));
+  images.push_back(new  Aliens("player1", "ufo.bmp", 
+			       -0.2, 0, true, false));
+  images.push_back(new  Aliens("player1", "ufo.bmp", 
+			       -0.2, 0.2, true, false));
+  images.push_back(new  Aliens("player1", "ufo.bmp", 
+			       -0.2, 0.4, true, false));
+  images.push_back(new  Aliens("player1", "ufo.bmp", 
+			       -0.2, 0.6, true, false));
+  images.push_back(new  Aliens("player1", "ufo.bmp", 
+			       -0.2, 0.8, true, false));
+
+  images.push_back(new  Aliens("player2", "ufo.bmp", 
+			       0.2, 0, true, false));
+  images.push_back(new  Aliens("player2", "ufo.bmp", 
+			       0.2, 0.2, true, false));
+  images.push_back(new  Aliens("player2", "ufo.bmp", 
+			       0.2, 0.4, true, false));
+  images.push_back(new  Aliens("player2", "ufo.bmp", 
+			       0.2, 0.6, true, false));
+  images.push_back(new  Aliens("player2", "ufo.bmp", 
+			       0.2, 0.8, true, false));
+
+  /*for(int it = 0, it < 5, ++it)
     {
-        GLfloat speed;
-        int angle, dmg;
-        /* initialize random seed: */
-        srand ( time(0) + i );
-
-        speed = (rand() % 100 + 1) * 0.00001; //-1.0 to 1.0
-        srand ( time(0) - i );
-        angle = (rand() % 360); //-1.0 to 1.0
-
-        dmg = 3;
-
-        bullet_vec.push_back(Bullet(0,0,"bullet", dmg, speed, angle));
+      aliens.push_back(new Alien ("player1", "ufo.bmp", 
+      double xin, double yin, bool up_in, bool down_in));
     }
+  images.push_back(new Alien("player1", "player2.bmp"));
+  images.push_back(new Alien("player1", "player2.bmp"));
+  images.push_back(new Alien("player2", "player2.bmp"));
+  images.push_back(new Alien("player2", "player2.bmp"));*/
 
-    for(int i = 0; i <= 10; i++)
-    {
-        for(int j = 0; j <= 10; j++)
-        {
-            obs_vec.push_back(Obstacle(0.5 + i*0.01,0.5 + j*0.01,"obs", 1));
-        }
-    }
-}
 
-void Game_state::update()
-{
-    for(int i = 0; i < (int)bullet_vec.size(); i++)
-    {
-        bullet_vec[i].update();
-        for(int j = 0; j < (int)obs_vec.size(); j++)
-            bullet_vec[i].collision(obs_vec[j]);
-    }
-}
-
-void Game_state::render()
-{
-    /* Clear The Screen And The Depth Buffer */
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-    for(int i = 0; i < (int)bullet_vec.size(); i++)
-    {
-        bullet_vec[i].render();
-    }
-    for(int i = 0; i < (int)obs_vec.size(); i++)
-        obs_vec[i].render();
-    
-    /* Draw it to the screen */
-    SDL_GL_SwapBuffers( );
+	
 }
 
 void Game_state::init()
 {
+	
 }
 
-void Game_state::handle_key_events(SDL_Event keyevent)
+void Game_state::update()
 {
+	for (unsigned int it = 0;
+		 it < images.size(); it++ )
+	{
+		images[it]->update();
+	}	
+}
 
+void Game_state::render()
+{
+	
+    /* Clear The Screen And The Depth Buffer */
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+    //cursor_obj->render();
+	
+	
+	// Render all menu items
+	for (unsigned int it = 0;
+		 it < images.size(); it++ )
+	{
+		images[it]->render();
+	}
+	
+	// Render all highscore items
+	/*for (unsigned int it = 0;
+		 it < highscore.size(); it++ )
+	{
+		highscore[it]->render();
+		}*/
+
+    /* Draw it to the screen */
+    SDL_GL_SwapBuffers( );
+
+}
+
+void Game_state::move_cursor_up()
+{	
+	menu_item = menu_item - 1;
+	
+	if(menu_item < 0)
+	{
+		menu_item = images.size() - 1;
+	}
+	
+	cursor_obj->set_y(images[menu_item]->get_y());
+}
+
+void Game_state::move_cursor_down()
+{	
+	menu_item = menu_item + 1;
+	
+	if(menu_item > images.size() - 1)
+	{
+		menu_item = 0;
+	}
+	
+	cursor_obj->set_y(images[menu_item]->get_y());
 }
 
 void Game_state::remove_objects()
 {
-    for(int i = 0; i < (int)bullet_vec.size(); i++)
-    {
-        if( bullet_vec[i].get_dead() )
-        {
-            bullet_vec.erase (bullet_vec.begin()+i);
-            --i;
-        }
-    } 
-    for(int i = 0; i < (int)obs_vec.size(); i++)
-    {
-        if( obs_vec[i].get_dead() )
-        {
-            obs_vec.erase (obs_vec.begin()+i);
-            --i;
-        }
-    }
+	
+}
+
+//Handles keyboard input
+void Game_state::handle_key_events(SDL_Event keyevent)
+{
+	for (unsigned int it = 0;
+		 it < images.size(); it++ )
+	{
+		images[it]->handle_key_events(keyevent);
+	}
+
+  /*switch(keyevent.type){
+		case SDL_KEYDOWN:
+			switch(keyevent.key.keysym.sym)
+			{
+				case SDLK_UP:
+					move_cursor_up();
+					break;
+				case SDLK_DOWN:
+					move_cursor_down();
+					break;
+				case SDLK_LEFT:
+					break;
+				case SDLK_RIGHT:
+					break;
+				case SDLK_RETURN:
+					cout << "Return" << endl;
+					break;
+				case SDLK_ESCAPE:
+					set_running(false);
+					break;
+				default:
+					break;
+			}
+			break;
+		case SDL_KEYUP:
+			switch(keyevent.key.keysym.sym)
+			{
+				case SDLK_UP:
+					//charyvel = 0;
+					break;
+				case SDLK_DOWN:
+					//charyvel = 0;
+					break;
+				default:
+					break;
+			}
+			}*/
 }

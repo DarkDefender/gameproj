@@ -10,18 +10,27 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-#include "bullet.h"
-#include "obstacle.h"
-
 #include "state.h"
+#include "sprite.h"
+#include "game_object.h"
+#include "player.h"
+#include "alien.h"
 #include <SDL/SDL.h>
 #include <vector>
+
+class Game_engine;
 
 class Game_state : public State
 {
 	private:
-        vector<Bullet> bullet_vec;
-        vector<Obstacle> obs_vec;
+		int menu_item;
+		vector<Game_object*> highscore;
+		//vector<Game_object*> images;
+		vector<Game_object*> images;
+		//vector{Game_object*> aliens;
+		Game_object* cursor_obj;
+		void move_cursor_up();
+		void move_cursor_down();
 		
 	public:
         void init();
@@ -30,6 +39,7 @@ class Game_state : public State
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
 		Game_state(bool run);
+		
 		
 };
 
