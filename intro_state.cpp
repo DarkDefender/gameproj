@@ -29,8 +29,13 @@ class Star
         {
             glLoadIdentity( );
             glTranslatef( x, y , z);
+            glDisable( GL_TEXTURE_2D );
+            // Enable transparency (blending textures/colors)
+            glEnable (GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
             glBegin(GL_QUADS);
+            glColor4f( 1, 1, 1, 0.2*-z );
             glVertex3f(0, 0.009, 0);
             glVertex3f(0.005, 0, 0);
             glVertex3f(0, -0.009, 0);
@@ -52,6 +57,14 @@ class Star
 
 Intro_state::Intro_state(bool run) : State(run)
 {
+    alien = new Sprite("alien.png", 0.8, 0.8);
+    planet = new Sprite("glob.png", 0.7, 0.7);
+    alien->create_texture();
+    planet->create_texture();
+
+    planet_off = -1;
+    alien_width = -0.8;
+
     for(int i = 0; i <= 50; i++)
     {
         GLfloat x, y, z;
@@ -80,18 +93,46 @@ void Intro_state::update()
     {
         stars[i].update(timer.get_ticks());
     }
+    if ( timer.get_ticks() >= 12000 && timer.get_ticks() < 15000)
+    {
+        planet_off *= 0.98;
+    }
+    if ( timer.get_ticks() > 15000 && timer.get_ticks() < 15500)
+    {
+        planet->set_color(0,0,0,1);
+        alien->set_color(0,0,0,1);
+        alien_width *= 0.8;
+    }
+    if (timer.get_ticks() > 15500)
+    {
+        planet->set_color(1,1,1,1);
+        alien->set_color(1,1,1,1);
+    }
 }
 
 void Intro_state::render()
 {
     /* Clear The Screen And The Depth Buffer */
+    if (timer.get_ticks() >= 15000 && timer.get_ticks() < 15500)
+        glClearColor( 1.0f, 1.0f, 1.0f, 0.5f );
+    else
+        glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
+
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
     for(int i = 0; i < (int)stars.size(); i++)
     {
         stars[i].render();
     }
-    
+    if (timer.get_ticks() >= 15000)
+    {
+        alien->render(0,-0.1, -2, 0.8 + alien_width, 0.8);
+    }
+    if ( timer.get_ticks() >= 12000 )
+    {
+        planet->render(0,-0.7 + planet_off ,-1);
+    }
+
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
 }

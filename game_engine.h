@@ -17,6 +17,7 @@ private:
 
     void clean();
     void handle_events(SDL_Surface*&);
+	void change_state();
     bool resize_window(int, int);
 	bool init_sdl(SDL_Surface*&);
 	bool init_gl();	

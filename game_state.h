@@ -11,6 +11,7 @@
 #define GAME_STATE_H
 
 #include "bullet.h"
+#include "obstacle.h"
 
 #include "state.h"
 #include <SDL/SDL.h>
@@ -20,6 +21,7 @@ class Game_state : public State
 {
 	private:
         vector<Bullet> bullet_vec;
+        vector<Obstacle> obs_vec;
 		
 	public:
         void init();

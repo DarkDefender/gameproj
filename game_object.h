@@ -33,21 +33,29 @@ class Game_object
         GLfloat goalx, goaly;
 		Sprite* img;
 		void init();
-		
+		int hp;
+
 	public:
 		GLfloat get_x();
 		GLfloat get_y();
 		void set_x(GLfloat new_x);
 		void set_y(GLfloat new_y);
+ 		GLfloat get_h();
+		GLfloat get_w();
 		virtual void update();
 		virtual void render();
 		virtual void remove_objects();
 		virtual void handle_key_events(SDL_Event keyevent);
+
+		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type);
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
 		Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path);
 		Game_object();
         bool get_dead();
-		
+        void set_dead();
+		int get_hp();
+        void set_hp(int);
+
 	};
 
 #endif

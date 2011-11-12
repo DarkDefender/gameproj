@@ -17,19 +17,21 @@
 using namespace std;
 
 class Sprite
-	{
-	private:
-		
-		string img_path;
-        GLuint texture[1];
-        GLfloat h,w;
+{
+    private:
 
-	public:
-		Sprite(string image_path, GLfloat, GLfloat);
-		bool create_texture();
-		void render(GLfloat, GLfloat, GLfloat);
-		void change_img(string image_path, GLfloat, GLfloat);
-        GLuint* get_texture();
-	};
+    string img_path;
+    GLuint texture[1];
+    GLfloat h,w, r,g,b,a;
+
+    public:
+    Sprite(string image_path, GLfloat, GLfloat);
+    bool create_texture();
+    void render(GLfloat, GLfloat, GLfloat);
+    void render(GLfloat x, GLfloat y, GLfloat z, GLfloat height, GLfloat width);
+    void change_img(string image_path, GLfloat, GLfloat);
+    GLuint* get_texture();
+    void set_color(GLfloat, GLfloat, GLfloat, GLfloat);
+};
 
 #endif

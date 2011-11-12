@@ -32,7 +32,27 @@ Game_engine::Game_engine()
 	
 	menu = new Menu_state(true);
     //menu = new Intro_state(true);
-    //menu = new Game_state(true);
+    game = new Game_state(false);
+	current_state = menu;
+}
+
+
+void Game_engine::change_state()
+{
+	
+	if(current_state == menu)
+	{
+		current_state = game;
+		game->set_running(true);
+		menu->set_running(false);
+	}
+	else
+	{
+		current_state = menu;
+		menu->set_running(true);
+		game->set_running(false);
+	}
+	
 }
 
 //Keeps the game running
@@ -44,23 +64,29 @@ void Game_engine::run()
     Timer time;
     time.start();
 
-    while(menu->get_running())
+    while(menu->get_running() || game->get_running())
     {
         //Reset/Start the timer
         fps.start();
+		
+		if(current_state->swap_state())
+		{
+			change_state();
+		}
+		
         //Handle key and/or other events. Pass them on if needed
         handle_events(surface);
 
         //Update
-        menu->update();
+        current_state->update();
 
         //Remove objects
-        menu->remove_objects();
+        current_state->remove_objects();
 
         //Render
         if (is_active)
         {
-            menu->render();
+            current_state->render();
             //Cap the frame rate
             if( fps.get_ticks() < 1000 / 60 )
             { 
@@ -69,7 +95,6 @@ void Game_engine::run()
         }
         if ( time.get_ticks() > 1000 )
         {
-            //cout << frame << endl;
             frame = 0;
             time.start();
         }
@@ -116,9 +141,10 @@ void Game_engine::handle_events(SDL_Surface*& surface)
             case SDL_QUIT:
                 //Stop program
                 menu->set_running(false);
+				game->set_running(false);
                 break;
             default:
-				menu->handle_key_events(event);
+				current_state->handle_key_events(event);
                 break;
         }
     }
@@ -127,9 +153,6 @@ void Game_engine::handle_events(SDL_Surface*& surface)
 //Init opengl
 bool Game_engine::init_gl()
 {
-    /* Enable Texture Mapping ( NEW ) */
-    glEnable( GL_TEXTURE_2D );
-
     /* Enable smooth shading */
     glShadeModel( GL_SMOOTH );
 
