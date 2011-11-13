@@ -130,7 +130,11 @@ void Game_state::move_cursor_down()
 
 void Game_state::remove_objects()
 {
-	
+  for (unsigned int it = 0;
+       it < images.size(); it++ )
+    {
+      images[it]->remove_objects();
+    }
 }
 
 //Handles keyboard input

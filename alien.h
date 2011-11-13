@@ -12,7 +12,7 @@ class Aliens : public Game_object
  public:
   Aliens (string typein, string ufo_picture, double xin, 
 	  double yin, bool up_in, bool down_in)
-    : up(up_in), down(down_in), moved_x_dir(0)
+    : up(up_in), down(down_in), moved_x_dir(0),fire_time(990)
 {
 
   type = typein;
@@ -41,19 +41,21 @@ class Aliens : public Game_object
   void handle_key_events(SDL_Event keyevent);
   void update();
   void render();
-  void remove_objects() {};
+  void remove_objects();
 
   void move_up();
   void move_down();
-
+  void set_fire_time(int fire){fire_time=fire;}
 
  private:
   // vector<Bullet*> bullets;
   // vector<SpecialBullet*> spbullets;
+  vector<Bullet*> bullets;
   bool up;
   bool down;
   double x_step;
   double moved_x_dir;
+  int fire_time;
   // ev. Bullets
 };
 

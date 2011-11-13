@@ -4,8 +4,12 @@
 #include "sprite.h"
 #include "game_object.h"
 #include "score.h"
+#include "game_state.h"
+#include "game_engine.h"
+#include "bullet.h"
 
 using namespace std;
+
 
 
 void Player :: move_up()
@@ -50,6 +54,12 @@ void Player::handle_key_events(SDL_Event keyevent)
                         //y = y - 0.1;
                         down=true;
                         break;
+		case SDLK_f:
+		  if(bullets.size()<number_of_bullets)
+		    {
+bullets.push_back(new Bullet(x+0.5*w,y,"bullet", 1, 0.01, 0));
+		    }
+		  break;
                     default:
                         break;
                 }
@@ -84,6 +94,12 @@ void Player::handle_key_events(SDL_Event keyevent)
                         //y=y-0.1;
                         down=true;
                         break;
+		case SDLK_l:
+		  if(bullets.size()<number_of_bullets)
+		    {
+		  bullets.push_back(new Bullet(x-0.5*w,y,"bullet", 1, -0.01, 0));
+		    }
+		  break;
                         //case SDLK_ESCAPE:
                         //set_running(false);
                     default:
@@ -113,10 +129,13 @@ void Player :: update()
 {
     if(up)
         move_up();
-    //if(!up)
-    //  x=x+0.001;
     if(down)
         move_down();
+    
+    for(int i = 0; i < (int)bullets.size(); i++)
+    {
+        bullets[i] -> update();
+    }
 }
 
 
@@ -125,4 +144,21 @@ void Player :: render()
 {
     img->render(x, y, -5);
     score_ -> render();
+    for(int i = 0; i < (int)bullets.size(); i++)
+    {
+        bullets[i] -> render();
+    }
+}
+
+
+void Player::remove_objects()
+{
+ for(int i = 0; i < (int)bullets.size(); i++)
+   {
+     if( bullets[i] -> get_dead() )
+       {
+	  bullets.erase (bullets.begin()+i);
+	  --i;
+       }
+   }
 }

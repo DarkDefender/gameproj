@@ -25,8 +25,9 @@ class Game_state : public State
 	private:
 		int menu_item;
 		vector<Game_object*> highscore;
-		//vector<Game_object*> images;
+		//vector<Bullet> bullet_vec;
 		vector<Game_object*> images;
+		//vector<Game_object*> images;
 		//vector{Game_object*> aliens;
 		Game_object* cursor_obj;
 		void move_cursor_up();
@@ -34,6 +35,8 @@ class Game_state : public State
 		
 	public:
         void init();
+	//vector<Bullet> bullet_vec;
+	//vector<Game_object*> images;
 		void update();
 		void render();
 		void remove_objects();

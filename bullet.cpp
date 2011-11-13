@@ -25,7 +25,7 @@ void Bullet::update()
 {
     x = x + cos(angle) * spd;
     y = y + sin(angle) * spd;
-    if (fabs(x) >= 1 or fabs(y) >= 1)
+    if (fabs(x) >= 1.3 or fabs(y) >= 1.3)
         dead = true;
 }
 

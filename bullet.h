@@ -17,6 +17,7 @@ class Bullet : public Game_object
         void update();
         void collision(Game_object&);
         void render();
+	void reverse_speed() {spd = -spd;}
    //   void remove_objects();   Skall troligtvis bort!
    //   void handle_key_events(SDL_Event keyevent);
         Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, int start_angle);

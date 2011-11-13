@@ -93,10 +93,43 @@ void Aliens :: update()
     move_up();
   if(down)
   move_down();
+  if(rand() % 1000 > fire_time)
+    {
+      if(type=="player1")
+	{
+	  bullets.push_back(new Bullet(x,y,"bullet",1,-0.01,0));
+	}
+      else
+	{
+	bullets.push_back(new Bullet(x,y,"bullet",1,0.01,0));
+	}
+    }
+
+  for(int i = 0; i < (int)bullets.size(); i++)
+    {
+      bullets[i] -> update();
+    }
 }
 
 
 void Aliens :: render()
 {
   img->render(x, y, -5);
+    for(int i = 0; i < (int)bullets.size(); i++)
+    {
+        bullets[i] -> render();
+    }
+}
+
+
+void Aliens::remove_objects()
+{
+ for(int i = 0; i < (int)bullets.size(); i++)
+   {
+     if( bullets[i] -> get_dead() )
+       {
+	  bullets.erase (bullets.begin()+i);
+	  --i;
+       }
+   }
 }
