@@ -54,7 +54,9 @@ void Bullet::render()
     glLoadIdentity( );
     glTranslatef(x, y, -5);
 
+    glDisable( GL_TEXTURE_2D );
     glBegin(GL_QUADS);
+    glColor4f(1,1,1,1);
     glVertex3f(0, 0.009, 0);
     glVertex3f(0.005, 0, 0);
     glVertex3f(0, -0.009, 0);
