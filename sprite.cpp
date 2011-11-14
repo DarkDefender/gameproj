@@ -95,28 +95,31 @@ bool Sprite::create_texture()
         /* Typical Texture Generation Using Data From The Bitmap */
         glBindTexture( GL_TEXTURE_2D, texture[0] );
 		
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        /* Nearest neighbour Filtering */
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+
 		/* TODO - Fix GL_RGBA with texture->format */
         if (TextureImage[0]->format->Amask)
         {
 		
         /* Generate The Texture */
-        gluBuild2DMipmaps( GL_TEXTURE_2D, 4,
-                TextureImage[0]->w, TextureImage[0]->h, GL_RGBA,
-                GL_UNSIGNED_BYTE, TextureImage[0]->pixels );
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TextureImage[0]->w, TextureImage[0]->h,
+                0, GL_BGRA, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
         else
         {
-        gluBuild2DMipmaps( GL_TEXTURE_2D, 3,
-                TextureImage[0]->w, TextureImage[0]->h, GL_BGR,
-                GL_UNSIGNED_BYTE, TextureImage[0]->pixels );
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, TextureImage[0]->w, TextureImage[0]->h,
+                0, GL_BGR, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
-        /* Nearest neighbour Filtering */
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); 
+        
     }
 	
-	
-
     /* Free up any memory we may have used */
     if ( TextureImage[0] )
         SDL_FreeSurface( TextureImage[0] ); 
