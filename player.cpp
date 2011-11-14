@@ -54,12 +54,12 @@ void Player::handle_key_events(SDL_Event keyevent)
                         //y = y - 0.1;
                         down=true;
                         break;
-		case SDLK_f:
-		  if(bullets.size()<number_of_bullets)
-		    {
-bullets.push_back(new Bullet(x+0.5*w,y,"bullet", 1, 0.01, 0));
-		    }
-		  break;
+                    case SDLK_f:
+                        if((int)bullets.size() < number_of_bullets)
+                        {
+                            bullets.push_back(new Bullet(x+0.5*w,y,"bullet", 1, 0.01, 0));
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -94,12 +94,12 @@ bullets.push_back(new Bullet(x+0.5*w,y,"bullet", 1, 0.01, 0));
                         //y=y-0.1;
                         down=true;
                         break;
-		case SDLK_l:
-		  if(bullets.size()<number_of_bullets)
-		    {
-		  bullets.push_back(new Bullet(x-0.5*w,y,"bullet", 1, -0.01, 0));
-		    }
-		  break;
+                    case SDLK_l:
+                        if((int)bullets.size() < number_of_bullets)
+                        {
+                            bullets.push_back(new Bullet(x-0.5*w,y,"bullet", 1, -0.01, 0));
+                        }
+                        break;
                         //case SDLK_ESCAPE:
                         //set_running(false);
                     default:
@@ -131,7 +131,7 @@ void Player :: update()
         move_up();
     if(down)
         move_down();
-    
+
     for(int i = 0; i < (int)bullets.size(); i++)
     {
         bullets[i] -> update();
@@ -153,12 +153,12 @@ void Player :: render()
 
 void Player::remove_objects()
 {
- for(int i = 0; i < (int)bullets.size(); i++)
-   {
-     if( bullets[i] -> get_dead() )
-       {
-	  bullets.erase (bullets.begin()+i);
-	  --i;
-       }
-   }
+    for(int i = 0; i < (int)bullets.size(); i++)
+    {
+        if( bullets[i] -> get_dead() )
+        {
+            bullets.erase (bullets.begin()+i);
+            --i;
+        }
+    }
 }

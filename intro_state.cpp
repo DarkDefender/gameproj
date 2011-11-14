@@ -139,7 +139,7 @@ void Intro_state::render()
 
 void Intro_state::handle_key_events(SDL_Event keyevent)
 {
-
+//TODO Check for esc to cancel the intro... Place holder.
 }
 
 void Intro_state::remove_objects()

@@ -159,7 +159,7 @@ void Menu_state::move_cursor_down()
 {	
 	menu_item = menu_item + 1;
 	
-	if(menu_item > images.size() - 1)
+	if(menu_item > (int)images.size() - 1)
 	{
 		menu_item = 0;
 	}
@@ -257,7 +257,7 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 					if(player1_name || player2_name)
 					{
 						letter_item++;
-						if(letter_item > letters1.size() - 1)
+						if(letter_item > (int)letters1.size() - 1)
 						{
 							letter_item = 0;
 						}	

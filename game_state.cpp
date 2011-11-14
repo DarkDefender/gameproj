@@ -120,7 +120,7 @@ void Game_state::move_cursor_down()
 {	
 	menu_item = menu_item + 1;
 	
-	if(menu_item > images.size() - 1)
+	if(menu_item > (int)images.size() - 1)
 	{
 		menu_item = 0;
 	}

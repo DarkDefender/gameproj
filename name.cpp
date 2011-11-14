@@ -27,7 +27,7 @@ Name::Name(GLfloat x_pos, GLfloat y_pos, string obj_type) : Game_object(x_pos, y
 void Name::change_letter_up()
 {
 	it++;
-	if(it > images.size() - 1)
+	if(it > (int)images.size() - 1)
 	{
 		it = 0;
 	}	

@@ -8,7 +8,8 @@
 
 using namespace std;
 
-
+//TODO clean this to only be definitions
+//as it should be in .h files...
 class Score : public Game_object
 {
  public:
@@ -17,7 +18,6 @@ class Score : public Game_object
   //void print_score();
   void change_score(int c) {score_number += c;}
 
-  void handle_key_events(SDL_Event keyevent) {}
   void update(){}
   void render();
   void remove_objects() {};
