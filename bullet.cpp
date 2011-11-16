@@ -27,10 +27,6 @@ void Bullet::update()
     y = y + sin(angle) * spd;
     if (fabs(x) >= 1.3 or fabs(y) >= 1.3)
         dead = true;
-    if (angle > 1.5)
-        angle += 0.01;
-    else
-        angle -= 0.01;
 }
 
 void Bullet::collision(Game_object& obj)
