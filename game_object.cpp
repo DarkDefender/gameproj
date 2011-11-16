@@ -96,3 +96,5 @@ void Game_object::set_dead() { dead = true; }
 
 int Game_object::get_hp() { return hp; }
 void Game_object::set_hp(int health) { hp = health; }
+
+string Game_object::get_type() { return type; }

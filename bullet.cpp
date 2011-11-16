@@ -30,8 +30,8 @@ void Bullet::update()
 }
 
 void Bullet::collision(Game_object& obj)
-{
-    if ( fabs(obj.get_x() - x) < obj.get_w() && fabs(obj.get_y() -y) < obj.get_h() )
+{ 
+    if (type != obj.get_type() and fabs(obj.get_x() - x) < obj.get_w() and fabs(obj.get_y() -y) < obj.get_h() )
     {
         int cur_hp = obj.get_hp() - hp;
         if (cur_hp <= 0)

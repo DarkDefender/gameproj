@@ -108,12 +108,12 @@ bool Sprite::create_texture()
 		
         /* Generate The Texture */
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TextureImage[0]->w, TextureImage[0]->h,
-                0, GL_BGRA, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
+                0, GL_RGBA, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
         else // Texture without alpha channel
         {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, TextureImage[0]->w, TextureImage[0]->h,
-                0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
+                0, GL_BGR, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
         
     }

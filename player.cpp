@@ -55,10 +55,7 @@ void Player::handle_key_events(SDL_Event keyevent)
                         down=true;
                         break;
                     case SDLK_f:
-                        if((int)bullets.size() < number_of_bullets)
-                        {
-                            bullets.push_back(new Bullet(x+0.5*w,y,"bullet", 1, 0.01, 0));
-                        }
+                        bullets->push_back(Bullet(x+0.5*w,y,"player1", 1, 0.01, 0));
                         break;
                     default:
                         break;
@@ -95,10 +92,7 @@ void Player::handle_key_events(SDL_Event keyevent)
                         down=true;
                         break;
                     case SDLK_l:
-                        if((int)bullets.size() < number_of_bullets)
-                        {
-                            bullets.push_back(new Bullet(x-0.5*w,y,"bullet", 1, -0.01, 0));
-                        }
+                        bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, -0.01, 0));
                         break;
                         //case SDLK_ESCAPE:
                         //set_running(false);
@@ -132,33 +126,15 @@ void Player :: update()
     if(down)
         move_down();
 
-    for(int i = 0; i < (int)bullets.size(); i++)
-    {
-        bullets[i] -> update();
-    }
 }
-
-
 
 void Player :: render()
 {
     img->render(x, y, -5);
     score_ -> render();
-    for(int i = 0; i < (int)bullets.size(); i++)
-    {
-        bullets[i] -> render();
-    }
 }
 
 
 void Player::remove_objects()
 {
-    for(int i = 0; i < (int)bullets.size(); i++)
-    {
-        if( bullets[i] -> get_dead() )
-        {
-            bullets.erase (bullets.begin()+i);
-            --i;
-        }
-    }
 }

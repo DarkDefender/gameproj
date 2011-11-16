@@ -28,7 +28,7 @@ class Game_state : public State
 		int menu_item;
 		int current_level;
 		vector<Game_object*> highscore;
-		//vector<Bullet> bullet_vec;
+		vector<Bullet> bullet_vec;
 		vector<Game_object*> images;
 		//vector<Game_object*> images;
 		//vector{Game_object*> aliens;
