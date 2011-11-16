@@ -27,6 +27,7 @@ class Player : public Game_object
     {
         bullets = b_ptr;
         type = typein;
+        hp = 1;
         y = 0;
         h = 0.1;
         w = 0.1;
