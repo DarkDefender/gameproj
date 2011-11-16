@@ -32,43 +32,43 @@ Menu_state::Menu_state(bool run) : State(run)
 	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "test_img.png");
 	
 	//New game image
-	images.push_back(new Game_object(-0.5,0.8,0.2,0.5,"new game","new_game.png"));
+	images.push_back(new Game_object(-0.6,0.8,0.2,0.5,"new game","images/newgame.png"));
 	// Player 1 image
-	images.push_back(new Game_object(-0.5,0.4,0.2,0.5,"player 1","player1.png"));
+	images.push_back(new Game_object(-0.6,0.4,0.2,0.5,"player 1","images/player1.png"));
 	// Player 2 image
-	images.push_back(new Game_object(-0.5,0,0.2,0.5,"player 2","player2.png"));
+	images.push_back(new Game_object(-0.6,0,0.2,0.5,"player 2","images/player2.png"));
 	//Help image
-	images.push_back(new Game_object(-0.5,-0.4,0.2,0.5,"help","help.png"));
+	images.push_back(new Game_object(-0.6,-0.4,0.2,0.5,"help","images/help.png"));
 	//Quit image
-	images.push_back(new Game_object(-0.5,-0.8,0.2,0.5,"quit","quit.png"));
+	images.push_back(new Game_object(-0.6,-0.8,0.2,0.5,"quit","images/quit.png"));
 	
 	
 	//Letters
 	//Player1
-	letters1.push_back(new Name(0,0.4,"1"));
-	letters1.push_back(new Name(0.5,0.4,"2"));
-	letters1.push_back(new Name(1,0.4,"3"));
+	letters1.push_back(new Name(-0.2,0.4,"1"));
+	letters1.push_back(new Name(0,0.4,"2"));
+	letters1.push_back(new Name(0.2,0.4,"3"));
 	//Player2
-	letters2.push_back(new Name(0,0,"1"));
-	letters2.push_back(new Name(0.5,0,"2"));
-	letters2.push_back(new Name(1,0,"3"));
+	letters2.push_back(new Name(-0.2,0,"1"));
+	letters2.push_back(new Name(0,0,"2"));
+	letters2.push_back(new Name(0.2,0,"3"));
 	
 	//Highscore image
-	highscore.push_back(new Game_object(0.4,0.8,"highscore","test_img.bmp"));
+	highscore.push_back(new Game_object(0.4,0.8,"highscore","test_img.png"));
 	
 	//Help
 	//Player 1
-	help.push_back(new Game_object(-0.5,0.8,0.2,0.5,"player 1","player1.png"));
+	help.push_back(new Game_object(-0.5,0.8,0.2,0.5,"player 1","images/player1.png"));
 	help.push_back(new Game_object(-0.5,0.6,0.2,0.2,"up","up-arrow.png"));
 	help.push_back(new Game_object(-0.5,0.4,0.2,0.2,"down","down-arrow.png"));
 	help.push_back(new Game_object(-0.5,0.2,0.2,0.2,"shift","shift.png"));
 	//Player 2
-	help.push_back(new Game_object(0.5,0.8,0.2,0.5,"player 2","player2.png"));
+	help.push_back(new Game_object(0.5,0.8,0.2,0.5,"player 2","images/player2.png"));
 	help.push_back(new Game_object(0.5,0.6,0.2,0.2,"w","alphabet-w.png"));
 	help.push_back(new Game_object(0.5,0.4,0.2,0.2,"s","alphabet-s.png"));
 	help.push_back(new Game_object(0.5,0.2,0.2,0.2,"1","number-1.png"));
 	//Menu buttons
-	help.push_back(new Game_object(0,0,0.2,0.5,"Menu","new_game.png"));
+	help.push_back(new Game_object(0.15,0,0.2,0.5,"Menu","images/menu.png"));
 	help.push_back(new Game_object(-0.1,-0.2,0.2,0.2,"left","left-arrow.png"));
 	help.push_back(new Game_object(0.1,-0.2,0.2,0.2,"right","right-arrow.png"));
 	help.push_back(new Game_object(0,-0.4,0.2,0.2,"enter","enter.png"));

@@ -11,7 +11,7 @@
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
-#include <SDL/SDL_image.h>
+#include <SDL_image.h>
 #include "game_exception.h"
 #include <iostream>
 
@@ -99,7 +99,7 @@ bool Sprite::create_texture()
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
         /* Nearest neighbour Filtering */
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
         glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
 
 		/* TODO - Fix GL_RGBA with texture->format */
@@ -110,13 +110,11 @@ bool Sprite::create_texture()
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TextureImage[0]->w, TextureImage[0]->h,
                 0, GL_BGRA, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
-        else
+        else // Texture without alpha channel
         {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, TextureImage[0]->w, TextureImage[0]->h,
-                0, GL_BGR, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
+                0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
-        
-        glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE); 
         
     }
 	
