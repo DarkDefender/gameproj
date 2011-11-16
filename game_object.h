@@ -29,7 +29,7 @@ class Game_object
 		string type;
 		bool dead;
 		GLfloat spd;
-        int angle;
+        GLfloat angle;
         GLfloat goalx, goaly;
 		Sprite* img;
 		void init();

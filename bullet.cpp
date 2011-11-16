@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, int start_angle)
+Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle)
 {
     x = x_pos;
     y = y_pos;
@@ -27,11 +27,15 @@ void Bullet::update()
     y = y + sin(angle) * spd;
     if (fabs(x) >= 1.3 or fabs(y) >= 1.3)
         dead = true;
+    if (angle > 1.5)
+        angle += 0.01;
+    else
+        angle -= 0.01;
 }
 
 void Bullet::collision(Game_object& obj)
 { 
-    if (type != obj.get_type() and fabs(obj.get_x() - x) < obj.get_w() and fabs(obj.get_y() -y) < obj.get_h() )
+    if (type != obj.get_type() and fabs(obj.get_x() - x) < obj.get_w()/2 and fabs(obj.get_y() -y) < obj.get_h()/2 )
     {
         int cur_hp = obj.get_hp() - hp;
         if (cur_hp <= 0)

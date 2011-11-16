@@ -97,7 +97,7 @@ void Aliens :: update()
     {
         if(type=="p1")
         {
-            bullets->push_back(Bullet(x,y,"p1",1,-0.01,0));
+            bullets->push_back(Bullet(x,y,"p1",1,0.01,3.14159));
         }
         else
         {

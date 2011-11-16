@@ -92,7 +92,7 @@ void Player::handle_key_events(SDL_Event keyevent)
                         down=true;
                         break;
                     case SDLK_l:
-                        bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, -0.01, 0));
+                        bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159));
                         break;
                         //case SDLK_ESCAPE:
                         //set_running(false);
