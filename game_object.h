@@ -55,6 +55,7 @@ class Game_object
         void set_dead();
 		int get_hp();
         void set_hp(int);
+        string get_type();
 
 	};
 
