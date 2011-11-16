@@ -16,7 +16,7 @@ LIBS = -lopengl32 -lglu32 -lSDL_image
 endif
 
 all:
-	$(CC) -o space-invaders main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_state.cpp bullet.cpp game_object.cpp sprite.cpp timer.cpp name.cpp obstacle.cpp player.cpp score.cpp alien.cpp `sdl-config --cflags --libs` $(LIBS)
+	$(CC) -o space-invaders main.cpp game_engine.cpp state.cpp menu_state.cpp intro_state.cpp game_state.cpp bullet.cpp game_object.cpp sprite.cpp timer.cpp name.cpp obstacle.cpp player.cpp score.cpp alien.cpp game_timer.cpp `sdl-config --cflags --libs` $(LIBS)
 
 clean:
 	@echo Cleaning up...

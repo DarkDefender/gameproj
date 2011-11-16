@@ -22,38 +22,47 @@ using namespace std;
 
 Game_state::Game_state(bool run) : State(run)
 {	
+
+	//Starting level
+	current_level = 1;
 	
-  images.push_back(new Player("player1", "player1.bmp", &bullet_vec));
-  images.push_back(new Player("player2", "player2.bmp", &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.bmp", -0.2, 0, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.bmp", -0.2, 0.2, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.bmp", 
+  images.push_back(new Player("player1", "player1.png", &bullet_vec));
+  images.push_back(new Player("player2", "player2.png", &bullet_vec));
+  images.push_back(new  Aliens("p1", "ufo.png", -0.2, 0, true, false, &bullet_vec));
+  images.push_back(new  Aliens("p1", "ufo.png", -0.2, 0.2, true, false, &bullet_vec));
+  images.push_back(new  Aliens("p1", "ufo.png", 
 			       -0.2, 0.4, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.bmp", 
+  images.push_back(new  Aliens("p1", "ufo.png", 
 			       -0.2, 0.6, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.bmp", 
+  images.push_back(new  Aliens("p1", "ufo.png", 
 			       -0.2, 0.8, true, false, &bullet_vec));
 
-  images.push_back(new  Aliens("p2", "ufo.bmp", 
+  images.push_back(new  Aliens("p2", "ufo.png", 
 			       0.2, 0, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.bmp", 
+  images.push_back(new  Aliens("p2", "ufo.png", 
 			       0.2, 0.2, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.bmp", 
+  images.push_back(new  Aliens("p2", "ufo.png", 
 			       0.2, 0.4, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.bmp", 
+  images.push_back(new  Aliens("p2", "ufo.png", 
 			       0.2, 0.6, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.bmp", 
+  images.push_back(new  Aliens("p2", "ufo.png", 
 			       0.2, 0.8, true, false, &bullet_vec));
 
+
+	
+	//Timer
+	timer = new Game_timer(-0.4,0.8);
+	
+	
   /*for(int it = 0, it < 5, ++it)
     {
-      aliens.push_back(new Alien ("player1", "ufo.bmp", 
+      aliens.push_back(new Alien ("player1", "ufo.png", 
       double xin, double yin, bool up_in, bool down_in));
     }
-  images.push_back(new Alien("player1", "player2.bmp"));
-  images.push_back(new Alien("player1", "player2.bmp"));
-  images.push_back(new Alien("player2", "player2.bmp"));
-  images.push_back(new Alien("player2", "player2.bmp"));*/
+  images.push_back(new Alien("player1", "player2.png"));
+  images.push_back(new Alien("player1", "player2.png"));
+  images.push_back(new Alien("player2", "player2.png"));
+  images.push_back(new Alien("player2", "player2.png"));*/
 
 
 	
@@ -83,6 +92,15 @@ void Game_state::update()
             bullet_vec[i].collision(*images[j]);
         }
     }
+	
+	timer->update();
+	
+	//New level
+	if(timer->get_level() != current_level)
+	{
+		current_level = timer->get_level();
+	}
+
 }
 
 void Game_state::render()
@@ -100,11 +118,15 @@ void Game_state::render()
 	{
 		images[it]->render();
 	}
+	
+	timer->render();
+	
 	for (unsigned int it = 0;
 		 it < bullet_vec.size(); it++ )
 	{
 		bullet_vec[it].render();
 	}  
+
 	// Render all highscore items
 	/*for (unsigned int it = 0;
 		 it < highscore.size(); it++ )
