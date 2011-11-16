@@ -2,10 +2,15 @@
 #define TIMER
 
 #include <SDL/SDL.h>
+#include <vector>
+#include <string>
+#include "game_object.h"
 
-class Timer
+class Timer : public Game_object
 {
     private:
+	
+	
     //The clock time when the timer started
     int startTicks;
 
@@ -15,10 +20,12 @@ class Timer
     //The timer status
     bool paused;
     bool started;
+	
+	void update_img();
 
     public:
     //Initializes variables
-    Timer();
+	Timer();
 
     //The various clock actions
     void start();

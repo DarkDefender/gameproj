@@ -15,6 +15,7 @@
 #include "game_object.h"
 #include "player.h"
 #include "alien.h"
+#include "game_timer.h"
 #include <SDL/SDL.h>
 #include <vector>
 
@@ -23,7 +24,9 @@ class Game_engine;
 class Game_state : public State
 {
 	private:
+		Game_timer* timer;
 		int menu_item;
+		int current_level;
 		vector<Game_object*> highscore;
 		//vector<Bullet> bullet_vec;
 		vector<Game_object*> images;

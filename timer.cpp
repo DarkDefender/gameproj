@@ -1,5 +1,8 @@
 #include "timer.h"
 #include <SDL/SDL.h>
+#include <iostream>
+
+using namespace std;
 
 Timer::Timer()
 {
@@ -7,7 +10,7 @@ Timer::Timer()
     startTicks = 0;
     pausedTicks = 0;
     paused = false;
-    started = false;
+    started = false;	
 }
 
 void Timer::start()

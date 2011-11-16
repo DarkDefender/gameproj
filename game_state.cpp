@@ -23,31 +23,38 @@ using namespace std;
 Game_state::Game_state(bool run) : State(run)
 {	
 
+	//Starting level
+	current_level = 1;
 	
-  images.push_back(new Player("player1", "player1.bmp"));
-  images.push_back(new Player("player2", "player2.bmp"));
-  images.push_back(new  Aliens("player1", "ufo.bmp", 
+  images.push_back(new Player("player1", "player1.png"));
+  images.push_back(new Player("player2", "player2.png"));
+  images.push_back(new  Aliens("player1", "ufo.png", 
 			       -0.2, 0, true, false));
-  images.push_back(new  Aliens("player1", "ufo.bmp", 
+  images.push_back(new  Aliens("player1", "ufo.png", 
 			       -0.2, 0.2, true, false));
-  images.push_back(new  Aliens("player1", "ufo.bmp", 
+  images.push_back(new  Aliens("player1", "ufo.png", 
 			       -0.2, 0.4, true, false));
-  images.push_back(new  Aliens("player1", "ufo.bmp", 
+  images.push_back(new  Aliens("player1", "ufo.png", 
 			       -0.2, 0.6, true, false));
-  images.push_back(new  Aliens("player1", "ufo.bmp", 
+  images.push_back(new  Aliens("player1", "ufo.png", 
 			       -0.2, 0.8, true, false));
 
-  images.push_back(new  Aliens("player2", "ufo.bmp", 
+  images.push_back(new  Aliens("player2", "ufo.png", 
 			       0.2, 0, true, false));
-  images.push_back(new  Aliens("player2", "ufo.bmp", 
+  images.push_back(new  Aliens("player2", "ufo.png", 
 			       0.2, 0.2, true, false));
-  images.push_back(new  Aliens("player2", "ufo.bmp", 
+  images.push_back(new  Aliens("player2", "ufo.png", 
 			       0.2, 0.4, true, false));
-  images.push_back(new  Aliens("player2", "ufo.bmp", 
+  images.push_back(new  Aliens("player2", "ufo.png", 
 			       0.2, 0.6, true, false));
-  images.push_back(new  Aliens("player2", "ufo.bmp", 
+  images.push_back(new  Aliens("player2", "ufo.png", 
 			       0.2, 0.8, true, false));
 
+	
+	//Timer
+	timer = new Game_timer(-0.4,0.8);
+	
+	
   /*for(int it = 0, it < 5, ++it)
     {
       aliens.push_back(new Alien ("player1", "ufo.bmp", 
@@ -73,7 +80,17 @@ void Game_state::update()
 		 it < images.size(); it++ )
 	{
 		images[it]->update();
-	}	
+	}
+	
+	
+	timer->update();
+	
+	//New level
+	if(timer->get_level() != current_level)
+	{
+		current_level = timer->get_level();
+	}
+	
 }
 
 void Game_state::render()
@@ -91,6 +108,8 @@ void Game_state::render()
 	{
 		images[it]->render();
 	}
+	
+	timer->render();
 	
 	// Render all highscore items
 	/*for (unsigned int it = 0;
