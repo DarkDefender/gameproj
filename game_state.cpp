@@ -53,8 +53,8 @@ void Game_state::new_lvl()
 
 void Game_state::init()
 {
-	players.push_back(new Player("player1", "images/p1.png", &bullet_vec));
-	players.push_back(new Player("player2", "images/p2.png", &bullet_vec));
+	players.push_back(new Player("player1", &bullet_vec));
+	players.push_back(new Player("player2", &bullet_vec));
 }
 
 void Game_state::update()
