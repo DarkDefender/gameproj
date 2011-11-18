@@ -29,7 +29,7 @@ Menu_state::Menu_state(bool run) : State(run)
 	letter_item = 0;
 	
 	//Cursor
-	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "test_img.png");
+	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "images/test_img.png");
 	
 	//New game image
 	images.push_back(new Game_object(-0.6,0.8,0.2,0.5,"new game","images/newgame.png"));
@@ -54,25 +54,25 @@ Menu_state::Menu_state(bool run) : State(run)
 	letters2.push_back(new Name(0.2,0,"3"));
 	
 	//Highscore image
-	highscore.push_back(new Game_object(0.4,0.8,"highscore","test_img.png"));
+	highscore.push_back(new Game_object(0.4,0.8,"highscore","images/test_img.png"));
 	
 	//Help
 	//Player 1
 	help.push_back(new Game_object(-0.5,0.8,0.2,0.5,"player 1","images/player1.png"));
-	help.push_back(new Game_object(-0.5,0.6,0.2,0.2,"up","up-arrow.png"));
-	help.push_back(new Game_object(-0.5,0.4,0.2,0.2,"down","down-arrow.png"));
-	help.push_back(new Game_object(-0.5,0.2,0.2,0.2,"shift","shift.png"));
+	help.push_back(new Game_object(-0.5,0.6,0.2,0.2,"up","images/up-arrow.png"));
+	help.push_back(new Game_object(-0.5,0.4,0.2,0.2,"down","images/down-arrow.png"));
+	help.push_back(new Game_object(-0.5,0.2,0.2,0.2,"shift","images/shift.png"));
 	//Player 2
 	help.push_back(new Game_object(0.5,0.8,0.2,0.5,"player 2","images/player2.png"));
-	help.push_back(new Game_object(0.5,0.6,0.2,0.2,"w","alphabet-w.png"));
-	help.push_back(new Game_object(0.5,0.4,0.2,0.2,"s","alphabet-s.png"));
-	help.push_back(new Game_object(0.5,0.2,0.2,0.2,"1","number-1.png"));
+	help.push_back(new Game_object(0.5,0.6,0.2,0.2,"w","images/alphabet-w.png"));
+	help.push_back(new Game_object(0.5,0.4,0.2,0.2,"s","images/alphabet-s.png"));
+	help.push_back(new Game_object(0.5,0.2,0.2,0.2,"1","images/number-1.png"));
 	//Menu buttons
 	help.push_back(new Game_object(0.15,0,0.2,0.5,"Menu","images/menu.png"));
-	help.push_back(new Game_object(-0.1,-0.2,0.2,0.2,"left","left-arrow.png"));
-	help.push_back(new Game_object(0.1,-0.2,0.2,0.2,"right","right-arrow.png"));
-	help.push_back(new Game_object(0,-0.4,0.2,0.2,"enter","enter.png"));
-	help.push_back(new Game_object(0,-0.6,0.2,0.2,"esc","esc.png"));
+	help.push_back(new Game_object(-0.1,-0.2,0.2,0.2,"left","images/left-arrow.png"));
+	help.push_back(new Game_object(0.1,-0.2,0.2,0.2,"right","images/right-arrow.png"));
+	help.push_back(new Game_object(0,-0.4,0.2,0.2,"enter","images/enter.png"));
+	help.push_back(new Game_object(0,-0.6,0.2,0.2,"esc","images/esc.png"));
 	
 	
 }

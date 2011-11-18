@@ -16,8 +16,8 @@ using namespace std;
 Game_timer::Game_timer(GLfloat x_pos, GLfloat y_pos) : Game_object(x_pos, y_pos, "Game_timer")
 {	
 	//Initate time
-	max_second1 = 3;
-	max_second2 = 0;
+	max_second1 = 0;
+	max_second2 = 5;
 	second1 = max_second1;
 	second2 = max_second2;
 	lvl_cnt1 = 0;

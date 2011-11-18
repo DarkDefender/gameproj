@@ -88,9 +88,9 @@ void Game_engine::run()
         {
             current_state->render();
             //Cap the frame rate
-            if( fps.get_ticks() < 1000 / 60 )
+            if( fps.get_ticks() < 1000.0 / 60 )
             { 
-                SDL_Delay( ( 1000 / 60 ) - fps.get_ticks() ); 
+                SDL_Delay( ( 1000.0 / 60 ) - fps.get_ticks() ); 
             }
         }
         if ( time.get_ticks() > 1000 )

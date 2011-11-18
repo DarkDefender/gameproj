@@ -6,6 +6,51 @@
 using namespace std;
 
 
+Aliens::Aliens(string typein, GLfloat xin, GLfloat yin,
+			   int lvl, vector<Bullet>* b_ptr)
+: Game_object(xin,yin,typein)
+{
+		
+	current_lvl = lvl;
+	init_alien();
+	up = true;
+	down = false;
+	bullets = b_ptr;
+
+	
+	if(typein == "player1")
+	{
+		x_step=-0.1;
+	}
+	else //if player2
+	{
+		x_step=0.1;
+	}
+}
+
+void Aliens::init_alien()
+{
+	
+	if(current_lvl%2)
+	{
+		ufo_img = "images/ufo.png";
+	}
+	else
+	{
+		ufo_img = "images/ufo1.png";
+	}
+	fire_time = 990;
+	moved_x_dir = 0;
+	w = 0.1;
+	h = 0.1;
+	dead = false;
+	spd = 0.005;
+	hp = 1;
+	
+	img = new Sprite(ufo_img, h, w);
+	img->create_texture();
+}
+
 void Aliens :: move_up()
 {
     if (y + spd + h/2<1 && moved_x_dir == 0)
@@ -115,4 +160,9 @@ void Aliens :: render()
 
 void Aliens::remove_objects()
 {
+}
+
+void Aliens::set_fire_time(int fire)
+{
+	fire_time=fire;
 }
