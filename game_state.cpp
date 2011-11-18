@@ -80,12 +80,21 @@ void Game_state::update()
         bullet_vec[it].update();
     }	
     
-	//Handle collisions
+	//Handle collisions between bullets and aliens
     for (unsigned int i = 0; i < bullet_vec.size(); i++)
     {
         for (unsigned int j = 0; j < aliens.size(); j++)
         {
             bullet_vec[i].collision(*aliens[j]);
+        }
+    }
+	
+	//Handle collisions between bullets and players
+    for (unsigned int i = 0; i < bullet_vec.size(); i++)
+    {
+        for (unsigned int j = 0; j < players.size(); j++)
+        {
+            bullet_vec[i].collision(*players[j]);
         }
     }
 	
