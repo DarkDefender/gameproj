@@ -7,11 +7,16 @@
  *
  */
 
+#ifdef WIN32
+#include <SDL/SDL_image.h>
+#else
+#include <SDL_image.h>
+#endif
+
 #include "sprite.h"
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
-#include <SDL_image.h>
 #include "game_exception.h"
 #include <iostream>
 

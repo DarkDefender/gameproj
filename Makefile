@@ -12,6 +12,7 @@ endif
 
 # Windows
 ifeq ($(OS),MINGW32_NT-6.0)
+WIN32 = 1
 LIBS = -lopengl32 -lglu32 -lSDL_image
 endif
 
