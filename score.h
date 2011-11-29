@@ -13,14 +13,14 @@ using namespace std;
 class Score : public Game_object
 {
  public:
-  Score (string typein);
+	Score (string typein);
 
-  //void print_score();
-  void change_score(int c) {score_number += c;}
-
-  void update(){}
-  void render();
-  void remove_objects() {};
+	//void print_score();
+	void change_score(int c) {score_number += c;}
+	void add_score(int added_score);
+	void update(){}
+	void render();
+	void remove_objects() {};
   
 
 

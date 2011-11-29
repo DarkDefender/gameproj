@@ -26,72 +26,79 @@ Game_state::Game_state(bool run) : State(run)
 	//Starting level
 	current_level = 1;
 	
-  images.push_back(new Player("player1", "player1.png", &bullet_vec));
-  images.push_back(new Player("player2", "player2.png", &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.png", -0.2, 0, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.png", -0.2, 0.2, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.png", 
-			       -0.2, 0.4, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.png", 
-			       -0.2, 0.6, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p1", "ufo.png", 
-			       -0.2, 0.8, true, false, &bullet_vec));
-
-  images.push_back(new  Aliens("p2", "ufo.png", 
-			       0.2, 0, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.png", 
-			       0.2, 0.2, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.png", 
-			       0.2, 0.4, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.png", 
-			       0.2, 0.6, true, false, &bullet_vec));
-  images.push_back(new  Aliens("p2", "ufo.png", 
-			       0.2, 0.8, true, false, &bullet_vec));
-
-
+	init();
+	new_lvl();
 	
 	//Timer
 	timer = new Game_timer(-0.4,0.8);
 	
-	
-  /*for(int it = 0, it < 5, ++it)
-    {
-      aliens.push_back(new Alien ("player1", "ufo.png", 
-      double xin, double yin, bool up_in, bool down_in));
-    }
-  images.push_back(new Alien("player1", "player2.png"));
-  images.push_back(new Alien("player1", "player2.png"));
-  images.push_back(new Alien("player2", "player2.png"));
-  images.push_back(new Alien("player2", "player2.png"));*/
+}
 
-
+void Game_state::new_lvl()
+{
+	//Player1 aliens
+	aliens.push_back(new  Aliens("p1", -0.2, 0, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.2, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.4, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.6, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.8, current_level, &bullet_vec));
 	
+	//Player2 aliens
+	aliens.push_back(new  Aliens("p2", 0.2, 0, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.2, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.4, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.6, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.8, current_level, &bullet_vec));
 }
 
 void Game_state::init()
 {
-	
+	players.push_back(new Player("player1", &bullet_vec));
+	players.push_back(new Player("player2", &bullet_vec));
 }
 
 void Game_state::update()
 {
-    for (unsigned int it = 0;
-            it < images.size(); it++ )
+	//Update players
+	for (unsigned int it = 0;
+		 it < players.size(); it++ )
     {
-        images[it]->update();
+        players[it]->update();
     }	
+	
+	//Update aliens
+    for (unsigned int it = 0;
+            it < aliens.size(); it++ )
+    {
+        aliens[it]->update();
+    }	
+	
+	//Update bullets
     for (unsigned int it = 0;
             it < bullet_vec.size(); it++ )
     {
         bullet_vec[it].update();
-    }	    
+    }	
+    
+	//Handle collisions between bullets and aliens
     for (unsigned int i = 0; i < bullet_vec.size(); i++)
     {
-        for (unsigned int j = 0; j < images.size(); j++)
+        for (unsigned int j = 0; j < aliens.size(); j++)
         {
-            bullet_vec[i].collision(*images[j]);
+            bullet_vec[i].collision(*aliens[j]);
         }
     }
+	
+	//Handle collisions between bullets and players
+    for (unsigned int i = 0; i < bullet_vec.size(); i++)
+    {
+        for (unsigned int j = 0; j < players.size(); j++)
+        {
+            bullet_vec[i].collision(*players[j]);
+        }
+    }
+	
+	
 	
 	timer->update();
 	
@@ -99,6 +106,7 @@ void Game_state::update()
 	if(timer->get_level() != current_level)
 	{
 		current_level = timer->get_level();
+		new_lvl();
 	}
 
 }
@@ -107,64 +115,51 @@ void Game_state::render()
 {
 	
     /* Clear The Screen And The Depth Buffer */
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-    //cursor_obj->render();
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	
 	
 	
-	// Render all menu items
+	// Render all players
 	for (unsigned int it = 0;
-		 it < images.size(); it++ )
+		 it < players.size(); it++ )
 	{
-		images[it]->render();
+		players[it]->render();
 	}
+	
+	// Render all aliens
+	for (unsigned int it = 0;
+		 it < aliens.size(); it++ )
+	{
+		aliens[it]->render();
+	}
+	
 	
 	timer->render();
 	
+	// Render all bullets
 	for (unsigned int it = 0;
 		 it < bullet_vec.size(); it++ )
 	{
 		bullet_vec[it].render();
 	}  
 
-	// Render all highscore items
-	/*for (unsigned int it = 0;
-		 it < highscore.size(); it++ )
-	{
-		highscore[it]->render();
-		}*/
-
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
 
 }
 
-void Game_state::move_cursor_up()
-{	
-	menu_item = menu_item - 1;
-	
-	if(menu_item < 0)
-	{
-		menu_item = images.size() - 1;
-	}
-	
-	cursor_obj->set_y(images[menu_item]->get_y());
-}
-
-void Game_state::move_cursor_down()
-{	
-	menu_item = menu_item + 1;
-	
-	if(menu_item > (int)images.size() - 1)
-	{
-		menu_item = 0;
-	}
-	
-	cursor_obj->set_y(images[menu_item]->get_y());
-}
-
 void Game_state::remove_objects()
 {
+	//Remove dead players
+    for(int i = 0; i < (int)players.size(); i++)
+    {
+        if( players[i]->get_dead() )
+        {
+            players.erase (players.begin()+i);
+            --i;
+        }
+    }
+	
+	//Remove dead bullets
     for(int i = 0; i < (int)bullet_vec.size(); i++)
     {
         if( bullet_vec[i].get_dead() )
@@ -173,11 +168,13 @@ void Game_state::remove_objects()
             --i;
         }
     }
-    for(int i = 0; i < (int)images.size(); i++)
+	
+	//Remove dead aliens
+    for(int i = 0; i < (int)aliens.size(); i++)
     {
-        if( images[i]->get_dead() )
+        if( aliens[i]->get_dead() )
         {
-            images.erase (images.begin()+i);
+            aliens.erase (aliens.begin()+i);
             --i;
         }
     }
@@ -187,9 +184,9 @@ void Game_state::remove_objects()
 void Game_state::handle_key_events(SDL_Event keyevent)
 {
 	for (unsigned int it = 0;
-		 it < images.size(); it++ )
+		 it < players.size(); it++ )
 	{
-		images[it]->handle_key_events(keyevent);
+		players[it]->handle_key_events(keyevent);
 	}
 
 }

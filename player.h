@@ -18,34 +18,17 @@ class Player : public Game_object
         // vector<SpecialBullet*> spbullets;
         bool up;
         bool down;
+		bool shooting;
+		int shoot_cooldown;
+		int shoot_cnt;
         Score* score_;
+		string player_img;
         int number_of_bullets;
         //Sprite* im9;
+		void shoot();
 
     public:
-        Player (string typein, string picture_file, vector<Bullet>* b_ptr): life(3), up(false), down(false), number_of_bullets(5)
-    {
-        bullets = b_ptr;
-        type = typein;
-        hp = 1;
-        y = 0;
-        h = 0.1;
-        w = 0.1;
-        spd = 0.01;
-        dead = false;
-        img = new Sprite(picture_file, h, w);
-        img->create_texture();
-        if(typein == "player1")
-        {
-            x=-1.2;
-            score_ = new Score("player1");
-        }
-        else //if player2
-        {
-            x=1.2;
-            score_ = new Score("player2");
-        }
-    }
+		Player(string typein, vector<Bullet>* b_ptr);
 
         // game-loop funktions
         void handle_key_events(SDL_Event keyevent);

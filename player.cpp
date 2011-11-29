@@ -11,6 +11,39 @@
 using namespace std;
 
 
+Player::Player (string typein, vector<Bullet>* b_ptr)
+{
+	life = 3;
+	number_of_bullets = 5;
+	up = false;
+	down = false;
+	shoot_cooldown = 30;
+	shoot_cnt = shoot_cooldown;
+	shooting = false;
+	bullets = b_ptr;
+	type = typein;
+	hp = 1;
+	y = 0;
+	h = 0.1;
+	w = 0.1;
+	spd = 0.01;
+	dead = false;
+
+	if(type == "player1")
+	{
+		x=-1;
+		player_img = "images/p1.png";
+	}
+	else //if player2
+	{
+		x=1;
+		player_img = "images/p2.png";
+	}
+	score_ = new Score(type);
+	img = new Sprite(player_img, h, w);
+	img->create_texture();
+}
+
 
 void Player :: move_up()
 {
@@ -55,7 +88,7 @@ void Player::handle_key_events(SDL_Event keyevent)
                         down=true;
                         break;
                     case SDLK_f:
-                        bullets->push_back(Bullet(x+0.5*w,y,"player1", 1, 0.01, 0));
+                        shooting = true;
                         break;
                     default:
                         break;
@@ -70,6 +103,9 @@ void Player::handle_key_events(SDL_Event keyevent)
                     case SDLK_x:
                         down=false;
                         break;
+					case SDLK_f:
+						shooting = false;
+						break;
                     default:
                         break;
                 }
@@ -92,7 +128,7 @@ void Player::handle_key_events(SDL_Event keyevent)
                         down=true;
                         break;
                     case SDLK_l:
-                        bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159));
+                        shooting = true;
                         break;
                         //case SDLK_ESCAPE:
                         //set_running(false);
@@ -111,6 +147,9 @@ void Player::handle_key_events(SDL_Event keyevent)
                         //x=x-0.1;
                         down=false;
                         break;
+					case SDLK_l:
+						shooting = false;
+						break;
                     default:
                         break;
                 }
@@ -121,11 +160,18 @@ void Player::handle_key_events(SDL_Event keyevent)
 
 void Player :: update()
 {
+	shoot_cnt--;
+	
+	
     if(up)
         move_up();
     if(down)
         move_down();
-
+	if(shooting && shoot_cnt <= 0)
+	{
+		shoot();
+		shoot_cnt = shoot_cooldown;
+	}
 }
 
 void Player :: render()
@@ -137,4 +183,16 @@ void Player :: render()
 
 void Player::remove_objects()
 {
+}
+
+void Player::shoot()
+{
+	if(type == "player2")
+	{
+		bullets->push_back(Bullet(x-0.5*w,y,type, 1, 0.01, 3.14159));
+	}
+	else
+	{
+		bullets->push_back(Bullet(x+0.5*w,y,type, 1, 0.01, 0));
+	}
 }

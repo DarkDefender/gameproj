@@ -25,21 +25,14 @@ class Game_state : public State
 {
 	private:
 		Game_timer* timer;
-		int menu_item;
 		int current_level;
-		vector<Game_object*> highscore;
 		vector<Bullet> bullet_vec;
-		vector<Game_object*> images;
-		//vector<Game_object*> images;
-		//vector{Game_object*> aliens;
-		Game_object* cursor_obj;
-		void move_cursor_up();
-		void move_cursor_down();
+		vector<Game_object*> aliens;
+		vector<Game_object*> players;
+		void new_lvl();
 		
 	public:
         void init();
-	//vector<Bullet> bullet_vec;
-	//vector<Game_object*> images;
 		void update();
 		void render();
 		void remove_objects();
