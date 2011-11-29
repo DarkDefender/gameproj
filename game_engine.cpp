@@ -99,8 +99,6 @@ void Game_engine::run()
 
     while(menu->get_running() || game->get_running())
     {
-        //Reset/Start the timer
-		
         if(current_state->swap_state())
         {
             change_state();
@@ -119,9 +117,9 @@ void Game_engine::run()
         if (is_active)
         {
             current_state->render();
-            //Cap the frame rate
         }
 
+        //Cap the frame rate
         delay.waitNextFrame();
 
         if ( time.get_ticks() > 1000 )

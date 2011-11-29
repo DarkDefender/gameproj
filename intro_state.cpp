@@ -35,7 +35,7 @@ class Star
             glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
             glBegin(GL_QUADS);
-            glColor4f( 1, 1, 1, 0.2*-z );
+            glColor4f( 0.2*-z, 0.2*-z, 1, (rand() % 101)/100.0 );
             glVertex3f(0, 0.009, 0);
             glVertex3f(0.005, 0, 0);
             glVertex3f(0, -0.009, 0);
