@@ -59,6 +59,13 @@ void Score :: render()
   int i = skore%10;
   int numbers_wroten = 0;
   
+	if(skore == 0)
+	{
+		numbers[0]->render(x-numbers_wroten*w,y,-5);
+	}
+		
+	
+	
   while(skore !=0)
     {
       

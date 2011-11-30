@@ -44,6 +44,7 @@ class Menu_state : public State
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
 		Menu_state(bool run);
+		~Menu_state();
 		
 		
 };

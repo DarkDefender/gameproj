@@ -30,6 +30,7 @@ class Game_state : public State
 		vector<Game_object*> aliens;
 		vector<Game_object*> players;
 		void new_lvl();
+		void clean();
 		
 	public:
         void init();
@@ -38,6 +39,7 @@ class Game_state : public State
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
 		Game_state(bool run);
+		~Game_state();
 		
 		
 };

@@ -79,15 +79,15 @@ void Player::handle_key_events(SDL_Event keyevent)
             case SDL_KEYDOWN:
                 switch(keyevent.key.keysym.sym)
                 {
-                    case SDLK_s:
+                    case SDLK_w:
                         //y = y + 0.1;
                         up=true;
                         break;
-                    case SDLK_x:
+                    case SDLK_s:
                         //y = y - 0.1;
                         down=true;
                         break;
-                    case SDLK_f:
+                    case SDLK_1:
                         shooting = true;
                         break;
                     default:
@@ -97,13 +97,13 @@ void Player::handle_key_events(SDL_Event keyevent)
             case SDL_KEYUP:
                 switch(keyevent.key.keysym.sym)
                 {
-                    case SDLK_s:
+                    case SDLK_w:
                         up=false;
                         break;
-                    case SDLK_x:
+                    case SDLK_s:
                         down=false;
                         break;
-					case SDLK_f:
+					case SDLK_1:
 						shooting = false;
 						break;
                     default:
@@ -118,16 +118,16 @@ void Player::handle_key_events(SDL_Event keyevent)
             case SDL_KEYDOWN:
                 switch(keyevent.key.keysym.sym)
                 {
-                    case SDLK_k:
+                    case SDLK_UP:
                         //y=y+0.1;
                         //cout << "k trycktes " << endl;
                         up=true;
                         break;
-                    case SDLK_m:
+                    case SDLK_DOWN:
                         //y=y-0.1;
                         down=true;
                         break;
-                    case SDLK_l:
+                    case SDLK_RSHIFT:
                         shooting = true;
                         break;
                         //case SDLK_ESCAPE:
@@ -139,15 +139,15 @@ void Player::handle_key_events(SDL_Event keyevent)
             case SDL_KEYUP:
                 switch(keyevent.key.keysym.sym)
                 {
-                    case SDLK_k:
+                    case SDLK_UP:
                         //x=x+0.1;
                         up=false;
                         break;
-                    case SDLK_m:
+                    case SDLK_DOWN:
                         //x=x-0.1;
                         down=false;
                         break;
-					case SDLK_l:
+					case SDLK_RSHIFT:
 						shooting = false;
 						break;
                     default:
@@ -170,6 +170,7 @@ void Player :: update()
 	if(shooting && shoot_cnt <= 0)
 	{
 		shoot();
+		score_->add_score(5);
 		shoot_cnt = shoot_cooldown;
 	}
 }

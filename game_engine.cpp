@@ -68,6 +68,18 @@ Game_engine::Game_engine()
 	current_state = menu;
 }
 
+Game_engine::~Game_engine()
+{
+	delete menu;
+	delete game;
+	current_state = 0;
+	menu = 0;
+	game = 0;
+	
+	//Quit SDL
+    SDL_Quit();
+	
+}
 
 void Game_engine::change_state()
 {

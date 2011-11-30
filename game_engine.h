@@ -34,6 +34,7 @@ private:
 public:
 	void run();
 	Game_engine();
+	~Game_engine();
 
 
 };
