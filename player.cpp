@@ -40,7 +40,6 @@ Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* sco
 		x=1;
 		player_img = "images/p2.png";
 	}
-	score_ = new Score(type);
 	img = new Sprite(player_img, h, w);
 	img->create_texture();
 }
@@ -178,7 +177,6 @@ void Player :: update()
 void Player :: render()
 {
     img->render(x, y, -5);
-    score_ -> render();
 }
 
 
