@@ -20,6 +20,38 @@
 
 using namespace std;
 
+class FrameScheduler
+{
+    public:
+    FrameScheduler(double fps) {setFPS(fps);}
+
+    void setFPS(double newFPS)
+    {
+        frame=0;
+        lastFrame=firstTick=SDL_GetTicks();
+        fps=newFPS;
+        msPerFrame=1000.0/fps;
+    }
+
+    void reset() {setFPS(fps);}
+
+    void waitNextFrame()
+    {
+        frame++;
+        const uint now=SDL_GetTicks();
+        if (now-lastFrame>10000)reset(); //this is so standby mode or hibernation doesn't send the program into a frenzy
+        lastFrame=now;
+        const uint targetTick=firstTick+frame*msPerFrame; //tick count we want to reach (might have passed already if we're behind schedule)
+        if (now<targetTick)SDL_Delay(targetTick-now);
+    }
+
+    private:
+    uint frame;
+    uint firstTick;
+    uint lastFrame;
+    double fps,msPerFrame;
+};
+
 //Default constructor
 Game_engine::Game_engine()
 {
@@ -58,22 +90,20 @@ void Game_engine::change_state()
 //Keeps the game running
 void Game_engine::run()
 {
-    Timer fps;
-    int frame = 0;
+
+    FrameScheduler delay(60);
 
     Timer time;
+    int frame = 0;
     time.start();
 
     while(menu->get_running() || game->get_running())
     {
-        //Reset/Start the timer
-        fps.start();
-		
-		if(current_state->swap_state())
-		{
-			change_state();
-		}
-		
+        if(current_state->swap_state())
+        {
+            change_state();
+        }
+
         //Handle key and/or other events. Pass them on if needed
         handle_events(surface);
 
@@ -87,12 +117,11 @@ void Game_engine::run()
         if (is_active)
         {
             current_state->render();
-            //Cap the frame rate
-            if( fps.get_ticks() < 1000.0 / 60 )
-            { 
-                SDL_Delay( ( 1000.0 / 60 ) - fps.get_ticks() ); 
-            }
         }
+
+        //Cap the frame rate
+        delay.waitNextFrame();
+
         if ( time.get_ticks() > 1000 )
         {
             frame = 0;

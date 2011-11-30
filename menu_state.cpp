@@ -22,7 +22,8 @@ using namespace std;
 Menu_state::Menu_state(bool run) : State(run)
 {	
 	
-	show_help = false;
+	change_state = false;
+    show_help = false;
 	player1_name = false;
 	player2_name = false;
 	menu_item = 0;

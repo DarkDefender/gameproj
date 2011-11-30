@@ -35,7 +35,7 @@ class Star
             glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
             glBegin(GL_QUADS);
-            glColor4f( 1, 1, 1, 0.2*-z );
+            glColor4f( 0.2*-z, 0.2*-z, 1, (rand() % 101)/100.0 );
             glVertex3f(0, 0.009, 0);
             glVertex3f(0.005, 0, 0);
             glVertex3f(0, -0.009, 0);
@@ -97,13 +97,13 @@ void Intro_state::update()
     {
         planet_off *= 0.98;
     }
-    if ( timer.get_ticks() > 15000 && timer.get_ticks() < 15500)
+    if ( timer.get_ticks() > 15000 && timer.get_ticks() < 15300)
     {
         planet->set_color(0,0,0,1);
         alien->set_color(0,0,0,1);
         alien_width *= 0.8;
     }
-    if (timer.get_ticks() > 15500)
+    if (timer.get_ticks() > 15300)
     {
         planet->set_color(1,1,1,1);
         alien->set_color(1,1,1,1);
@@ -113,7 +113,7 @@ void Intro_state::update()
 void Intro_state::render()
 {
     /* Clear The Screen And The Depth Buffer */
-    if (timer.get_ticks() >= 15000 && timer.get_ticks() < 15500)
+    if (timer.get_ticks() >= 15000 && timer.get_ticks() < 15300)
         glClearColor( 1.0f, 1.0f, 1.0f, 0.5f );
     else
         glClearColor( 0.0f, 0.0f, 0.0f, 0.5f );
