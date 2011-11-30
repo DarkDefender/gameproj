@@ -38,17 +38,17 @@ class FrameScheduler
     void waitNextFrame()
     {
         frame++;
-        const uint now=SDL_GetTicks();
+        const unsigned int now=SDL_GetTicks();
         if (now-lastFrame>10000)reset(); //this is so standby mode or hibernation doesn't send the program into a frenzy
         lastFrame=now;
-        const uint targetTick=firstTick+frame*msPerFrame; //tick count we want to reach (might have passed already if we're behind schedule)
+        const unsigned int targetTick=firstTick+frame*msPerFrame; //tick count we want to reach (might have passed already if we're behind schedule)
         if (now<targetTick)SDL_Delay(targetTick-now);
     }
 
     private:
-    uint frame;
-    uint firstTick;
-    uint lastFrame;
+    unsigned int frame;
+    unsigned int firstTick;
+    unsigned int lastFrame;
     double fps,msPerFrame;
 };
 
