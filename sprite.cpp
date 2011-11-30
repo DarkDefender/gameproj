@@ -86,7 +86,7 @@ void Sprite::change_img(string image_path, GLfloat height, GLfloat width)
 bool Sprite::create_texture()
 {
 #ifdef __APPLE__
-	int order_color_a = GL_BGRA8;
+	int order_color_a = GL_BGRA;
 #else
 	int order_color_a = GL_RGBA8;
 #endif
@@ -121,7 +121,7 @@ bool Sprite::create_texture()
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TextureImage[0]->w, TextureImage[0]->h,
                 0, order_color_a, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
         }
-        else // Texture without alpha channel
+        else // Texture without alpha channel (BMP)
         {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, TextureImage[0]->w, TextureImage[0]->h,
                 0, GL_BGR, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
