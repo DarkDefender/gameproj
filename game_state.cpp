@@ -27,12 +27,9 @@ Game_state::Game_state(bool run) : State(run)
 	init();
 	new_lvl();
 	
-<<<<<<< HEAD
+
 	//Timer
 	timer = new Game_timer(-0.4,0.9);
-	
-=======
->>>>>>> 43493709305fbb3a80cc75622d1992b885aeccb3
 }
 
 void Game_state::new_lvl()
