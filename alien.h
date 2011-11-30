@@ -29,6 +29,7 @@ class Aliens : public Game_object
     public:
 		Aliens(string typein, GLfloat xin, GLfloat yin, 
 		       int lvl, vector<Bullet>* b_ptr, vector<Game_object*>*);
+		~Aliens();
 
         // game-loop funktions
         void handle_key_events(SDL_Event keyevent);

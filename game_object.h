@@ -37,6 +37,7 @@ class Game_object
 		int score;
 
 	public:
+		
 		GLfloat get_x();
 		GLfloat get_y();
 		void set_x(GLfloat new_x);
@@ -53,6 +54,7 @@ class Game_object
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
 		Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path);
 		Game_object();
+		//virtual ~Game_object();
         bool get_dead();
         void set_dead();
 		int get_hp();

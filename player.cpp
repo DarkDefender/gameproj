@@ -32,28 +32,32 @@ Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* sco
 
 	if(type == "player1")
 	{
-		x=-1;
+		x=-1.2;
 		player_img = "images/p1.png";
 	}
 	else //if player2
 	{
-		x=1;
+		x=1.2;
 		player_img = "images/p2.png";
 	}
 	img = new Sprite(player_img, h, w);
 	img->create_texture();
 }
 
+Player::~Player()
+{
+  delete img;
+}
 
 void Player :: move_up()
 {
-    if (y + spd<1)
+    if (y + spd<0.85)
     {
         y=y+spd;
     }
     else
     {
-        y=1;
+        y=0.85;
     }
 }
 
@@ -61,10 +65,14 @@ void Player :: move_up()
 
 void Player :: move_down()
 {
-    if (y - spd>-1)
-    {
+    if (y - spd>-0.95)
+      {
         y=y-spd;
-    }
+      }
+    else
+      {
+	y = -0.95;
+      }
 
 }
 

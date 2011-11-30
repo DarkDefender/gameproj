@@ -35,14 +35,14 @@ Score::Score (string typein)
   type = typein;
   if(typein == "player1")
     {
-      x = -0.8;
+      x = -1;
     }
   else
     {
-      x = 0.8;
+      x = 1.2;
     }
 
-  y = 0.8;
+  y = 0.9;
   w = 0.1;
   h = 0.1;
   dead = false;
@@ -51,6 +51,11 @@ Score::Score (string typein)
   img = new Sprite("images/1.png", h, w);
 
   img->create_texture();
+}
+
+Score::~Score()
+{
+  delete img;
 }
 
 void Score :: render()
