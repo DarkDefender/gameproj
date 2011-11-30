@@ -11,8 +11,9 @@
 using namespace std;
 
 
-Player::Player (string typein, vector<Bullet>* b_ptr)
+Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in)
 {
+  score_vec = score_vec_in;
 	life = 3;
 	number_of_bullets = 5;
 	up = false;
@@ -137,21 +138,21 @@ void Player::handle_key_events(SDL_Event keyevent)
                 }
                 break;
             case SDL_KEYUP:
-                switch(keyevent.key.keysym.sym)
+	      switch(keyevent.key.keysym.sym)
                 {
-                    case SDLK_k:
-                        //x=x+0.1;
-                        up=false;
-                        break;
-                    case SDLK_m:
-                        //x=x-0.1;
-                        down=false;
-                        break;
-					case SDLK_l:
-						shooting = false;
-						break;
-                    default:
-                        break;
+		case SDLK_k:
+		  //x=x+0.1;
+		  up=false;
+		  break;
+		case SDLK_m:
+		  //x=x-0.1;
+		  down=false;
+		  break;
+		case SDLK_l:
+		  shooting = false;
+		  break;
+		default:
+		  break;
                 }
         }
     }
@@ -189,10 +190,10 @@ void Player::shoot()
 {
 	if(type == "player2")
 	{
-		bullets->push_back(Bullet(x-0.5*w,y,type, 1, 0.01, 3.14159));
+	  bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159, score_vec));
 	}
 	else
 	{
-		bullets->push_back(Bullet(x+0.5*w,y,type, 1, 0.01, 0));
+	  bullets->push_back(Bullet(x+0.5*w,y,"player1", 1, 0.01, 0, score_vec));
 	}
 }

@@ -15,6 +15,7 @@ class Player : public Game_object
     private:
         int life;
         vector<Bullet>* bullets;
+	vector <Game_object*>* score_vec;
         // vector<SpecialBullet*> spbullets;
         bool up;
         bool down;
@@ -28,7 +29,7 @@ class Player : public Game_object
 		void shoot();
 
     public:
-		Player(string typein, vector<Bullet>* b_ptr);
+		Player(string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in);
 
         // game-loop funktions
         void handle_key_events(SDL_Event keyevent);

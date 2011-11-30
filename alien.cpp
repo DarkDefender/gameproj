@@ -1,16 +1,17 @@
 #include <iostream>
 #include "player.h"
 #include "alien.h"
+#include "score.h"
 #include "game_object.h"
 
 using namespace std;
 
 
 Aliens::Aliens(string typein, GLfloat xin, GLfloat yin,
-			   int lvl, vector<Bullet>* b_ptr)
+	       int lvl, vector<Bullet>* b_ptr, vector<Game_object*>* pointer_score_vec_in)
 : Game_object(xin,yin,typein)
 {
-		
+  pointer_score_vec = pointer_score_vec_in;	
 	current_lvl = lvl;
 	init_alien();
 	up = true;
@@ -142,11 +143,11 @@ void Aliens :: update()
     {
         if(type=="p1")
         {
-            bullets->push_back(Bullet(x,y,"p1",1,0.01,3.14159));
+	  bullets->push_back(Bullet(x,y,"p1",1,0.01,3.14159, pointer_score_vec));
         }
         else
         {
-            bullets->push_back(Bullet(x,y,"p2",1,0.01,0));
+	  bullets->push_back(Bullet(x,y,"p2",1,0.01,0, pointer_score_vec));
         }
     }
 }
