@@ -64,6 +64,15 @@ Game_timer::Game_timer(GLfloat x_pos, GLfloat y_pos) : Game_object(x_pos, y_pos,
 
 }
 
+Game_timer::~Game_timer()
+{
+	delete img1;
+	delete img2;
+	delete level_img;
+	delete level_counter1;
+	delete level_counter2;
+}
+
 void Game_timer::render()
 {
 	img1->render(x,y,-5);

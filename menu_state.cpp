@@ -30,7 +30,7 @@ Menu_state::Menu_state(bool run) : State(run)
 	letter_item = 0;
 	
 	//Cursor
-	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "images/test_img.png");
+	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "images/pil.png");
 	
 	//New game image
 	images.push_back(new Game_object(-0.6,0.8,0.2,0.5,"new game","images/newgame.png"));
@@ -60,14 +60,14 @@ Menu_state::Menu_state(bool run) : State(run)
 	//Help
 	//Player 1
 	help.push_back(new Game_object(-0.5,0.8,0.2,0.5,"player 1","images/player1.png"));
-	help.push_back(new Game_object(-0.5,0.6,0.2,0.2,"up","images/up-arrow.png"));
-	help.push_back(new Game_object(-0.5,0.4,0.2,0.2,"down","images/down-arrow.png"));
-	help.push_back(new Game_object(-0.5,0.2,0.2,0.2,"shift","images/shift.png"));
+	help.push_back(new Game_object(0.5,0.6,0.2,0.2,"up","images/up-arrow.png"));
+	help.push_back(new Game_object(0.5,0.4,0.2,0.2,"down","images/down-arrow.png"));
+	help.push_back(new Game_object(0.5,0.2,0.2,0.2,"shift","images/shift.png"));
 	//Player 2
 	help.push_back(new Game_object(0.5,0.8,0.2,0.5,"player 2","images/player2.png"));
-	help.push_back(new Game_object(0.5,0.6,0.2,0.2,"w","images/alphabet-w.png"));
-	help.push_back(new Game_object(0.5,0.4,0.2,0.2,"s","images/alphabet-s.png"));
-	help.push_back(new Game_object(0.5,0.2,0.2,0.2,"1","images/number-1.png"));
+	help.push_back(new Game_object(-0.5,0.6,0.2,0.2,"w","images/alphabet-w.png"));
+	help.push_back(new Game_object(-0.5,0.4,0.2,0.2,"s","images/alphabet-s.png"));
+	help.push_back(new Game_object(-0.5,0.2,0.2,0.2,"1","images/number-1.png"));
 	//Menu buttons
 	help.push_back(new Game_object(0.15,0,0.2,0.5,"Menu","images/menu.png"));
 	help.push_back(new Game_object(-0.1,-0.2,0.2,0.2,"left","images/left-arrow.png"));
@@ -76,6 +76,17 @@ Menu_state::Menu_state(bool run) : State(run)
 	help.push_back(new Game_object(0,-0.6,0.2,0.2,"esc","images/esc.png"));
 	
 	
+}
+
+Menu_state::~Menu_state()
+{
+	help.clear();
+	highscore.clear();
+	letters2.clear();
+	letters1.clear();
+	images.clear();
+	delete cursor_obj;
+	cursor_obj = 0;
 }
 
 void Menu_state::init()
@@ -281,7 +292,7 @@ void Menu_state::handle_key_events(SDL_Event keyevent)
 					}
 					break;
 				case SDLK_ESCAPE:
-					set_running(false);
+					change_state = true;
 					break;
 				default:
 					break;

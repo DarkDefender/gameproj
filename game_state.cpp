@@ -23,16 +23,16 @@ using namespace std;
 
 Game_state::Game_state(bool run) : State(run)
 {	
-
-	//Starting level
-	current_level = 1;
 	
 	init();
 	new_lvl();
 	
+<<<<<<< HEAD
 	//Timer
 	timer = new Game_timer(-0.4,0.9);
 	
+=======
+>>>>>>> 43493709305fbb3a80cc75622d1992b885aeccb3
 }
 
 void Game_state::new_lvl()
@@ -54,14 +54,45 @@ void Game_state::new_lvl()
 
 void Game_state::init()
 {
-  players.push_back(new Player("player1", &bullet_vec, &score));
-  players.push_back(new Player("player2", &bullet_vec, &score));
+	//Starting level
+	current_level = 1;
+	
+	players.push_back(new Player("player1", &bullet_vec, &score));
+	players.push_back(new Player("player2", &bullet_vec, &score));
 	score.push_back(new Score("player1"));
 	score.push_back(new Score("player2"));
+	
+	//Timer
+	timer = new Game_timer(-0.4,0.8);
+}
+
+Game_state::~Game_state()
+{
+	clean();
+}
+
+void Game_state::clean()
+{
+	aliens.clear();
+	players.clear();
+	bullet_vec.clear();
+	score.clear();
+	delete timer;
+	timer = 0;
 }
 
 void Game_state::update()
 {
+	//If both players are dead
+	if(players.size() <= 0)
+	{
+		change_state = true;
+		clean();
+		init();
+		new_lvl();
+	}
+	
+	
 	//Update players
 	for (unsigned int it = 0;
 		 it < players.size(); it++ )
@@ -195,6 +226,21 @@ void Game_state::remove_objects()
 //Handles keyboard input
 void Game_state::handle_key_events(SDL_Event keyevent)
 {
+	switch(keyevent.type){
+		case SDL_KEYDOWN:
+			switch(keyevent.key.keysym.sym)
+			{
+			case SDLK_ESCAPE:
+					change_state = true;
+					break;
+				default:
+					break;
+			}
+		default:
+			break;
+	}
+	
+	
 	for (unsigned int it = 0;
 		 it < players.size(); it++ )
 	{

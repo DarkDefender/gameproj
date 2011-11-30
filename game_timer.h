@@ -45,6 +45,7 @@ class Game_timer : public Game_object
     public:
 		//Initializes variables
 		Game_timer(GLfloat x_pos, GLfloat y_pos);
+		~Game_timer();
 		
 		//Game_object functions
 		void render();
