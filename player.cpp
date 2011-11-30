@@ -11,8 +11,9 @@
 using namespace std;
 
 
-Player::Player (string typein, vector<Bullet>* b_ptr)
+Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in)
 {
+  score_vec = score_vec_in;
 	life = 3;
 	number_of_bullets = 5;
 	up = false;
@@ -39,7 +40,6 @@ Player::Player (string typein, vector<Bullet>* b_ptr)
 		x=1;
 		player_img = "images/p2.png";
 	}
-	score_ = new Score(type);
 	img = new Sprite(player_img, h, w);
 	img->create_texture();
 }
@@ -137,7 +137,7 @@ void Player::handle_key_events(SDL_Event keyevent)
                 }
                 break;
             case SDL_KEYUP:
-                switch(keyevent.key.keysym.sym)
+	      switch(keyevent.key.keysym.sym)
                 {
                     case SDLK_UP:
                         //x=x+0.1;
@@ -170,7 +170,6 @@ void Player :: update()
 	if(shooting && shoot_cnt <= 0)
 	{
 		shoot();
-		score_->add_score(5);
 		shoot_cnt = shoot_cooldown;
 	}
 }
@@ -178,7 +177,6 @@ void Player :: update()
 void Player :: render()
 {
     img->render(x, y, -5);
-    score_ -> render();
 }
 
 
@@ -190,10 +188,10 @@ void Player::shoot()
 {
 	if(type == "player2")
 	{
-		bullets->push_back(Bullet(x-0.5*w,y,type, 1, 0.01, 3.14159));
+	  bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159, score_vec));
 	}
 	else
 	{
-		bullets->push_back(Bullet(x+0.5*w,y,type, 1, 0.01, 0));
+	  bullets->push_back(Bullet(x+0.5*w,y,"player1", 1, 0.01, 0, score_vec));
 	}
 }

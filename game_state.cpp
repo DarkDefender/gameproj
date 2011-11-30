@@ -12,6 +12,7 @@
 #include "game_object.h"
 #include "player.h"
 #include "alien.h"
+#include "score.h"
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
@@ -31,18 +32,18 @@ Game_state::Game_state(bool run) : State(run)
 void Game_state::new_lvl()
 {
 	//Player1 aliens
-	aliens.push_back(new  Aliens("p1", -0.2, 0, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p1", -0.2, 0.2, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p1", -0.2, 0.4, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p1", -0.2, 0.6, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p1", -0.2, 0.8, current_level, &bullet_vec));
+  aliens.push_back(new  Aliens("p1", -0.2, 0, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.2, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.4, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.6, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p1", -0.2, 0.8, current_level, &bullet_vec, &score));
 	
 	//Player2 aliens
-	aliens.push_back(new  Aliens("p2", 0.2, 0, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p2", 0.2, 0.2, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p2", 0.2, 0.4, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p2", 0.2, 0.6, current_level, &bullet_vec));
-	aliens.push_back(new  Aliens("p2", 0.2, 0.8, current_level, &bullet_vec));
+	aliens.push_back(new  Aliens("p2", 0.2, 0, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.2, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.4, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.6, current_level, &bullet_vec, &score));
+	aliens.push_back(new  Aliens("p2", 0.2, 0.8, current_level, &bullet_vec, &score));
 }
 
 void Game_state::init()
@@ -50,8 +51,10 @@ void Game_state::init()
 	//Starting level
 	current_level = 1;
 	
-	players.push_back(new Player("player1", &bullet_vec));
-	players.push_back(new Player("player2", &bullet_vec));
+	players.push_back(new Player("player1", &bullet_vec, &score));
+	players.push_back(new Player("player2", &bullet_vec, &score));
+	score.push_back(new Score("player1"));
+	score.push_back(new Score("player2"));
 	
 	//Timer
 	timer = new Game_timer(-0.4,0.8);
@@ -67,6 +70,7 @@ void Game_state::clean()
 	aliens.clear();
 	players.clear();
 	bullet_vec.clear();
+	score.clear();
 	delete timer;
 	timer = 0;
 }
@@ -165,6 +169,15 @@ void Game_state::render()
 	{
 		bullet_vec[it].render();
 	}  
+
+	//score->render();
+	
+	// Render all bullets
+	for (unsigned int it = 0;
+		 it < score.size(); it++ )
+	{
+		score[it] -> render();
+	} 
 
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );

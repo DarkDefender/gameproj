@@ -58,22 +58,19 @@ void Score :: render()
   int skore = score_number;
   int i = skore%10;
   int numbers_wroten = 0;
-  
-	if(skore == 0)
-	{
-		numbers[0]->render(x-numbers_wroten*w,y,-5);
-	}
-		
-	
-	
+
+  if(score_number == 0)
+    {
+      numbers[0] -> render(x-numbers_wroten*w,y,-5);
+    }
+   
   while(skore !=0)
     {
-      
       switch (i) 
 	{
 	case 0: numbers[0] -> render(x-numbers_wroten*w,y,-5);
 	  //numbers[0]-> create_texture();
-	    //cout << 0 << endl;
+	  //cout << 0 << endl;
 	  break;
 	case 1: numbers[1] -> render(x-numbers_wroten*w,y,-5);
 	  //cout << 1 << endl;

@@ -2,16 +2,20 @@
 #include "obstacle.h"
 #include "game_object.h"
 #include "sprite.h"
+#include "score.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
 #include <math.h>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle)
+Bullet::Bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle,  vector <Game_object*>* pointer_score_vec_in)
 {
+  
+    score_vec = *pointer_score_vec_in;
     x = x_pos;
     y = y_pos;
     type = obj_type;
@@ -39,7 +43,15 @@ void Bullet::collision(Game_object& obj)
             obj.set_dead();
             hp = abs(cur_hp);
             if (hp == 0)
-                dead = true;
+	      dead = true;
+
+	    for (unsigned int it = 0;
+		 it < score_vec.size(); it++ )
+	      {
+		if (type == score_vec[it] -> get_type())
+		  score_vec[it] -> add_score(1);
+	      }
+
         }
         else
         {

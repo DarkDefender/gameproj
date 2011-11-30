@@ -15,6 +15,7 @@
 #include "game_object.h"
 #include "player.h"
 #include "alien.h"
+#include "score.h"
 #include "game_timer.h"
 #include <SDL/SDL.h>
 #include <vector>
@@ -29,6 +30,7 @@ class Game_state : public State
 		vector<Bullet> bullet_vec;
 		vector<Game_object*> aliens;
 		vector<Game_object*> players;
+		vector<Game_object*> score;
 		void new_lvl();
 		void clean();
 		

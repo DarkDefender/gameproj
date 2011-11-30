@@ -5,6 +5,7 @@
 #include <string>
 #include "player.h"
 #include "game_object.h"
+#include "score.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ class Aliens : public Game_object
 
     private:
         vector<Bullet>* bullets;
+	vector<Game_object*>* pointer_score_vec;
         // vector<SpecialBullet*> spbullets;
         bool up;
         bool down;
@@ -26,7 +28,7 @@ class Aliens : public Game_object
 
     public:
 		Aliens(string typein, GLfloat xin, GLfloat yin, 
-			   int lvl, vector<Bullet>* b_ptr);
+		       int lvl, vector<Bullet>* b_ptr, vector<Game_object*>*);
 
         // game-loop funktions
         void handle_key_events(SDL_Event keyevent);

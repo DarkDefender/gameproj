@@ -34,6 +34,7 @@ class Game_object
 		Sprite* img;
 		void init();
 		int hp;
+		int score;
 
 	public:
 		GLfloat get_x();
@@ -46,6 +47,7 @@ class Game_object
 		virtual void render();
 		virtual void remove_objects();
 		virtual void handle_key_events(SDL_Event keyevent);
+		virtual void add_score(int){}
 
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type);
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
