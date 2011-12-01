@@ -57,6 +57,7 @@ class Star
 
 Intro_state::Intro_state(bool run) : State(run)
 {
+    change_state = false;
     alien = new Sprite("alien.png", 0.8, 0.8);
     planet = new Sprite("glob.png", 0.7, 0.7);
     alien->create_texture();
