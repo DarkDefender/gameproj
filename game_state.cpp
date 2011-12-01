@@ -13,6 +13,7 @@
 #include "player.h"
 #include "alien.h"
 #include "score.h"
+#include "obstacle.h"
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
@@ -61,6 +62,12 @@ void Game_state::init()
 	
 	//Timer
 	timer = new Game_timer(-0.4,0.8);
+
+    //Obstacle
+    vector<Obstacle> test = create_obs(1.1, 0, 0);
+    obstacle.insert(obstacle.end(), test.begin(), test.end());
+    test = create_obs(-1.1, 0);
+    obstacle.insert(obstacle.end(), test.begin(), test.end());
 }
 
 Game_state::~Game_state()
@@ -74,6 +81,7 @@ void Game_state::clean()
 	players.clear();
 	bullet_vec.clear();
 	score.clear();
+    obstacle.clear();
 	delete timer;
 	timer = 0;
 }
@@ -128,7 +136,16 @@ void Game_state::update()
             bullet_vec[i].collision(*players[j]);
         }
     }
-	
+
+	  	//Handle collisions between bullets and obstacles
+    for (unsigned int i = 0; i < bullet_vec.size(); i++)
+    {
+        for (unsigned int j = 0; j < obstacle.size(); j++)
+        {
+            bullet_vec[i].collision(obstacle[j]);
+        }
+    }
+	     
 	
 	
 	timer->update();
@@ -173,14 +190,20 @@ void Game_state::render()
 		bullet_vec[it].render();
 	}  
 
-	//score->render();
-	
-	// Render all bullets
+	// Render all the obstacles, from the vector<Game_object(!NO STAR)> obstacle
+    for (unsigned int it = 0;
+            it < obstacle.size(); it++)
+    { 
+        obstacle[it].render();
+    }
+
+	// Render all scorez0r
 	for (unsigned int it = 0;
 		 it < score.size(); it++ )
 	{
-		score[it] -> render();
+		score[it]->render();
 	} 
+
 
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
@@ -189,7 +212,7 @@ void Game_state::render()
 
 void Game_state::remove_objects()
 {
-	//Remove dead players
+    //Remove dead players
     for(int i = 0; i < (int)players.size(); i++)
     {
         if( players[i]->get_dead() )
@@ -198,8 +221,8 @@ void Game_state::remove_objects()
             --i;
         }
     }
-	
-	//Remove dead bullets
+
+    //Remove dead bullets
     for(int i = 0; i < (int)bullet_vec.size(); i++)
     {
         if( bullet_vec[i].get_dead() )
@@ -208,8 +231,8 @@ void Game_state::remove_objects()
             --i;
         }
     }
-	
-	//Remove dead aliens
+
+    //Remove dead aliens
     for(int i = 0; i < (int)aliens.size(); i++)
     {
         if( aliens[i]->get_dead() )
@@ -218,6 +241,14 @@ void Game_state::remove_objects()
             --i;
         }
     }
+    for(int i = 0; i < (int)obstacle.size(); i++)
+    {
+        if( obstacle[i].get_dead() )
+        {
+            obstacle.erase (obstacle.begin()+i);
+            --i;
+        }
+    }   
 }
 
 //Handles keyboard input

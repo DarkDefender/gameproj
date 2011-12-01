@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
+#include <vector>
 
 using namespace std;
 
@@ -20,5 +21,7 @@ class Obstacle : public Game_object
    //   Eventuellt lägga till destruktor
    //   Hoppa
 };
+
+vector<Obstacle> create_obs(GLfloat x, GLfloat y, int type = 0);
 
 #endif

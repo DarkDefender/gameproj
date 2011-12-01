@@ -45,7 +45,7 @@ class Game_object
  		GLfloat get_h();
 		GLfloat get_w();
 		virtual void update();
-		virtual void render();
+		virtual void render(); 
 		virtual void remove_objects();
 		virtual void handle_key_events(SDL_Event keyevent);
 		virtual void add_score(int){}
