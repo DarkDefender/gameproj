@@ -197,7 +197,7 @@ void Player :: update()
         move_up();
     if(down)
         move_down();
-	if(shooting && shoot_cnt <= 0 && number_of_bullets)
+	if(shooting && shoot_cnt <= 0 && number_of_bullets && not spec_shooting)
 	{
         number_of_bullets--;
 		shoot();
