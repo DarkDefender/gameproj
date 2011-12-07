@@ -22,7 +22,7 @@ class Name : public Game_object
 		void change_letter_down();
 		void change_letter_up();
 		Name(GLfloat x_pos, GLfloat y_pos, string obj_type);
-		
+		~Name();
 	};
 
 #endif

@@ -4,9 +4,8 @@
 #include <SDL/SDL.h>
 #include <vector>
 #include <string>
-#include "game_object.h"
 
-class Timer : public Game_object
+class Timer
 {
     private:
 	
