@@ -9,7 +9,7 @@ using namespace std;
 
 
 Aliens::Aliens(string typein, GLfloat xin, GLfloat yin,
-	       int lvl, vector<Bullet>* b_ptr, vector<Game_object*>* pointer_score_vec_in)
+	       int lvl, vector<Bullet*>* b_ptr, vector<Game_object*>* pointer_score_vec_in)
 : Game_object(xin,yin,typein)
 {
   pointer_score_vec = pointer_score_vec_in;	
@@ -149,20 +149,20 @@ void Aliens :: update()
     {
         if(type=="p1")
         {
-	  bullets->push_back(Bullet(x,y,"p1",1,0.01,3.14159, pointer_score_vec));
+	  bullets->push_back(new Bullet(x,y,"p1",1,0.01,3.14159, pointer_score_vec));
 	  if (current_lvl%3 == 0)
 	    {
-	      bullets->push_back(Bullet(x,y,"p1",1,0.01,2.5, pointer_score_vec));
-	      bullets->push_back(Bullet(x,y,"p1",1,0.01,-2.5, pointer_score_vec));
+	      bullets->push_back(new Bullet(x,y,"p1",1,0.01,2.5, pointer_score_vec));
+	      bullets->push_back(new Bullet(x,y,"p1",1,0.01,-2.5, pointer_score_vec));
 	    }
         }
         else
         {
-	  bullets->push_back(Bullet(x,y,"p2",1,0.01,0, pointer_score_vec));
+	  bullets->push_back(new Bullet(x,y,"p2",1,0.01,0, pointer_score_vec));
  if (current_lvl%3 == 0)
 	    {
-	      bullets->push_back(Bullet(x,y,"p2",1,0.01,2.5+3.14159, pointer_score_vec));
-	      bullets->push_back(Bullet(x,y,"p2",1,0.01,-2.5+3.14159, pointer_score_vec));
+	      bullets->push_back(new Bullet(x,y,"p2",1,0.01,2.5+3.14159, pointer_score_vec));
+	      bullets->push_back(new Bullet(x,y,"p2",1,0.01,-2.5+3.14159, pointer_score_vec));
 	    }
         }
     }

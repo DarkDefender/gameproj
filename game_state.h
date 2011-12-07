@@ -28,7 +28,7 @@ class Game_state : public State
 		bool new_game;
 		Game_timer* timer;
 		int current_level;
-		vector<Bullet> bullet_vec;
+		vector<Bullet*> bullet_vec;
 		vector<Game_object*> aliens;
 		vector<Game_object*> players;
 		vector<Game_object*> score;

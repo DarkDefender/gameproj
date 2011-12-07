@@ -137,7 +137,7 @@ void Game_state::update()
     for (unsigned int it = 0;
             it < bullet_vec.size(); it++ )
     {
-        bullet_vec[it].update();
+        bullet_vec[it]->update();
     }	
     
 	//Handle collisions between bullets and aliens
@@ -145,7 +145,7 @@ void Game_state::update()
     {
         for (unsigned int j = 0; j < aliens.size(); j++)
         {
-            bullet_vec[i].collision(*aliens[j]);
+            bullet_vec[i]->collision(*aliens[j]);
         }
     }
 	
@@ -154,7 +154,7 @@ void Game_state::update()
     {
         for (unsigned int j = 0; j < players.size(); j++)
         {
-            bullet_vec[i].collision(*players[j]);
+            bullet_vec[i]->collision(*players[j]);
         }
     }
 
@@ -163,7 +163,7 @@ void Game_state::update()
     {
         for (unsigned int j = 0; j < obstacle.size(); j++)
         {
-            bullet_vec[i].collision(obstacle[j]);
+            bullet_vec[i]->collision(obstacle[j]);
         }
     }
 	     
@@ -208,7 +208,7 @@ void Game_state::render()
 	for (unsigned int it = 0;
 		 it < bullet_vec.size(); it++ )
 	{
-		bullet_vec[it].render();
+		bullet_vec[it]->render();
 	}  
 
 	// Render all the obstacles, from the vector<Game_object(!NO STAR)> obstacle
@@ -246,7 +246,7 @@ void Game_state::remove_objects()
     //Remove dead bullets
     for(int i = 0; i < (int)bullet_vec.size(); i++)
     {
-        if( bullet_vec[i].get_dead() )
+        if( bullet_vec[i]->get_dead() )
         {
             bullet_vec.erase (bullet_vec.begin()+i);
             --i;
