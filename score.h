@@ -21,6 +21,7 @@ class Score : public Game_object
 	void update(){}
 	void render();
 	void remove_objects() {};
+	int get_score();
   
 
 

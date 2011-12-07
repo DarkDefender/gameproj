@@ -3,6 +3,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
+#include <sstream>
 #include <iostream>
 
 using namespace std;
@@ -66,4 +67,19 @@ void Name::change_letter_down()
 		it = images.size() - 1;
 	}
 	img->change_img(images[it], h, w);
+}
+
+void Name::set_letter(int letter)
+{
+	it = letter;
+}
+
+string Name::get_letter()
+{
+	string s = images[it];
+	stringstream ss;
+	string k;
+	ss << s[7];
+	ss >> k;
+	return k;
 }

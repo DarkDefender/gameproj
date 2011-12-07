@@ -93,6 +93,7 @@ void Game_engine::change_state()
 	else
 	{
 		current_state = menu;
+		menu->set_scores(game->get_scores());
 		menu->set_running(true);
 		game->set_running(false);
 	}

@@ -11,6 +11,7 @@
 #include "game_engine.h"
 #include "game_object.h"
 #include "name.h"
+#include "highscore.h"
 #include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
@@ -28,6 +29,8 @@ Menu_state::Menu_state(bool run) : State(run)
 	player2_name = false;
 	menu_item = 0;
 	letter_item = 0;
+	
+	hscore = new Highscore();
 	
 	//Cursor
 	cursor_obj = new Game_object(-1.0, 0.8, "cursor", "images/pil.png");
@@ -54,9 +57,6 @@ Menu_state::Menu_state(bool run) : State(run)
 	letters2.push_back(new Name(0,0,"2"));
 	letters2.push_back(new Name(0.2,0,"3"));
 	
-	//Highscore image
-	highscore.push_back(new Game_object(0.4,0.8,"highscore","images/test_img.png"));
-	
 	//Help
 	//Player 1
 	help.push_back(new Game_object(-0.5,0.8,0.2,0.5,"player 1","images/player1.png"));
@@ -78,10 +78,27 @@ Menu_state::Menu_state(bool run) : State(run)
 	
 }
 
+void Menu_state::set_scores(vector<int> scores)
+{
+	if(!scores.size() <= 0)
+	{
+		vector<string> player_names;
+		player_names.push_back(letters1[0]->get_letter());
+		player_names.push_back(letters1[1]->get_letter());
+		player_names.push_back(letters1[2]->get_letter());
+		player_names.push_back(letters2[0]->get_letter());
+		player_names.push_back(letters2[1]->get_letter());
+		player_names.push_back(letters2[2]->get_letter());
+		
+		hscore->add_score(scores,player_names);
+	}
+}
+
 Menu_state::~Menu_state()
 {
+	hscore->create_file();
 	help.clear();
-	highscore.clear();
+	delete hscore;
 	letters2.clear();
 	letters1.clear();
 	images.clear();
@@ -129,12 +146,6 @@ void Menu_state::render()
 			images[it]->render();
 		}
 	
-		// Render all highscore items
-		for (unsigned int it = 0;
-			 it < highscore.size(); it++ )
-		{
-			highscore[it]->render();
-		}
 		//Render all letters for player1			  
 		for (unsigned int it = 0;
 			it < letters1.size(); it++ )
@@ -149,6 +160,7 @@ void Menu_state::render()
 		}
 	}
 	
+	hscore->render();
 	
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );

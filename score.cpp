@@ -114,3 +114,8 @@ void Score::add_score(int added_score)
 {
 	score_number = score_number + added_score;
 }
+
+int Score::get_score()
+{
+	return score_number;
+}
