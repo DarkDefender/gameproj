@@ -47,7 +47,6 @@ Player::Player (string typein, vector<Bullet*>* b_ptr, vector <Game_object*>* sc
 		player_img = "images/p2.png";
 	}
 	img = new Sprite(player_img, h, w);
-	img->create_texture();
 }
 
 Player::~Player()

@@ -45,22 +45,17 @@ Game_timer::Game_timer(GLfloat x_pos, GLfloat y_pos) : Game_object(x_pos, y_pos,
 	
 	//Game_timer
 	img1 = new Sprite(images[second1], h, w);
-	img1->create_texture();	
 	
 	img2 = new Sprite(images[second2], h, w);
-	img2->create_texture();	
 	
 	
 	
 	// Current level
 	level_img = new Sprite("images/level.png", h, 0.5);
-	level_img->create_texture();
 	
 	level_counter1 = new Sprite(images[lvl_cnt1], h, w);
-	level_counter1->create_texture();
 	
 	level_counter2 = new Sprite(images[lvl_cnt2], h, w);
-	level_counter2->create_texture();
 
 }
 

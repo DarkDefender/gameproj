@@ -56,7 +56,6 @@ void Aliens::init_alien()
 	hp = 1;
 	
 	img = new Sprite(ufo_img, h, w);
-	img->create_texture();
 }
 
 void Aliens :: move_up()

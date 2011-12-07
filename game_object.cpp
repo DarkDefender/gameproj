@@ -54,7 +54,6 @@ Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string i
 	dead = false;
 	type = obj_type;
 	img = new Sprite(img_path, h, w);
-	img->create_texture();	
 }
 
 Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path)
@@ -66,7 +65,6 @@ Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat w
 	dead = false;
 	type = obj_type;
 	img = new Sprite(img_path, h, w);
-	img->create_texture();	
 }
 
 Game_object::~Game_object()

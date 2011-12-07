@@ -44,7 +44,6 @@ Name::Name(GLfloat x_pos, GLfloat y_pos, string obj_type) : Game_object(x_pos, y
 	images.push_back("images/z.png");
 	it = 0;
 	img = new Sprite(images[it], h, w);
-	img->create_texture();
 	
 }
 

@@ -11,26 +11,16 @@ Score::Score (string typein)
 	
 	score_number = 0;
 	numbers.push_back( new Sprite("images/0.png",0.1, 0.1));
-	numbers[0]->create_texture();
 	numbers.push_back( new Sprite("images/1.png",0.1, 0.1));
-	numbers[1]->create_texture();
 	numbers.push_back( new Sprite("images/2.png",0.1, 0.1));	
-	numbers[2]->create_texture();
 	numbers.push_back( new Sprite("images/3.png",0.1, 0.1));
-	numbers[3]->create_texture();
 	numbers.push_back( new Sprite("images/4.png",0.1, 0.1));
-	numbers[4]->create_texture();
 
 	numbers.push_back( new Sprite("images/5.png",0.1, 0.1));
-	numbers[5]->create_texture();
 	numbers.push_back( new Sprite("images/6.png",0.1, 0.1));
-	numbers[6]->create_texture();
 	numbers.push_back( new Sprite("images/7.png",0.1, 0.1));
-	numbers[7]->create_texture();
 	numbers.push_back( new Sprite("images/8.png",0.1, 0.1));
-	numbers[8]->create_texture();
 	numbers.push_back( new Sprite("images/9.png",0.1, 0.1));
-	numbers[9]->create_texture();
 
   type = typein;
   if(typein == "player1")
@@ -50,7 +40,6 @@ Score::Score (string typein)
 
   img = new Sprite("images/1.png", h, w);
 
-  img->create_texture();
 }
 
 Score::~Score()
@@ -74,7 +63,6 @@ void Score :: render()
       switch (i) 
 	{
 	case 0: numbers[0] -> render(x-numbers_wroten*w,y,-5);
-	  //numbers[0]-> create_texture();
 	  //cout << 0 << endl;
 	  break;
 	case 1: numbers[1] -> render(x-numbers_wroten*w,y,-5);
