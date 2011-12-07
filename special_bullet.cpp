@@ -6,16 +6,19 @@
 
 using namespace std;   
 
-Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle, vector <Game_object*>* pointer_score_vec_in)
+Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle, vector<Game_object*>* pointer_score_vec_in, vector<Bullet>* b_ptr)
 {
     score_vec = *pointer_score_vec_in;
     x = x_pos;
     y = y_pos;
+    h = 0.1;
+    w = 0.1;
     type = obj_type;
     hp = damage;
     spd = speed;
     angle = start_angle;
     dead = false;
+    bullet = b_ptr;
 }
 
 void Special_bullet::update()

@@ -20,14 +20,17 @@ class Player : public Game_object
         bool up;
         bool down;
 	bool shooting;
+    bool spec_shooting;
 	int shoot_cooldown;
 	int shoot_cnt;
+    int spec_cnt;
     int bullet_cooldown;
     int bullet_cnt;
 	string player_img;
         int number_of_bullets;
         //Sprite* im9;
 	void shoot();
+    void spec_shoot();
 
     public:
 		Player(string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in);
