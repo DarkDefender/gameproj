@@ -101,7 +101,7 @@ Sprite::Sprite(string image_path, GLfloat height, GLfloat width)
 	create_texture();
 }	
 
-void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
+void Sprite::render(GLfloat x, GLfloat y, GLfloat z, GLfloat rot)
 {
     /* Move Into The Screen 5 Units */
     glLoadIdentity( );
@@ -109,6 +109,7 @@ void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
 
     glEnable( GL_TEXTURE_2D );
 
+    glRotatef( rot, 0.0f, 0.0f, 1.0f); /* Rotate On The Z Axis */
 
     /* Select Our Texture */
     glBindTexture( GL_TEXTURE_2D, texture );

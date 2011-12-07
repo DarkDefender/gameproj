@@ -18,6 +18,7 @@ Aliens::Aliens(string typein, GLfloat xin, GLfloat yin,
 	up = true;
 	down = false;
 	bullets = b_ptr;
+    angle = 0;
 
 	
 	if(typein == "player1")
@@ -60,6 +61,7 @@ void Aliens::init_alien()
 
 void Aliens :: move_up()
 {
+        angle = 90;
     if (y + spd + h/2<0.85 && moved_x_dir == 0)
     {
         y=y+spd;
@@ -99,6 +101,7 @@ void Aliens :: move_up()
 
 void Aliens :: move_down()
 {
+    angle = 0;
     if (y - spd- h/2>-1)
     {
         y=y-spd;
@@ -176,7 +179,7 @@ void Aliens :: update()
 
 void Aliens :: render()
 {
-  img->render(x, y, -5);
+  img->render(x, y, -5, angle);
 }
 
 
