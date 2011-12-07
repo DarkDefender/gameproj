@@ -6,12 +6,15 @@
 #include <math.h>
 #include "special_bullet.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;   
 
 Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle, vector<Game_object*>* pointer_score_vec_in, vector<Bullet*>* b_ptr) :Bullet(x_pos,y_pos,obj_type,damage,speed,start_angle,pointer_score_vec_in) 
 {
     bullets = b_ptr;
+    img = new Sprite("images/skott/skott01.png", 0.1, 0.1);
+    int img_cnt = 1;
 }
 
 void Special_bullet::update()
@@ -25,6 +28,19 @@ void Special_bullet::update()
         }
         dead = true;
     }
+}
+
+void Special_bullet::render()
+{
+    stringstream out;
+    string buffer;
+    out << img_cnt;
+    buffer = out.str();
+    if (++img_cnt != 10)
+        buffer = "0" + buffer;
+    else
+        img_cnt = 1;
+    img->change_img("images/skott/skott"+buffer+".png", 0.1, 0.1);
 }
 
 void Special_bullet::collision(Game_object& obj)
