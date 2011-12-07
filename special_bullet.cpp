@@ -17,19 +17,15 @@ Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, in
 void Special_bullet::update()
 {                                                         
     x = x + cos(angle) * spd;
-    if (fabs(x) == 0.4)
-        dead = true;
-}
-
-void Special_bullet::collision(Game_object& obj) {}
-
-void Special_bullet::render()
-{
-    if (true)
+    if (fabs(x) <= 0.4)
     {
         for (int i = 0; i < 12; i++)
         {
             bullets->push_back(new Bullet(x, y, obj_type, 1, 0.01, (rand() % 101)/100, &score_vec));
         }
-    }                                
+        dead = true;
+    }
 }
+
+void Special_bullet::collision(Game_object& obj)
+{}
