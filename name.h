@@ -21,6 +21,8 @@ class Name : public Game_object
 		void update();
 		void change_letter_down();
 		void change_letter_up();
+		void set_letter(int letter);
+		string get_letter();
 		Name(GLfloat x_pos, GLfloat y_pos, string obj_type);
 		~Name();
 	};

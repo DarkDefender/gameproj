@@ -9,6 +9,8 @@
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
 #include "state.h"
+#include "game_state.h"
+#include "menu_state.h"
 #include <SDL/SDL.h>
 
 class Game_engine
@@ -27,8 +29,8 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_BPP;
 	SDL_Surface *surface;
-    State* menu;
-	State* game;
+    Menu_state* menu;
+	Game_state* game;
 	State* current_state;
 	
 public:

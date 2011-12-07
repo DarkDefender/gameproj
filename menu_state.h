@@ -14,6 +14,7 @@
 #include "sprite.h"
 #include "name.h"
 #include "game_object.h"
+#include "highscore.h"
 #include <SDL/SDL.h>
 #include <vector>
 
@@ -27,7 +28,7 @@ class Menu_state : public State
 		bool show_help;
 		bool player1_name;
 		bool player2_name;
-		vector<Game_object*> highscore;
+		Highscore* hscore;
 		vector<Game_object*> images;
 		vector<Name*> letters1;
 		vector<Name*> letters2;
@@ -43,6 +44,7 @@ class Menu_state : public State
 		void render();
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
+		void set_scores(vector<int> highscore);
 		Menu_state(bool run);
 		~Menu_state();
 		

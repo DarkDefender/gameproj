@@ -98,6 +98,7 @@ Sprite::Sprite(string image_path, GLfloat height, GLfloat width)
     g = 1;
     b = 1;
     a = 1;
+	create_texture();
 }	
 
 void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
