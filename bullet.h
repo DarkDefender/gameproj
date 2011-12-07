@@ -13,12 +13,12 @@ using namespace std;
 
 class Bullet : public Game_object
 {
-    private:
+    protected:
   vector<Game_object*> score_vec;
 
     public:
         void update();
-        void collision(Game_object&);
+        virtual void collision(Game_object&);
         void render();
         void reverse_speed() {spd = -spd;}
         //   void remove_objects();   Skall troligtvis bort!

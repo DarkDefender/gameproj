@@ -7,11 +7,12 @@
 #include "game_state.h"
 #include "game_engine.h"
 #include "bullet.h"
+#include "special_bullet.h"
 
 using namespace std;
 
 
-Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in)
+Player::Player (string typein, vector<Bullet*>* b_ptr, vector <Game_object*>* score_vec_in)
 {
   score_vec = score_vec_in;
 	life = 3;
@@ -31,6 +32,9 @@ Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* sco
 	w = 0.1;
 	spd = 0.01;
 	dead = false;
+    spec_cnt = 0;
+    spec_shooting = false;
+
 
 	if(type == "player1")
 	{
@@ -100,6 +104,8 @@ void Player::handle_key_events(SDL_Event keyevent)
                     case SDLK_1:
                         shooting = true;
                         break;
+                    case SDLK_2:
+                        spec_shooting = true;
                     default:
                         break;
                 }
@@ -116,6 +122,8 @@ void Player::handle_key_events(SDL_Event keyevent)
 					case SDLK_1:
 						shooting = false;
 						break;
+                    case SDLK_2:
+                        spec_shooting = false;
                     default:
                         break;
                 }
@@ -140,6 +148,9 @@ void Player::handle_key_events(SDL_Event keyevent)
                     case SDLK_RSHIFT:
                         shooting = true;
                         break;
+                    case SDLK_RCTRL:
+                        spec_shooting = true;
+                        break;
                         //case SDLK_ESCAPE:
                         //set_running(false);
                     default:
@@ -160,6 +171,8 @@ void Player::handle_key_events(SDL_Event keyevent)
 					case SDLK_RSHIFT:
 						shooting = false;
 						break;
+                    case SDLK_RCTRL:
+                        spec_shooting = false;
                     default:
                         break;
                 }
@@ -184,12 +197,21 @@ void Player :: update()
         move_up();
     if(down)
         move_down();
-	if(shooting && shoot_cnt <= 0 && number_of_bullets)
+	if(shooting && shoot_cnt <= 0 && number_of_bullets && not spec_shooting)
 	{
         number_of_bullets--;
 		shoot();
 		shoot_cnt = shoot_cooldown;
 	}
+    if(spec_shooting and spec_cnt == 180)
+    {
+        spec_cnt = 0;
+        spec_shoot();
+    }
+    else if (spec_shooting)
+    {
+        ++spec_cnt;
+    }
 }
 
 void Player :: render()
@@ -206,10 +228,23 @@ void Player::shoot()
 {
 	if(type == "player2")
 	{
-	  bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159, score_vec));
+	  bullets->push_back(new Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159, score_vec));
 	}
 	else
 	{
-	  bullets->push_back(Bullet(x+0.5*w,y,"player1", 1, 0.01, 0, score_vec));
+	  bullets->push_back(new Bullet(x+0.5*w,y,"player1", 1, 0.01, 0, score_vec));
 	}
 }
+
+void Player::spec_shoot()
+{
+    if (type == "player2")
+    {
+        bullets->push_back(new Special_bullet(x-0.5*w, y, "player2", 0, 0.005, 3.14159, score_vec, bullets));
+    }
+    else
+    {
+        bullets->push_back(new Special_bullet(x+0.5*w, y, "player1", 0, 0.005, 0, score_vec, bullets));
+    }
+}
+
