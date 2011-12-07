@@ -21,21 +21,16 @@ Obstacle::Obstacle(GLfloat x_pos, GLfloat y_pos, string obj_type, int health)
     w = 0.01;
     h = 0.01;
     hit = 0;
-    bool half_life = false;
+    half_life = false;
 }
 
 void Obstacle::update()
 {
-    cerr << "update" << endl;
-    if ((not hit) and half_life)
-        dead = true;
-    else if (not hit)
-        hit--;
+
 }
 
 void Obstacle::set_dead()
 {
-    cout << hp << endl;
     half_life = true;
     if (not hit)
         hit = 30;
@@ -43,13 +38,21 @@ void Obstacle::set_dead()
 
 void Obstacle::render()
 {
+    if (hit == 0 and half_life)
+        dead = true;
+    else if (hit != 0)
+        hit--;   
     glLoadIdentity( );
     glTranslatef(x, y, -5);
 
     glBegin(GL_QUADS);
-    if (hit)
-        glColor4f( 1.0, 0.8, 0.5, 1.0);
-    glColor4f( 1.0, 0.6, 0.1, (rand() % 101)/100.0 );
+    if (hit != 0)
+    {
+        cerr << hit << endl;
+        glColor4f( 1.0, 1.0, 1.0, 1.0);
+    }
+    else
+        glColor4f( 1.0, 0.6, 0.1, (rand() % 101)/100.0 );
     glVertex3f(-0.005, 0.005, 0);
     glVertex3f(0.005, 0.005, 0);
     glVertex3f(0.005, -0.005, 0);
