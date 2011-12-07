@@ -24,22 +24,22 @@ Obstacle::Obstacle(GLfloat x_pos, GLfloat y_pos, string obj_type, int health)
     bool half_life = false;
 }
 
-//void Obstacle::update()
-//{
-//    cerr << "update" << endl;
-//    if ((not hit) and half_life)
-//        dead = true;
-//    else if (not hit)
-//        hit--;
-//}
-//
-//void Obstacle::set_dead()
-//{
-//    cout << "set dead" << endl;
-//    half_life = true;
-//    if (not hit)
-//        hit = 30;
-//}
+void Obstacle::update()
+{
+    cerr << "update" << endl;
+    if ((not hit) and half_life)
+        dead = true;
+    else if (not hit)
+        hit--;
+}
+
+void Obstacle::set_dead()
+{
+    cout << hp << endl;
+    half_life = true;
+    if (not hit)
+        hit = 30;
+}
 
 void Obstacle::render()
 {

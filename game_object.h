@@ -57,7 +57,7 @@ class Game_object
 		Game_object();
 		//virtual ~Game_object();
         bool get_dead();
-        void set_dead();
+        virtual void set_dead();
 		int get_hp();
         void set_hp(int);
         string get_type();
