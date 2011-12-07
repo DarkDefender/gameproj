@@ -12,8 +12,10 @@ using namespace std;
 class Obstacle : public Game_object
 {
     public:
-        void update();
+        bool half_life;
+   //     void update();
         void render();
+   //     void set_dead();
    //   void remove_objects();   Skall troligtvis bort!
    //   void handle_key_events(SDL_Event keyevent);
         Obstacle(GLfloat x_pos, GLfloat y_pos, string obj_type, int health);
