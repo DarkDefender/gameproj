@@ -3,6 +3,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
 #include <string>
+#include <math.h>
+#include "special_bullet.h"
 
 using namespace std;   
 
@@ -18,7 +20,7 @@ Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, in
     spd = speed;
     angle = start_angle;
     dead = false;
-    bullet = b_ptr;
+    bullets = b_ptr;
 }
 
 void Special_bullet::update()
@@ -34,7 +36,7 @@ void Special_bullet::render()
     {
         for (int i = 0; i < 12; i++)
         {
-            bullets->push_back(Bullet(x, y, obj_type, 1, 0.01, (rand() % 101)/100, score_vec))
+            bullets->push_back(Bullet(x, y, obj_type, 1, 0.01, (rand() % 101)/100, score_vec));
         }
     }                                
 }

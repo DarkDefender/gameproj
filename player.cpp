@@ -240,11 +240,11 @@ void Player::spec_shoot()
 {
     if (type == "player")
     {
-        bullet->push_back(Special_bullet(x-0.5*w, y, "player2", 0, 0.005, 3.14159, score_vec, bullet));
+        bullets->push_back(Special_bullet(x-0.5*w, y, "player2", 0, 0.005, 3.14159, score_vec, bullets));
     }
     else
     {
-        bullet->push_back(Special_bullet(x+0.5*w, y, "player1", 0, 0.005, 0, score_vec, bullet));
+        bullets->push_back(Special_bullet(x+0.5*w, y, "player1", 0, 0.005, 0, score_vec, bullets));
     }
 }
 
