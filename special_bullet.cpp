@@ -21,7 +21,7 @@ void Special_bullet::update()
     {
         for (int i = 0; i < 12; i++)
         {
-            bullets->push_back(new Bullet(x, y, obj_type, 1, 0.01, (rand() % 101)/100, &score_vec));
+            bullets->push_back(new Bullet(x, y, obj_type, 1, 0.01, 2*3.14159*(rand() % 101)/100, &score_vec));
         }
         dead = true;
     }
