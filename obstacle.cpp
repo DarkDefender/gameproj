@@ -31,6 +31,7 @@ void Obstacle::update()
 
 void Obstacle::set_dead()
 {
+    hp = 0;
     half_life = true;
     if (not hit)
         hit = 50;
