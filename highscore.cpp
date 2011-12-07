@@ -113,6 +113,8 @@ void Highscore::add_score(vector<int> scores, vector<string> player_names)
 		}
 	}
 	
+	highscore_sort();
+	
 	//Player 2
 	for(unsigned int i = 0; i<items.size();i++)
 	{

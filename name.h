@@ -24,8 +24,7 @@ class Name : public Game_object
 		void set_letter(int letter);
 		string get_letter();
 		Name(GLfloat x_pos, GLfloat y_pos, string obj_type);
-		
-		
+		~Name();
 	};
 
 #endif

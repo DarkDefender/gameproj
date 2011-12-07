@@ -49,13 +49,13 @@ Menu_state::Menu_state(bool run) : State(run)
 	
 	//Letters
 	//Player1
-	letters1.push_back(new Name(-0.2,0.4,"1"));
-	letters1.push_back(new Name(0,0.4,"2"));
-	letters1.push_back(new Name(0.2,0.4,"3"));
+	letters1.push_back(new Name(-0.3,0.4,"1"));
+	letters1.push_back(new Name(-0.15,0.4,"2"));
+	letters1.push_back(new Name(0,0.4,"3"));
 	//Player2
-	letters2.push_back(new Name(-0.2,0,"1"));
-	letters2.push_back(new Name(0,0,"2"));
-	letters2.push_back(new Name(0.2,0,"3"));
+	letters2.push_back(new Name(-0.3,0,"1"));
+	letters2.push_back(new Name(-0.15,0,"2"));
+	letters2.push_back(new Name(0,0,"3"));
 	
 	//Help
 	//Player 1

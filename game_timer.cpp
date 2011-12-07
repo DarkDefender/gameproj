@@ -77,9 +77,9 @@ void Game_timer::render()
 {
 	img1->render(x,y,-5);
 	img2->render(x+0.1,y,-5);
-	level_img->render(x,y-1,-5);
-	level_counter1->render(x+0.3,y-1,-5);
-	level_counter2->render(x+0.5,y-1,-5);
+	level_img->render(x+0.5,y,-5);
+	level_counter1->render(x+0.8,y,-5);
+	level_counter2->render(x+1,y,-5);
 	
 }
 

@@ -19,16 +19,19 @@ class Player : public Game_object
         // vector<SpecialBullet*> spbullets;
         bool up;
         bool down;
-		bool shooting;
-		int shoot_cooldown;
-		int shoot_cnt;
-		string player_img;
+	bool shooting;
+	int shoot_cooldown;
+	int shoot_cnt;
+    int bullet_cooldown;
+    int bullet_cnt;
+	string player_img;
         int number_of_bullets;
         //Sprite* im9;
-		void shoot();
+	void shoot();
 
     public:
 		Player(string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in);
+		~Player();
 
         // game-loop funktions
         void handle_key_events(SDL_Event keyevent);

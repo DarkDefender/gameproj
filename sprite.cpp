@@ -89,7 +89,7 @@ bool Sprite::create_texture()
 #ifdef __APPLE__
 	int order_color_a = GL_BGRA;
 #else
-	int order_color_a = GL_RGBA8;
+	int order_color_a = GL_RGBA;
 #endif
 	
     /* Create storage space for the texture */

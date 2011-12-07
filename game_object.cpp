@@ -69,6 +69,10 @@ Game_object::Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat w
 	img->create_texture();	
 }
 
+Game_object::~Game_object()
+{
+}
+
 void Game_object::init()
 {
 

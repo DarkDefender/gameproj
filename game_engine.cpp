@@ -232,7 +232,7 @@ bool Game_engine::resize_window( int width, int height )
         if ( height == 0 )
             height = 1;
 
-        ratio = ( GLfloat )width / ( GLfloat )height;
+        ratio = 4 / 3;
 
         /* Setup our viewport. */
         glViewport( 0, 0, ( GLint )width, ( GLint )height );
@@ -248,9 +248,9 @@ bool Game_engine::resize_window( int width, int height )
         //gluPerspective( 45.0f, ratio, 0.1f, 100.0f );
 
         if (width <= height) {
-            glOrtho(-1.0, 1.0, -1.0 / ratio, 1.0 / ratio, 0.1, 100);  // aspect <= 1
+            glOrtho(-1.3, 1.3, -1.0 / ratio, 1.0 / ratio, 0.1, 100);  // aspect <= 1
         } else {
-            glOrtho(-1.0 * ratio, 1.0 * ratio, -1.0, 1.0, 0.1, 100);  // aspect > 1
+            glOrtho(-1.3 * ratio, 1.3 * ratio, -1.0, 1.0, 0.1, 100);  // aspect > 1
         }
         /* Make sure we're chaning the model view and not the projection */
         glMatrixMode( GL_MODELVIEW );

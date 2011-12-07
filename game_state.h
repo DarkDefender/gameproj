@@ -33,6 +33,7 @@ class Game_state : public State
 		vector<Game_object*> players;
 		vector<Game_object*> score;
 		vector<int> highscore;
+        vector<Obstacle> obstacle;
 		void new_lvl();
 		void clean();
 		

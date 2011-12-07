@@ -3,6 +3,7 @@
 #include "alien.h"
 #include "score.h"
 #include "game_object.h"
+#include <math.h>
 
 using namespace std;
 
@@ -27,6 +28,11 @@ Aliens::Aliens(string typein, GLfloat xin, GLfloat yin,
 	{
 		x_step=0.1;
 	}
+}
+
+Aliens::~Aliens()
+{
+  delete img;
 }
 
 void Aliens::init_alien()
@@ -54,7 +60,7 @@ void Aliens::init_alien()
 
 void Aliens :: move_up()
 {
-    if (y + spd + h/2<1 && moved_x_dir == 0)
+    if (y + spd + h/2<0.85 && moved_x_dir == 0)
     {
         y=y+spd;
     }
@@ -139,17 +145,32 @@ void Aliens :: update()
         move_up();
     if(down)
         move_down();
-    if(rand() % 1000 > fire_time)
+    if(rand() % 1000 > fire_time-current_lvl)
     {
         if(type=="p1")
         {
 	  bullets->push_back(Bullet(x,y,"p1",1,0.01,3.14159, pointer_score_vec));
+	  if (current_lvl%3 == 0)
+	    {
+	      bullets->push_back(Bullet(x,y,"p1",1,0.01,2.5, pointer_score_vec));
+	      bullets->push_back(Bullet(x,y,"p1",1,0.01,-2.5, pointer_score_vec));
+	    }
         }
         else
         {
 	  bullets->push_back(Bullet(x,y,"p2",1,0.01,0, pointer_score_vec));
+ if (current_lvl%3 == 0)
+	    {
+	      bullets->push_back(Bullet(x,y,"p2",1,0.01,2.5+3.14159, pointer_score_vec));
+	      bullets->push_back(Bullet(x,y,"p2",1,0.01,-2.5+3.14159, pointer_score_vec));
+	    }
         }
     }
+    if(fabs(x) >= 1)
+      {
+	dead = true;
+      }
+	
 }
 
 

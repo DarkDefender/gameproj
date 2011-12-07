@@ -14,6 +14,7 @@ class Score : public Game_object
 {
  public:
 	Score (string typein);
+	~Score();
 
 	//void print_score();
 	void change_score(int c) {score_number += c;}
