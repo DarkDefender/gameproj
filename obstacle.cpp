@@ -46,6 +46,7 @@ void Obstacle::render()
     glLoadIdentity( );
     glTranslatef(x, y, -5);
 
+    glDisable( GL_TEXTURE_2D );
     glBegin(GL_QUADS);
     if (hit != 0)
         glColor4f( 1.0, 1.0, 1.0, (50+hit)/100.0);
