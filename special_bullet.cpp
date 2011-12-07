@@ -13,7 +13,7 @@ using namespace std;
 Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, int damage, GLfloat speed, GLfloat start_angle, vector<Game_object*>* pointer_score_vec_in, vector<Bullet*>* b_ptr) :Bullet(x_pos,y_pos,obj_type,damage,speed,start_angle,pointer_score_vec_in) 
 {
     bullets = b_ptr;
-    img = new Sprite("images/skott/skott_01.png", 0.74, 1.0);
+    img = new Sprite("images/skott/skott_01.png", 0.1, 0.1);
     int img_cnt = 1;
 }
 
@@ -45,12 +45,14 @@ void Special_bullet::render()
         buffer = "0" + buffer;
     else
         img_cnt = 1;
-    img->change_img("images/skott/skott_"+buffer+".png", 0.74, 1.0);
+    img->change_img("images/skott/skott_"+buffer+".png", 0.1, 0.1);
     if (x < 0)
-        img->render(x, y, -5, 270);
+        img->render(x, y, -5, 0);
     else
-        img->render(x, y, -5, 90);
+        img->render(x, y, -5, 180);
 }
 
 void Special_bullet::collision(Game_object& obj)
 {}
+
+Special_bullet::~Special_bullet() { delete img; }
