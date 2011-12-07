@@ -14,7 +14,7 @@ class Player : public Game_object
 {
     private:
         int life;
-        vector<Bullet>* bullets;
+        vector<Bullet*>* bullets;
 	vector <Game_object*>* score_vec;
         // vector<SpecialBullet*> spbullets;
         bool up;
@@ -33,7 +33,7 @@ class Player : public Game_object
     void spec_shoot();
 
     public:
-		Player(string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in);
+		Player(string typein, vector<Bullet*>* b_ptr, vector <Game_object*>* score_vec_in);
 		~Player();
 
         // game-loop funktions

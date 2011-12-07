@@ -13,7 +13,7 @@ class Aliens : public Game_object
 {
 
     private:
-        vector<Bullet>* bullets;
+        vector<Bullet*>* bullets;
 	vector<Game_object*>* pointer_score_vec;
         // vector<SpecialBullet*> spbullets;
         bool up;
@@ -28,7 +28,7 @@ class Aliens : public Game_object
 
     public:
 		Aliens(string typein, GLfloat xin, GLfloat yin, 
-		       int lvl, vector<Bullet>* b_ptr, vector<Game_object*>*);
+		       int lvl, vector<Bullet*>* b_ptr, vector<Game_object*>*);
 		~Aliens();
 
         // game-loop funktions

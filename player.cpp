@@ -12,7 +12,7 @@
 using namespace std;
 
 
-Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* score_vec_in)
+Player::Player (string typein, vector<Bullet*>* b_ptr, vector <Game_object*>* score_vec_in)
 {
   score_vec = score_vec_in;
 	life = 3;
@@ -228,23 +228,23 @@ void Player::shoot()
 {
 	if(type == "player2")
 	{
-	  bullets->push_back(Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159, score_vec));
+	  bullets->push_back(new Bullet(x-0.5*w,y,"player2", 1, 0.01, 3.14159, score_vec));
 	}
 	else
 	{
-	  bullets->push_back(Bullet(x+0.5*w,y,"player1", 1, 0.01, 0, score_vec));
+	  bullets->push_back(new Bullet(x+0.5*w,y,"player1", 1, 0.01, 0, score_vec));
 	}
 }
 
 void Player::spec_shoot()
 {
-    if (type == "player")
+    if (type == "player2")
     {
-        bullets->push_back(Special_bullet(x-0.5*w, y, "player2", 0, 0.005, 3.14159, score_vec, bullets));
+        bullets->push_back(new Special_bullet(x-0.5*w, y, "player2", 0, 0.005, 3.14159, score_vec, bullets));
     }
     else
     {
-        bullets->push_back(Special_bullet(x+0.5*w, y, "player1", 0, 0.005, 0, score_vec, bullets));
+        bullets->push_back(new Special_bullet(x+0.5*w, y, "player1", 0, 0.005, 0, score_vec, bullets));
     }
 }
 
