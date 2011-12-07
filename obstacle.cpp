@@ -53,19 +53,37 @@ vector<Obstacle> create_obs(GLfloat x, GLfloat y, int type)
                 obs_vec.push_back(Obstacle(x+0.01, y-(15-i)/100.0, "obs", 1));
             }
             if (x < 0)
+            {
                 for(int i = 0; i < 5; i++)
                     for(int j = 15-i; j > 0; j--)
                     {
                         obs_vec.push_back(Obstacle(0.01*(100*x+2+i), y+j/100.0, "obs", 1));
                         obs_vec.push_back(Obstacle(0.01*(100*x+2+i), y-j/100.0, "obs", 1));
                     }
+                if (y == 0)
+                    for(int i = 0; i < 5; i++)
+                        for(int j = 16+i; j > 15; j--)
+                        {
+                            obs_vec.push_back(Obstacle(x-0.01*(i-1), y+0.01*j, "obs", 1));
+                            obs_vec.push_back(Obstacle(x-0.01*(i-1), y-0.01*j, "obs", 1));
+                        }
+            }
             else
+            {
                 for(int i = 0; i < 5; i++)
                     for(int j = 15-i; j > 0; j--)
                     {
                         obs_vec.push_back(Obstacle(0.01*(100*x-1-i), y+j/100.0, "obs", 1));
                         obs_vec.push_back(Obstacle(0.01*(100*x-1-i), y-j/100.0, "obs", 1));
                     }
+                 if (y == 0)
+                    for(int i = 0; i < 5; i++)
+                        for(int j = 16+i; j > 15; j--)
+                        {
+                            obs_vec.push_back(Obstacle(x+0.01*i, y+0.01*j, "obs", 1));
+                            obs_vec.push_back(Obstacle(x+0.01*i, y-0.01*j, "obs", 1));
+                        }   
+            }
 
             break;
     }

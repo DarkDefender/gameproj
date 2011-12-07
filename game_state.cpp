@@ -66,7 +66,15 @@ void Game_state::init()
     //Obstacle
     vector<Obstacle> test = create_obs(1.1, 0, 0);
     obstacle.insert(obstacle.end(), test.begin(), test.end());
+    test = create_obs(1.1, 0.75, 0);
+    obstacle.insert(obstacle.end(), test.begin(), test.end());
+    test = create_obs(1.1, -0.75, 0);
+    obstacle.insert(obstacle.end(), test.begin(), test.end());
     test = create_obs(-1.1, 0);
+    obstacle.insert(obstacle.end(), test.begin(), test.end());
+    test = create_obs(-1.1, 0.75, 0);
+    obstacle.insert(obstacle.end(), test.begin(), test.end());
+    test = create_obs(-1.1, -0.75, 0);
     obstacle.insert(obstacle.end(), test.begin(), test.end());
 }
 
