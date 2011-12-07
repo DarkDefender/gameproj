@@ -47,9 +47,9 @@ void Special_bullet::render()
         img_cnt = 1;
     img->change_img("images/skott/skott_"+buffer+".png", 0.74, 1.0);
     if (x < 0)
-        img->render(x, y, -5, 0);
+        img->render(x, y, -5, 270);
     else
-        img->render(x, y, -5, 3.14159);
+        img->render(x, y, -5, 90);
 }
 
 void Special_bullet::collision(Game_object& obj)
