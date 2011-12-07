@@ -13,7 +13,7 @@ using namespace std;
 
 class Bullet : public Game_object
 {
-    private:
+    protected:
   vector<Game_object*> score_vec;
 
     public:
