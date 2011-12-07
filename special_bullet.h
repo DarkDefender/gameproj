@@ -11,6 +11,7 @@ class Special_bullet : public Bullet
     private:
 
     public:
+        void collision(Game_object&);
         vector<Bullet>* bullets;
         void update();
         void render();

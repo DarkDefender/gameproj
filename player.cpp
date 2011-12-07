@@ -238,7 +238,7 @@ void Player::shoot()
 
 void Player::spec_shoot()
 {
-    if (type == "player")
+    if (type == "player2")
     {
         bullets->push_back(Special_bullet(x-0.5*w, y, "player2", 0, 0.005, 3.14159, score_vec, bullets));
     }
