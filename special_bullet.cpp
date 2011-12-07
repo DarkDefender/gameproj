@@ -14,7 +14,7 @@ Special_bullet::Special_bullet(GLfloat x_pos, GLfloat y_pos, string obj_type, in
 {
     bullets = b_ptr;
     img = new Sprite("images/skott/skott_01.png", 0.1, 0.1);
-    int img_cnt = 1;
+    img_cnt = 1;
 }
 
 void Special_bullet::update()
@@ -39,13 +39,15 @@ void Special_bullet::render()
 {
     stringstream out;
     string buffer;
-    out << img_cnt;
-    buffer = out.str();
     if (++img_cnt != 10)
+    {
+        out << img_cnt;
+        buffer = out.str();
         buffer = "0" + buffer;
+        img->change_img("images/skott/skott_"+buffer+".png", 0.1, 0.1);
+    }
     else
         img_cnt = 1;
-    img->change_img("images/skott/skott_"+buffer+".png", 0.1, 0.1);
     if (x < 0)
         img->render(x, y, -5, 0);
     else
