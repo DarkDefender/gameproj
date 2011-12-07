@@ -22,7 +22,8 @@ void Special_bullet::update()
         {
             bullets->push_back(new Bullet(x, y, obj_type, 1, 0.01, (rand() % 101)/100, &score_vec));
         }
-    }                                
+        dead = true;
+    }
 }
 
 void Special_bullet::collision(Game_object& obj)
