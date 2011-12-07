@@ -21,7 +21,7 @@ class Sprite
     private:
 
     string img_path;
-    GLuint texture[1];
+    GLuint texture;
     GLfloat h,w, r,g,b,a;
 
     public:
@@ -30,7 +30,7 @@ class Sprite
     void render(GLfloat, GLfloat, GLfloat);
     void render(GLfloat x, GLfloat y, GLfloat z, GLfloat height, GLfloat width);
     void change_img(string image_path, GLfloat, GLfloat);
-    GLuint* get_texture();
+    GLuint get_texture();
     void set_color(GLfloat, GLfloat, GLfloat, GLfloat);
 };
 
