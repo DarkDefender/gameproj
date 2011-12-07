@@ -25,12 +25,14 @@ class Game_engine;
 class Game_state : public State
 {
 	private:
+		bool new_game;
 		Game_timer* timer;
 		int current_level;
 		vector<Bullet> bullet_vec;
 		vector<Game_object*> aliens;
 		vector<Game_object*> players;
 		vector<Game_object*> score;
+		vector<int> highscore;
         vector<Obstacle> obstacle;
 		void new_lvl();
 		void clean();
@@ -41,6 +43,8 @@ class Game_state : public State
 		void render();
 		void remove_objects();
 		void handle_key_events(SDL_Event keyevent);
+		vector<int> get_scores();
+		
 		Game_state(bool run);
 		~Game_state();
 		

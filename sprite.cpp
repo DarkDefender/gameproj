@@ -19,8 +19,75 @@
 #include <SDL/SDL_opengl.h>
 #include "game_exception.h"
 #include <iostream>
+#include <map>
 
 using namespace std;
+
+//image cache function
+map<string,GLuint> texture_cache;
+
+bool tex_cached(string filename)
+{
+    if (texture_cache.find(filename) == texture_cache.end())
+        return false;
+    return true;
+}
+
+GLuint* init_texture(string img_path)
+{
+#ifdef __APPLE__
+    int order_color_a = GL_BGRA;
+#else
+    int order_color_a = GL_RGBA;
+#endif
+
+    /* Create storage space for the texture */
+    SDL_Surface *TextureImage[1]; 
+    GLuint* texture;
+
+    /* Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit */
+    if ( ( TextureImage[0] = IMG_Load( img_path.c_str() ) ) )
+    {
+
+        glPixelStorei(GL_UNPACK_ALIGNMENT,4);
+
+        /* Create The Texture */
+        glGenTextures( 1, texture );
+
+        /* Typical Texture Generation Using Data From The Bitmap */
+        glBindTexture( GL_TEXTURE_2D, *texture );
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        /* Nearest neighbour Filtering */
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+
+        /* TODO - Fix GL_RGBA with texture->format */
+        if (TextureImage[0]->format->Amask)
+        {
+
+            /* Generate The Texture */
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TextureImage[0]->w, TextureImage[0]->h,
+                    0, order_color_a, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
+        }
+        else // Texture without alpha channel (BMP)
+        {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, TextureImage[0]->w, TextureImage[0]->h,
+                    0, GL_BGR, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
+        }
+
+    }
+
+    /* Free up any memory we may have used */
+    if ( TextureImage[0] )
+        SDL_FreeSurface( TextureImage[0] ); 
+
+    texture_cache.insert(pair<string, GLuint>(img_path, *texture));
+
+    return texture;
+}
 
 Sprite::Sprite(string image_path, GLfloat height, GLfloat width)
 {
@@ -31,6 +98,7 @@ Sprite::Sprite(string image_path, GLfloat height, GLfloat width)
     g = 1;
     b = 1;
     a = 1;
+	create_texture();
 }	
 
 void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
@@ -43,7 +111,7 @@ void Sprite::render(GLfloat x, GLfloat y, GLfloat z)
 
 
     /* Select Our Texture */
-    glBindTexture( GL_TEXTURE_2D, texture[0] );
+    glBindTexture( GL_TEXTURE_2D, texture );
 
     // Enable transparency (blending textures/colors)
     glEnable (GL_BLEND);
@@ -85,58 +153,19 @@ void Sprite::change_img(string image_path, GLfloat height, GLfloat width)
 
 bool Sprite::create_texture()
 {
-#ifdef __APPLE__
-	int order_color_a = GL_BGRA;
-#else
-	int order_color_a = GL_RGBA;
-#endif
-	
-    /* Create storage space for the texture */
-    SDL_Surface *TextureImage[1]; 
-
-    /* Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit */
-    if ( ( TextureImage[0] = IMG_Load( img_path.c_str() ) ) )
+    if (tex_cached(img_path))
     {
-
-        glPixelStorei(GL_UNPACK_ALIGNMENT,4);
-
-        /* Create The Texture */
-        glGenTextures( 1, &texture[0] );
-
-        /* Typical Texture Generation Using Data From The Bitmap */
-        glBindTexture( GL_TEXTURE_2D, texture[0] );
-		
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-        /* Nearest neighbour Filtering */
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-
-		/* TODO - Fix GL_RGBA with texture->format */
-        if (TextureImage[0]->format->Amask)
-        {
-		
-        /* Generate The Texture */
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TextureImage[0]->w, TextureImage[0]->h,
-                0, order_color_a, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
-        }
-        else // Texture without alpha channel (BMP)
-        {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, TextureImage[0]->w, TextureImage[0]->h,
-                0, GL_BGR, GL_UNSIGNED_BYTE, TextureImage[0]->pixels);
-        }
-        
+        texture = texture_cache.find(img_path)->second;
     }
-	
-    /* Free up any memory we may have used */
-    if ( TextureImage[0] )
-        SDL_FreeSurface( TextureImage[0] ); 
+    else
+    {
+        texture = *init_texture(img_path);
+    }
 
     return 0;
 }
 
-GLuint* Sprite::get_texture() { return texture; }
+GLuint Sprite::get_texture() { return texture; }
 
 void Sprite::set_color(GLfloat red, GLfloat green, GLfloat blue, GLfloat alfa)
 {

@@ -1,7 +1,7 @@
 CC = g++ -Wall -Wextra -pedantic
 
 OBJECTS = main game_engine state menu_state intro_state game_state bullet \
-		  game_object sprite timer name obstacle player score alien game_timer
+		  game_object sprite timer name obstacle player score alien game_timer highscore highscore_item
 
 OFILES = $(OBJECTS:%=%.o)
 

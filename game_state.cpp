@@ -24,7 +24,7 @@ using namespace std;
 
 Game_state::Game_state(bool run) : State(run)
 {	
-	
+	new_game = true;
 	init();
 	new_lvl();
 }
@@ -90,15 +90,32 @@ void Game_state::clean()
 	timer = 0;
 }
 
+vector<int> Game_state::get_scores()
+{
+	return highscore;
+}
+
 void Game_state::update()
 {
+	
+	if(new_game)
+	{
+		highscore.clear();
+	}
+	
 	//If both players are dead
 	if(players.size() <= 0)
 	{
 		change_state = true;
+		Score* hscore;
+		hscore = dynamic_cast<Score*>(score[0]);
+		highscore.push_back(hscore->get_score());
+		hscore = dynamic_cast<Score*>(score[1]);
+		highscore.push_back(hscore->get_score());
 		clean();
 		init();
 		new_lvl();
+		new_game = true;
 	}
 	
 	
