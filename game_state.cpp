@@ -27,10 +27,6 @@ Game_state::Game_state(bool run) : State(run)
 	
 	init();
 	new_lvl();
-	
-
-	//Timer
-	timer = new Game_timer(-0.4,0.9);
 }
 
 void Game_state::new_lvl()
@@ -61,7 +57,7 @@ void Game_state::init()
 	score.push_back(new Score("player2"));
 	
 	//Timer
-	timer = new Game_timer(-0.4,0.8);
+	timer = new Game_timer(-0.4,0.9);
 
     //Obstacle
     vector<Obstacle> test = create_obs(1.1, 0, 0);
