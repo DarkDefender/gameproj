@@ -48,10 +48,7 @@ void Special_bullet::render()
     }
     else
         img_cnt = 1;
-    if (x < 0)
-        img->render(x, y, -5, 0);
-    else
-        img->render(x, y, -5, 180);
+    img->render(x, y, -5, 180 * angle/3.14159); //not radians for the draw func
 }
 
 void Special_bullet::collision(Game_object& obj)
