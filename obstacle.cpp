@@ -33,7 +33,7 @@ void Obstacle::set_dead()
 {
     half_life = true;
     if (not hit)
-        hit = 100;
+        hit = 50;
 }
 
 void Obstacle::render()
@@ -47,7 +47,7 @@ void Obstacle::render()
 
     glBegin(GL_QUADS);
     if (hit != 0)
-        glColor4f( 1.0, 1.0, 1.0, 1.0-((100-hit)/100));
+        glColor4f( 1.0, 1.0, 1.0, (50+hit)/100.0);
     else
         glColor4f( 1.0, 0.6, 0.1, (rand() % 101)/100.0 );
     glVertex3f(-0.005, 0.005, 0);
