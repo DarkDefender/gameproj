@@ -53,7 +53,7 @@ Game_timer::Game_timer(GLfloat x_pos, GLfloat y_pos) : Game_object(x_pos, y_pos,
 	
 	
 	// Current level
-	level_img = new Sprite("images/continue.png", h, 0.5);
+	level_img = new Sprite("images/level.png", h, 0.5);
 	level_img->create_texture();
 	
 	level_counter1 = new Sprite(images[lvl_cnt1], h, w);
@@ -75,11 +75,11 @@ Game_timer::~Game_timer()
 
 void Game_timer::render()
 {
-	img1->render(x,y,-5);
-	img2->render(x+0.1,y,-5);
-	level_img->render(x+0.5,y,-5);
-	level_counter1->render(x+0.8,y,-5);
-	level_counter2->render(x+1,y,-5);
+	img1->render(x+0.8,y,-5);
+	img2->render(x+0.95,y,-5);
+	level_img->render(x,y,-5);
+	level_counter1->render(x+0.15,y,-5);
+	level_counter2->render(x+0.3,y,-5);
 	
 }
 

@@ -27,7 +27,7 @@ class Sprite
     public:
     Sprite(string image_path, GLfloat, GLfloat);
     bool create_texture();
-    void render(GLfloat, GLfloat, GLfloat);
+    void render(GLfloat, GLfloat, GLfloat, GLfloat = 0);
     void render(GLfloat x, GLfloat y, GLfloat z, GLfloat height, GLfloat width);
     void change_img(string image_path, GLfloat, GLfloat);
     GLuint get_texture();
