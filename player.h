@@ -22,6 +22,8 @@ class Player : public Game_object
 	bool shooting;
 	int shoot_cooldown;
 	int shoot_cnt;
+    int bullet_cooldown;
+    int bullet_cnt;
 	string player_img;
         int number_of_bullets;
         //Sprite* im9;

@@ -15,12 +15,14 @@ Player::Player (string typein, vector<Bullet>* b_ptr, vector <Game_object*>* sco
 {
   score_vec = score_vec_in;
 	life = 3;
-	number_of_bullets = 5;
 	up = false;
 	down = false;
-	shoot_cooldown = 30;
+	shoot_cooldown = 10;
 	shoot_cnt = shoot_cooldown;
 	shooting = false;
+	number_of_bullets = 5;
+    bullet_cooldown = 50;
+    bullet_cnt = bullet_cooldown;
 	bullets = b_ptr;
 	type = typein;
 	hp = 1;
@@ -169,14 +171,22 @@ void Player::handle_key_events(SDL_Event keyevent)
 void Player :: update()
 {
 	shoot_cnt--;
-	
-	
+	if(number_of_bullets <= 5 )
+    {
+        if(not bullet_cnt--)
+        {
+            number_of_bullets++;
+            bullet_cnt = bullet_cooldown;
+        }
+    }
+
     if(up)
         move_up();
     if(down)
         move_down();
-	if(shooting && shoot_cnt <= 0)
+	if(shooting && shoot_cnt <= 0 && number_of_bullets)
 	{
+        number_of_bullets--;
 		shoot();
 		shoot_cnt = shoot_cooldown;
 	}
