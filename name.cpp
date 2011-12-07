@@ -47,6 +47,11 @@ Name::Name(GLfloat x_pos, GLfloat y_pos, string obj_type) : Game_object(x_pos, y
 	
 }
 
+Name::~Name()
+{
+    delete img;
+}
+
 void Name::change_letter_up()
 {
 	it++;

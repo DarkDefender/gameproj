@@ -55,7 +55,7 @@ class Game_object
 		Game_object(GLfloat x_pos, GLfloat y_pos, string obj_type, string img_path);
 		Game_object(GLfloat x_pos, GLfloat y_pos, GLfloat height, GLfloat width, string obj_type, string img_path);
 		Game_object();
-		//virtual ~Game_object();
+		virtual ~Game_object();
         bool get_dead();
         virtual void set_dead();
 		int get_hp();
