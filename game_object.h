@@ -35,6 +35,7 @@ class Game_object
 		void init();
 		int hp;
 		int score;
+        int hit;
 
 	public:
 		
