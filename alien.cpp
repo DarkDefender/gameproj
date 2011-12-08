@@ -47,7 +47,7 @@ void Aliens::init_alien()
 	{
 		ufo_img = "images/ufo1.png";
 	}
-	fire_time = 990;
+	fire_time = 999;
 	moved_x_dir = 0;
 	w = 0.1;
 	h = 0.1;
