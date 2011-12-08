@@ -17,7 +17,14 @@
 #include <iostream>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
+
+
+#ifdef __APPLE__
+#include <SDL_mixer.h>
+#else
 #include <SDL/SDL_mixer.h>
+#endif
+
 
 using namespace std;
 

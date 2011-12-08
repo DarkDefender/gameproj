@@ -43,7 +43,6 @@ void Highscore::open_file()
 			getline (myfile,line);
 			if(line != "")
 			{
-				cout << line << endl;
 				items.push_back(Highscore_item(line));
 			}
 		}

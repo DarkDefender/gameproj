@@ -14,7 +14,7 @@ LIBS = -lGL -lGLU -lSDL_image -lSDL_mixer
 
 # MAC OS X
 ifeq ($(OS),Darwin)
-LIBS = -framework OpenGL -framework GLUT -framework SDL_Image -lstdc++
+LIBS = -framework OpenGL -framework GLUT -framework SDL_Image -lSDL_mixer -lstdc++
 endif
 
 # Windows

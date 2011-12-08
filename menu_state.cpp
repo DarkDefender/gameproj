@@ -138,7 +138,7 @@ void Menu_state::render()
 	
 		cursor_obj->render();
 	
-	
+		hscore->render();
 		// Render all menu items
 		for (unsigned int it = 0;
 			it < images.size(); it++ )
@@ -146,21 +146,39 @@ void Menu_state::render()
 			images[it]->render();
 		}
 	
+		int k = rand()%101;
+		
 		//Render all letters for player1			  
 		for (unsigned int it = 0;
 			it < letters1.size(); it++ )
 		{
-			letters1[it]->render();
+			if(player1_name && k>50 && it == letter_item)
+			{
+				
+			}
+			else
+			{
+				letters1[it]->render();
+			}
+			
 		}
 		//Render all letters for player2
 		for (unsigned int it = 0;
 			 it < letters2.size(); it++ )
 		{
-			letters2[it]->render();
+			
+			if(player2_name && k>50 && it == letter_item)
+			{
+				
+			}
+			else
+			{
+				letters2[it]->render();
+			}
+			
 		}
 	}
 	
-	hscore->render();
 	
     /* Draw it to the screen */
     SDL_GL_SwapBuffers( );
