@@ -10,7 +10,7 @@ IFLAGS = `sdl-config --cflags`
 OS = $(shell uname -s)
 
 #Default Linux
-LIBS = -lGL -lGLU -lSDL_image
+LIBS = -lGL -lGLU -lSDL_image -lSDL_mixer
 
 # MAC OS X
 ifeq ($(OS),Darwin)
@@ -28,7 +28,7 @@ all : space-invaders
 
 space-invaders : $(OFILES)
 	@echo Linking...
-	$(CC) -o space-invaders $(OFILES) `sdl-config --cflags --libs` $(LIBS)
+	$(CC) -o space-invaders $(OFILES) $(IFLAGS) $(LIBS)
 
 #Define a rule for building .o from .C files
 # the o-files depend on the respectively-named C-file

@@ -58,9 +58,9 @@ class Star
 Intro_state::Intro_state(bool run) : State(run)
 {
     change_state = false;
-    alien = new Sprite("alien.png", 0.8, 0.8);
-    planet = new Sprite("glob.png", 0.7, 0.7);
-    liu = new Sprite("LiU.png", 0.8, 1.2);
+    alien = new Sprite("images/alien.png", 0.8, 0.8);
+    planet = new Sprite("images/glob.png", 0.7, 0.7);
+    liu = new Sprite("images/LiU.png", 0.8, 1.2);
 
     planet_off = -1;
     alien_width = -0.8;

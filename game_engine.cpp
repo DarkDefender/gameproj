@@ -17,6 +17,7 @@
 #include <iostream>
 #include <SDL/SDL.h>
 #include <SDL/SDL_opengl.h>
+#include <SDL/SDL_mixer.h>
 
 using namespace std;
 
@@ -337,6 +338,15 @@ bool Game_engine::init_sdl(SDL_Surface*& surface)
 
     //Set caption
     SDL_WM_SetCaption( "Space Invaders", NULL );
+
+    //SOUND
+    //
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 4096 );
+    Mix_Init(MIX_INIT_OGG);
+    Mix_Music *music; //TODO clean this upp later
+    music = Mix_LoadMUS( "RoboCop_3.ogg" );
+    Mix_PlayMusic( music, -1 );
+
 
     return true;
 }
