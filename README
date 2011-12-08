@@ -1,0 +1,5 @@
+SDL (senaste)
+SDL-image (senaste)
+SDL-mixer-1.2.10 (senaste, verkar ej fungera med äldre versioner)
+
+kör make för att kompilera projektet, kör ./space-invaders för att starta spelet 

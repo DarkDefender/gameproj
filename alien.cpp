@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 Aliens::Aliens(string typein, GLfloat xin, GLfloat yin,
 	       int lvl, vector<Bullet*>* b_ptr, vector<Game_object*>* pointer_score_vec_in)
 : Game_object(xin,yin,typein)
