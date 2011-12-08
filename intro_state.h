@@ -28,6 +28,7 @@ class Intro_state : public State
     vector<Star> stars;
     Sprite* alien;
     Sprite* planet;
+    Sprite* liu;
     Timer timer;
 
     public:
@@ -37,6 +38,7 @@ class Intro_state : public State
     void remove_objects();
     void handle_key_events(SDL_Event keyevent);
     Intro_state(bool run);
+    ~Intro_state();
 
 };
 

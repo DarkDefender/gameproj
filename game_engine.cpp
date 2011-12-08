@@ -62,10 +62,10 @@ Game_engine::Game_engine()
 	// Load textures
     init_sdl(surface);
 	
-	menu = new Menu_state(true);
-    //menu = new Intro_state(true);
+    intro = new Intro_state(true);
+	menu = new Menu_state(false);
     game = new Game_state(false);
-	current_state = menu;
+	current_state = intro;
 }
 
 Game_engine::~Game_engine()
@@ -90,7 +90,13 @@ void Game_engine::change_state()
 		game->set_running(true);
 		menu->set_running(false);
 	}
-	else
+	else if (current_state == intro)
+    {
+        current_state = menu;
+        menu->set_running(true);
+        intro->set_running(false);
+    }
+    else
 	{
 		current_state = menu;
 		menu->set_scores(game->get_scores());
@@ -110,7 +116,7 @@ void Game_engine::run()
     int frame = 0;
     time.start();
 
-    while(menu->get_running() || game->get_running())
+    while(menu->get_running() || game->get_running() || intro->get_running())
     {
         if(current_state->swap_state())
         {
@@ -182,6 +188,7 @@ void Game_engine::handle_events(SDL_Surface*& surface)
                 //Handle user quit
             case SDL_QUIT:
                 //Stop program
+                intro->set_running(false);
                 menu->set_running(false);
 				game->set_running(false);
                 break;

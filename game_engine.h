@@ -29,6 +29,7 @@ private:
 	int SCREEN_WIDTH;
 	int SCREEN_BPP;
 	SDL_Surface *surface;
+    State* intro;
     Menu_state* menu;
 	Game_state* game;
 	State* current_state;
