@@ -19,7 +19,7 @@ endif
 
 # Windows
 ifeq ($(OS),MINGW32_NT-6.0)
-LIBS = -lopengl32 -lglu32 -lSDL_image
+LIBS = -lopengl32 -lglu32 -lSDL_image -lSDL_mixer
 endif
 
 LIBS += `sdl-config --libs`
